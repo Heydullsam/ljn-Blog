@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heydullsam.github.io/ljn-Blog/sitemap.xml

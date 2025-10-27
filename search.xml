@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>TCP</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/TCP/</url>
+    <content><![CDATA[clientlearned
+.pro中+network
+QTcpsocket类::connetToHost
+跳转方式，创建新的指针（指针在堆上，实例在栈上）
+ba.append(ui-&gt;lineEdit-&gt;text().toUtf8()); QByteArray加QString字符串的方法
+
+
+
+code#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;#include &lt;QMessageBox&gt;#include&quot;chat.h&quot;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    socket=new QTcpSocket;&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_cancelButton_clicked()&#123;    this-&gt;close();&#125;void Widget::on_connectButton_clicked()&#123;    //ip port    QString IP=ui-&gt;ipLine-&gt;text();    QString port=ui-&gt;portLine-&gt;text();    //connect    socket-&gt;connectToHost(QHostAddress(IP),port.toShort());    //whether success    connect(socket,&amp;QTcpSocket::connected,[this]()&#123;        QMessageBox::information(this,&quot;连接提示&quot;,&quot;连接服务器成功&quot;);        this-&gt;hide();        Chat *C=new Chat(socket);        C-&gt;show();    &#125;);    connect(socket,&amp;QTcpSocket::disconnected,[this]()&#123;        QMessageBox::warning(this,&quot;连接提示&quot;,&quot;连接异常，网络断开&quot;);    &#125;);&#125;
+
+#include &quot;chat.h&quot;#include &quot;ui_chat.h&quot;Chat::Chat(QTcpSocket *s,QWidget *parent)    : QWidget(parent)    , ui(new Ui::Chat)&#123;    ui-&gt;setupUi(this);    socket=s;&#125;Chat::~Chat()&#123;    delete ui;&#125;void Chat::on_clearButton_clicked()&#123;    ui-&gt;lineEdit-&gt;clear();&#125;void Chat::on_sendButton_clicked()&#123;    QByteArray ba;    ba.append(ui-&gt;lineEdit-&gt;text().toUtf8());    ui-&gt;lineEdit-&gt;text();    socket-&gt;write(ba);&#125;
+
+server
+线程的创建 继承QThread -&gt;start启动
+信号量 emit+signals声明 发送信号
+
+
+code#include &quot;mythread.h&quot;myThread::myThread(QTcpSocket *s)&#123;    socket=s;&#125;void myThread::run()&#123;    connect(socket,&amp;QTcpSocket::readyRead,this,&amp;myThread::clientInfoSlot);&#125;void myThread::clientInfoSlot()&#123;    // socket-&gt;readAll();    QByteArray ba=socket-&gt;readAll();    emit sendToWidget(ba);&#125;
+
+#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    server=new QTcpServer;    server-&gt;listen(QHostAddress::AnyIPv4,PORT);    connect(server,&amp;QTcpServer::newConnection,this,&amp;Widget::newClientHandler);&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::newClientHandler()&#123;    QTcpSocket *socket=server-&gt;nextPendingConnection();    // socket-&gt;peerAddress();    // socket-&gt;peerPort();    ui-&gt;ipLineEdit-&gt;setText(socket-&gt;peerAddress().toString());    ui-&gt;portLineEdit-&gt;setText(QString::number(socket-&gt;peerPort()));    // connect(socket,&amp;QTcpSocket::readyRead,this,&amp;Widget::clientInfoSlot);    //启动线程    myThread *t=new myThread(socket);    t-&gt;start();    connect(t,&amp;myThread::sendToWidget,this,&amp;Widget::threadSlot);&#125;// void Widget::clientInfoSlot()&#123;//     QTcpSocket *s = (QTcpSocket*)sender();//获取信号发出者//     ui-&gt;mainLineEdit-&gt;setText(QString(s-&gt;readAll()));// &#125;void Widget::threadSlot(QByteArray b)&#123;    ui-&gt;mainLineEdit-&gt;setText(QString(b));&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>desktop_pet_cat</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/desktop_cat/</url>
+    <content><![CDATA[learned
+重载QPaintEvent::paintEvent, 使之能够加载图片
+snprintf基于printf处理字符串，QString中.arg()可以模拟，注意参数是%num;
+connect调用的函数必须加&amp;
+Qpixmap::scale()用于调整大小
+Widget::update直接更新窗口
+透明窗口、透明背景、与移动
+
+
+this-&gt;setWindowFlag(Qt::FramelessWindowHint);     // 去除窗口边框    this-&gt;setAttribute(Qt::WA_TranslucentBackground); // 背景透明    this-&gt;installEventFilter(new DragFilter);
+
+
+最小化系统图标的使用
+
+QSystemTrayIcon sysTray(QIcon(&quot;:/pic/image/icon.png&quot;),&amp;w);    QMenu menu;    auto showAct=new QAction(&quot;show&quot;,&amp;sysTray);    auto exitAct=new QAction(&quot;exit&quot;,&amp;sysTray);    QObject::connect(showAct,&amp;QAction::triggered,&amp;w,[&amp;]()&#123;        w.setVisible(true);    &#125;);    QObject::connect(exitAct,&amp;QAction::triggered,&amp;a,[&amp;]()&#123;        QApplication::quit();    &#125;);    menu.addAction(showAct);    menu.addAction(exitAct);    sysTray.setContextMenu(&amp;menu);    sysTray.show();
+
+
+widget::setVisible暂时关闭窗口
+QUrl更安全的跨平台链接
+Q_ENUM_NS(RoleAct)&#x2F;&#x2F;注册枚举
+
+new_learn拖动窗口的内置函数实现
+if (w-&gt;windowHandle())                &#123;                    w-&gt;windowHandle()-&gt;startSystemMove();                    return true;                &#125;
+code#include &quot;widget.h&quot;#include &lt;QPixmap&gt;#include &lt;QDebug&gt;#include &lt;Qcursor&gt;#include &lt;QMetaEnum&gt;Widget::Widget(QWidget *parent)    : QWidget(parent),    timer(new QTimer(this)),//自动析构    menu(new QMenu(this))&#123;    this-&gt;setWindowFlag(Qt::FramelessWindowHint);//去除窗口边框    this-&gt;setAttribute(Qt::WA_TranslucentBackground);//背景透明    this-&gt;installEventFilter(new DragFilter);    connect(timer,&amp;QTimer::timeout,this,[this]()&#123;        static int index=0;//记录显示动作的图片索引        auto paths=this-&gt;action_map.value(this-&gt;cur_role_act);        this-&gt;cur_role_pix=paths[index++%paths.size()];        //paintEvent()会递归调用        this-&gt;update();    &#125;);    loadRoleActRes();    showActAnimation(RoleAct::SayHello);    initMennu();&#125;Widget::~Widget() &#123;&#125;void Widget::showActAnimation(RoleAct k)&#123;    timer-&gt;stop();    this-&gt;cur_role_act=k;    timer-&gt;start(500);&#125;void Widget::onMenuTriggered(QAction *action)&#123;    QMetaEnum me=QMetaEnum::fromType&lt;RoleAct&gt;();    bool ok;    int k=me.keyToValue(action-&gt;text().toStdString().c_str(),&amp;ok);    if(!ok)return;    showActAnimation(static_cast&lt;RoleAct&gt;(k));&#125;void Widget::paintEvent(QPaintEvent *event)&#123;    QPainter painter(this);    QPixmap pix;    // qDebug()&lt;&lt;&quot;pix path:&quot;&lt;&lt;this-&gt;cur_role_pix.toLocalFile();    pix.load(this-&gt;cur_role_pix.toLocalFile());    int targetWidth = 200;  // 你想要的宽    int targetHeight = 150; // 你想要的高    pix = pix.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);    painter.drawPixmap(0,0,pix);&#125;void Widget::contextMenuEvent(QContextMenuEvent *event)&#123;    this-&gt;menu-&gt;popup(QCursor::pos());&#125;void Widget::loadRoleActRes()&#123;    auto addRes=[this](RoleAct k,QString path,int count)    &#123;        QList&lt;QUrl&gt;paths;        char buf[260];//path最长255        for(int i=0;i&lt;count;++i)        &#123;            memset(buf,0,sizeof(buf));            sprintf_s(buf,path.toStdString().c_str(),i);            paths.append(QUrl::fromLocalFile(buf));        &#125;        action_map.insert(k,paths);        // qDebug()&lt;&lt;paths[1];    &#125;;    addRes(RoleAct::SayHello,&quot;:/pic/image/sayHello/sayHello%d.png&quot;,4);    addRes(RoleAct::Sleep,&quot;:/%d.png&quot;,32);    addRes(RoleAct::Swing,&quot;:/%d.png&quot;,11);&#125;void Widget::initMennu()&#123;    menu-&gt;addAction(&quot;SayHello&quot;);    menu-&gt;addAction(&quot;Sleep&quot;);    menu-&gt;addAction(&quot;Swing&quot;);    QAction* act=new QAction(&quot;Hide&quot;);    connect(act,&amp;QAction::triggered,this,[this]()&#123;        this-&gt;setVisible(false);    &#125;);    menu-&gt;addAction(act);    connect(this-&gt;menu,&amp;QMenu::triggered,this,Widget::onMenuTriggered);&#125;
+
+#ifndef WIDGET_H#define WIDGET_H#include &lt;QWidget&gt;#include &lt;QPaintEvent&gt;#include &lt;QPainter&gt;#include &lt;QEvent&gt;#include &lt;QMouseEvent&gt;#include &lt;QContextMenuEvent&gt;#include &lt;QMenu&gt;#include&lt;QMap&gt;#include&lt;QList&gt;#include&lt;QUrl&gt;#include&lt;QTimer&gt;namespace Act&#123;    Q_NAMESPACEenum RoleAct&#123;        SayHello,        Swing,        Sleep,    &#125;;    Q_ENUM_NS(RoleAct)//注册枚举&#125;    using namespace Act;class Widget : public QWidget&#123;    Q_OBJECTpublic:    Widget(QWidget *parent = nullptr);    ~Widget();public:    void showActAnimation(RoleAct k);public slots:    void onMenuTriggered(QAction *action);protected:    void paintEvent(QPaintEvent *event)override;    void contextMenuEvent(QContextMenuEvent*event)override;private:    void loadRoleActRes();    void initMennu();private:    QMap&lt;RoleAct,QList&lt;QUrl&gt;&gt;action_map;    QTimer* timer;    RoleAct cur_role_act;    QUrl cur_role_pix;    QMenu* menu;&#125;;class DragFilter:public QObject&#123;public:    bool eventFilter(QObject*obj,QEvent*event)    &#123;        auto w=dynamic_cast&lt;QWidget*&gt;(obj);        if(!w)            return false;        if(event-&gt;type()==QEvent::MouseButtonPress)        &#123;            auto e =dynamic_cast&lt;QMouseEvent*&gt;(event);            if(e)            &#123;                pos=e-&gt;pos();            &#125;        &#125;        else if(event-&gt;type()==QEvent::MouseMove)        &#123;            auto e =dynamic_cast&lt;QMouseEvent*&gt;(event);            if(e)            &#123;                if(e-&gt;buttons()&amp;Qt::MouseButton::LeftButton)                &#123;                    w-&gt;move(e-&gt;globalPosition().toPoint()-pos);                &#125;            &#125;        &#125;        return QObject::eventFilter(obj,event);    &#125;private:    QPoint pos;&#125;;#endif // WIDGET_H
+
+#include &quot;widget.h&quot;#include &lt;QApplication&gt;#include &lt;QSystemTrayIcon&gt;//系统菜单托盘int main(int argc, char *argv[])&#123;    QApplication a(argc, argv);    Widget w;    QSystemTrayIcon sysTray(QIcon(&quot;:/pic/image/icon.png&quot;),&amp;w);    QMenu menu;    auto showAct=new QAction(&quot;show&quot;,&amp;sysTray);    auto exitAct=new QAction(&quot;exit&quot;,&amp;sysTray);    QObject::connect(showAct,&amp;QAction::triggered,[&amp;]()&#123;        w.setVisible(true);    &#125;);    QObject::connect(exitAct,&amp;QAction::triggered,[&amp;]()&#123;        QApplication::quit();    &#125;);    menu.addAction(showAct);    menu.addAction(exitAct);    sysTray.setContextMenu(&amp;menu);    sysTray.show();    w.show();    return a.exec();&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Qt</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/content/</url>
+    <content><![CDATA[filters:  and:    - file.folder == this.file.folder    - file.path != this.file.path    - file.path != &quot;/assets/&quot;views:  - type: table    name: 表格    order:      - title      - file.name
+]]></content>
+      <tags>
+        <tag>sub_content</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>paste_pic</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/paste_pic/</url>
+    <content><![CDATA[updating: “ https://github.com/Heydullsam/paste_pic.git“
+
+1 全屏截图
+设置图标
+QSystemTrayIcon sysMenu.setIcon() .show()
+QCursor::pos()定位鼠标位置
+QRect确定矩形
+QMenu.addAction添加小组件的功能menu-&gt;addAction(&quot;截图&quot;,this,SLOT(grapScreen()));可以直接使用槽函数
+Qpainter.drawpixmap绘制，方便调用重写paintEvent
+
+2 选区截图
+实现了selectRectWidget类，通过重写鼠标事件实现部分区域的抓取
+通过update()和drawRect实现选中框的更新
+原窗口逻辑中加入resize，避免框选图片被强制拉长
+
+3 实现截图的拖动功能
+复用了之前DragFiler,加入了右键关闭功能
+安装DragFilter
+
+4 实现快捷键
+引入第三方库QHotkey, 解决了没有主窗口无法触发截图快捷键的问题+third_party文件目录，修改cmakelists target_link_libraries(paste_pic PRIVATE QHotkey) add_subdirectory(third_party&#x2F;QHotkey)
+通过QDialog QVBoxLayout QKeySequenceEdit收集快捷键输入
+
+class SetHotkeyDialog : public QDialog &#123;    Q_OBJECTpublic:    SetHotkeyDialog(QWidget* parent = nullptr) : QDialog(parent) &#123;        setWindowTitle(&quot;设置快捷键&quot;);        auto layout = new QVBoxLayout(this);        keyEdit = new QKeySequenceEdit(this);        auto btn = new QPushButton(&quot;确定&quot;, this);        layout-&gt;addWidget(keyEdit);        layout-&gt;addWidget(btn);        connect(btn, &amp;QPushButton::clicked, this, &amp;QDialog::accept);    &#125;    QKeySequence keySequence() const &#123; return keyEdit-&gt;keySequence(); &#125;private:    QKeySequenceEdit* keyEdit;    &#125;;
+
+设置快捷键并调用
+
+void SnipasteApp::setHotkey()&#123;    SetHotkeyDialog dlg;    if (dlg.exec() == QDialog::Accepted) &#123;        QKeySequence seq = dlg.keySequence();        if (!seq.isEmpty()) &#123;            if (m_hotkey) &#123;                m_hotkey-&gt;setRegistered(false);                delete m_hotkey;            &#125;            m_hotkey = new QHotkey(seq, true, this); // true 表示立即注册            connect(m_hotkey, &amp;QHotkey::activated, this, &amp;SnipasteApp::grapScreen);        &#125;    &#125;&#125;
+
+]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>notepad</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/notepad/</url>
+    <content><![CDATA[learned
+QFileDialog用于获取需要打开的文件（点击）
+QFile::open打开文件，readAll()获取QByteArray类型的数据
+键与槽函数Qt::ControlModifier,mousePressEvent，QPoint
+
+if(QKetEvent* k-&gt;modifiers()==Qt::ControlModifier &amp;&amp; k-&gt;key()==Qt::Key_S)        &#123;            saveActionSlot();        &#125;
+
+
+槽函数的连接（与按键事件）
+
+connect(ui-&gt;newAction,&amp;QAction::triggered,this,&amp;MainWindow::newActionSlot);
+code#include &quot;mainwindow.h&quot;#include &quot;./ui_mainwindow.h&quot;#include &lt;QFileDialog&gt;#include &lt;QMessageBox&gt;MainWindow::MainWindow(QWidget *parent)    : QMainWindow(parent)    , ui(new Ui::MainWindow)&#123;    ui-&gt;setupUi(this);    connect(ui-&gt;newAction,&amp;QAction::triggered,this,&amp;MainWindow::newActionSlot);    connect(ui-&gt;openAction,&amp;QAction::triggered,this,&amp;MainWindow::openActionSlot);    connect(ui-&gt;saveAction,&amp;QAction::triggered,this,&amp;MainWindow::saveActionSlot);&#125;MainWindow::~MainWindow()&#123;    delete ui;&#125;void MainWindow::newActionSlot()&#123;    ui-&gt;textEdit-&gt;clear();    this-&gt;setWindowTitle(&quot;新建文本文档.txt&quot;);&#125;void MainWindow::openActionSlot()&#123;    QString fileName = QFileDialog::getOpenFileName(this,&quot;打开&quot;,                                 QCoreApplication::applicationFilePath(),&quot;*.cpp&quot;);    if(fileName.isEmpty())    &#123;        QMessageBox::warning(this,&quot;警告&quot;,&quot;请选择一个文件&quot;);    &#125;    else    &#123;        // qDebug()&lt;&lt;fileName;        QFile file(fileName);        file.open(QIODevice::ReadOnly);        QByteArray ba=file.readAll();        ui-&gt;textEdit-&gt;setText(QString(ba));        file.close();    &#125;&#125;void MainWindow::saveActionSlot()&#123;    QString fileName = QFileDialog::getSaveFileName(this,&quot;保存&quot;,                                                    QCoreApplication::applicationFilePath());    if(fileName.isEmpty())    &#123;        QMessageBox::warning(this,&quot;警告&quot;,&quot;请选择一个文件&quot;);    &#125;    else    &#123;        // qDebug()&lt;&lt;fileName;        QFile file(fileName);        file.open(QIODevice::WriteOnly);        QByteArray ba;        ba.append(qPrintable(ui-&gt;textEdit-&gt;toPlainText()));        file.write(ba);        file.close();    &#125;&#125;void MainWindow::keyPressEvent(QKeyEvent *k)&#123;    if(k-&gt;modifiers()==Qt::ControlModifier &amp;&amp; k-&gt;key()==Qt::Key_S)    &#123;        saveActionSlot();    &#125;    else if(k-&gt;modifiers()==Qt::ControlModifier&amp;&amp;k-&gt;key()==Qt::Key_N)    &#123;        newActionSlot();    &#125;    else if(k-&gt;modifiers()==Qt::ControlModifier&amp;&amp;k-&gt;key()==Qt::Key_O)    &#123;        openActionSlot();    &#125;&#125;void MainWindow::mousePressEvent(QMouseEvent *m)&#123;    QPoint pt = m-&gt;pos();    qDebug()&lt;&lt;pt;    if(m-&gt;button()==Qt::LeftButton)    &#123;        qDebug()&lt;&lt;&quot;左键被按下&quot;;    &#125;    else if(m-&gt;button()==Qt::RightButton)    &#123;        qDebug()&lt;&lt;&quot;右键被按下&quot;;    &#125;&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>player</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/player/</url>
+    <content><![CDATA[MediaPlayer+AudioOutput(m_mediaPlayer-&gt;setAudioOutput(m_audioOutput);)获取文件目录QDirIterator，.hasNext()进行遍历播放逻辑
+
+void MusicPlayer::on_musicListView_doubleClicked(const QModelIndex &amp;index)&#123;    auto url=index.data(Qt::UserRole+1).toUrl();    m_mediaPlayer-&gt;setSource(url);    m_mediaPlayer-&gt;play();&#125;
+
+StandardItemModel在viewList上展示(数据处理setModel,appendRow)
+]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>begin: my favorite color</title>
+    <url>/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/</url>
+    <content><![CDATA[like color
+It is what I like to use in daily time
+]]></content>
+      <tags>
+        <tag>daily</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算器</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E7%AE%97%E5%99%A8/</url>
+    <content><![CDATA[learned
+QChar包含了所有的字符()&gt;char, 而switch语句期望获得一个数字，可以用QChar::unicode()进行转换
+函数多使用驼峰式命名，与cpp内置函数有所不同
+整数处理方式
+
+std::abs(result - std::round(result)) &lt; 1e-10
+
+槽的使用
+
+
+主要代码#include &quot;calculator.h&quot;#include &lt;QStack&gt;#include &lt;QString&gt;#include &lt;QChar&gt;#include &lt;cmath&gt;// 辅助函数：获取运算符优先级int getPriority(QChar op) &#123;    if (op == &#x27;+&#x27; || op == &#x27;-&#x27;) return 1;    if (op == &#x27;*&#x27; || op == &#x27;/&#x27;) return 2;    return 0;&#125;// 辅助函数：执行运算double applyOperation(double a, double b, QChar op) &#123;    switch (op.unicode()) &#123;    case &#x27;+&#x27;: return a + b;    case &#x27;-&#x27;: return a - b;    case &#x27;*&#x27;: return a * b;    case &#x27;/&#x27;:        if (b == 0) throw &quot;Division by zero&quot;;        return a / b;    default: return 0;    &#125;&#125;QString calculate(QString expression)&#123;    try &#123;        // 移除所有空格        expression = expression.replace(&quot; &quot;, &quot;&quot;);        QStack&lt;double&gt; values;        QStack&lt;QChar&gt; operators;        for (int i = 0; i &lt; expression.length(); i++) &#123;            QChar c = expression[i];            // 如果是数字，读取完整数字            if (c.isDigit() || c == &#x27;.&#x27;) &#123;                QString numStr;                while (i &lt; expression.length() &amp;&amp;                       (expression[i].isDigit() || expression[i] == &#x27;.&#x27;)) &#123;                    numStr += expression[i];                    i++;                &#125;                i--; // 回退一个字符                bool ok;                double num = numStr.toDouble(&amp;ok);                if (!ok) throw &quot;Invalid number format&quot;;                values.push(num);            &#125;            // 如果是左括号，压入运算符栈            else if (c == &#x27;(&#x27;) &#123;                operators.push(c);            &#125;            // 如果是右括号，计算括号内的表达式            else if (c == &#x27;)&#x27;) &#123;                while (!operators.empty() &amp;&amp; operators.top() != &#x27;(&#x27;) &#123;                    if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;                    double b = values.top(); values.pop();                    double a = values.top(); values.pop();                    QChar op = operators.top(); operators.pop();                    values.push(applyOperation(a, b, op));                &#125;                if (operators.empty()) throw &quot;Mismatched parentheses&quot;;                operators.pop(); // 弹出左括号            &#125;            // 如果是运算符            else if (c == &#x27;+&#x27; || c == &#x27;-&#x27; || c == &#x27;*&#x27; || c == &#x27;/&#x27;) &#123;                // 处理负号（一元运算符）                if (c == &#x27;-&#x27; &amp;&amp; (i == 0 || expression[i-1] == &#x27;(&#x27; ||                                 expression[i-1] == &#x27;+&#x27; || expression[i-1] == &#x27;-&#x27; ||                                 expression[i-1] == &#x27;*&#x27; || expression[i-1] == &#x27;/&#x27;)) &#123;                    // 这是一个负号而不是减号                    QString numStr = &quot;-&quot;;                    i++;                    while (i &lt; expression.length() &amp;&amp;                           (expression[i].isDigit() || expression[i] == &#x27;.&#x27;)) &#123;                        numStr += expression[i];                        i++;                    &#125;                    i--;                    bool ok;                    double num = numStr.toDouble(&amp;ok);                    if (!ok) throw &quot;Invalid number format&quot;;                    values.push(num);                    continue;                &#125;                // 处理普通运算符                while (!operators.empty() &amp;&amp;                       getPriority(operators.top()) &gt;= getPriority(c)) &#123;                    if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;                    double b = values.top(); values.pop();                    double a = values.top(); values.pop();                    QChar op = operators.top(); operators.pop();                    values.push(applyOperation(a, b, op));                &#125;                operators.push(c);            &#125;            else &#123;                throw &quot;Invalid character in expression&quot;;            &#125;        &#125;        // 处理剩余的运算符        while (!operators.empty()) &#123;            if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;            double b = values.top(); values.pop();            double a = values.top(); values.pop();            QChar op = operators.top(); operators.pop();            values.push(applyOperation(a, b, op));        &#125;        // 检查最终结果        if (values.size() != 1 || !operators.empty()) &#123;            throw &quot;Invalid expression&quot;;        &#125;        double result = values.top();        // 处理浮点数精度问题，如果结果是整数则显示为整数        if (std::abs(result - std::round(result)) &lt; 1e-10) &#123;            return QString::number(static_cast&lt;long long&gt;(std::round(result)));        &#125; else &#123;            return QString::number(result, &#x27;g&#x27;, 15); // 保留15位有效数字        &#125;    &#125;    catch (const char* error) &#123;        return QString(&quot;Error: &quot;) + error;    &#125;    catch (...) &#123;        return &quot;Error: Unknown error&quot;;    &#125;&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>信号与槽AI</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E4%BC%98%E5%8A%BF/</url>
+    <content><![CDATA[1. 观察者模式 (Observer Pattern)
+
+
+这是最直接、最经典的解决方案，也是Qt信号&#x2F;槽机制的理论基础。
+核心思想： 定义一种一对多的依赖关系，当一个对象（Subject，主题）的状态发生改变时，所有依赖于它的对象（Observers，观察者）都会得到通知并自动更新。
+实现方式：
+#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;algorithm&gt;#include &lt;memory&gt;// 前向声明class Observer;// 主题 (Subject) 接口class Subject &#123;public:    virtual ~Subject() = default;    virtual void attach(std::weak_ptr&lt;Observer&gt; observer) = 0;    virtual void detach(std::weak_ptr&lt;Observer&gt; observer) = 0;    virtual void notify() = 0;&#125;;// 观察者 (Observer) 接口class Observer &#123;public:    virtual ~Observer() = default;    virtual void update() = 0;&#125;;// 具体的主题（例如：后台工作线程）class ConcreteSubject : public Subject, public std::enable_shared_from_this&lt;ConcreteSubject&gt; &#123;public:    void doWork() &#123;        std::cout &lt;&lt; &quot;Working...&quot; &lt;&lt; std::endl;        // ... 一些工作 ...        std::cout &lt;&lt; &quot;Work done! Notifying observers.&quot; &lt;&lt; std::endl;        notify(); // 工作完成，通知所有观察者    &#125;    void attach(std::weak_ptr&lt;Observer&gt; observer) override &#123;        observers_.push_back(observer);    &#125;    void detach(std::weak_ptr&lt;Observer&gt; observer) override &#123;        // 在实际项目中，这里需要更复杂的逻辑来清理失效的 weak_ptr        observers_.erase(            std::remove_if(observers_.begin(), observers_.end(),                [&amp;observer](const std::weak_ptr&lt;Observer&gt;&amp; wp) &#123;                    return wp.lock() == observer.lock();                &#125;),            observers_.end());    &#125;    void notify() override &#123;        for (auto it = observers_.begin(); it != observers_.end(); ) &#123;            if (auto obs = it-&gt;lock()) &#123;                obs-&gt;update();                ++it;            &#125; else &#123;                // 观察者对象已被销毁，移除失效的 weak_ptr                it = observers_.erase(it);            &#125;        &#125;    &#125;private:    std::vector&lt;std::weak_ptr&lt;Observer&gt;&gt; observers_;&#125;;// 具体的观察者（例如：UI更新器）class ConcreteObserver : public Observer, public std::enable_shared_from_this&lt;ConcreteObserver&gt; &#123;public:    ConcreteObserver(const std::string&amp; name) : name_(name) &#123;&#125;    void update() override &#123;        std::cout &lt;&lt; &quot;Observer &quot; &lt;&lt; name_ &lt;&lt; &quot;: Received update! Updating UI...&quot; &lt;&lt; std::endl;    &#125;    // 一个便捷函数，用于将自己注册到主题    void subscribeTo(const std::shared_ptr&lt;Subject&gt;&amp; subject) &#123;        subject_ = subject;        subject_-&gt;attach(std::weak_ptr&lt;Observer&gt;(shared_from_this()));    &#125;    void unsubscribe() &#123;        if (auto sub = subject_.lock()) &#123;            sub-&gt;detach(std::weak_ptr&lt;Observer&gt;(shared_from_this()));        &#125;    &#125;private:    std::string name_;    std::weak_ptr&lt;Subject&gt; subject_;&#125;;// 使用示例int main() &#123;    auto worker = std::make_shared&lt;ConcreteSubject&gt;();    auto uiUpdater1 = std::make_shared&lt;ConcreteObserver&gt;(&quot;UI 1&quot;);    auto uiUpdater2 = std::make_shared&lt;ConcreteObserver&gt;(&quot;UI 2&quot;);    // 建立订阅关系（松耦合：Worker不知道谁订阅了它）    uiUpdater1-&gt;subscribeTo(worker);    uiUpdater2-&gt;subscribeTo(worker);    // 执行工作，自动通知所有订阅者    worker-&gt;doWork();    // 一个观察者取消订阅    uiUpdater1-&gt;unsubscribe();    std::cout &lt;&lt; &quot;\n--- After unsubscribe ---\n&quot;;    worker-&gt;doWork();    return 0;&#125;
+
+优点： 实现了松耦合，Subject不需要知道Observer的具体细节。缺点： 需要自己管理Observer的注册、注销和生命周期（使用std::weak_ptr防止悬挂指针）。
+
+2. 回调函数 (Callbacks) &#x2F; 函数对象 (Function Objects &#x2F; std::function)这是一种更轻量级的方式，特别适合一对一的通信场景。
+实现方式：
+#include &lt;iostream&gt;#include &lt;functional&gt;#include &lt;vector&gt;class Worker &#123;public:    // 使用 std::function 定义回调类型    using Callback = std::function&lt;void(int result)&gt;;    void setCompletionCallback(const Callback&amp; cb) &#123;        completionCallback_ = cb;    &#125;    void addProgressCallback(const Callback&amp; cb) &#123;        progressCallbacks_.push_back(cb);    &#125;    void doWork() &#123;        for (int i = 0; i &lt;= 100; i += 25) &#123;            std::cout &lt;&lt; &quot;Progress: &quot; &lt;&lt; i &lt;&lt; &quot;%&quot; &lt;&lt; std::endl;            // 通知所有进度回调（模拟一对多）            for (const auto&amp; cb : progressCallbacks_) &#123;                if (cb) cb(i);            &#125;        &#125;        // 工作完成，通知完成回调        if (completionCallback_) &#123;            completionCallback_(42); // 假设结果是42        &#125;    &#125;private:    Callback completionCallback_;    std::vector&lt;Callback&gt; progressCallbacks_;&#125;;// 一个接收通知的类class UI &#123;public:    void updateProgress(int value) &#123;        std::cout &lt;&lt; &quot;UI: Updating progress bar to &quot; &lt;&lt; value &lt;&lt; &quot;%&quot; &lt;&lt; std::endl;    &#125;    void handleResult(int result) &#123;        std::cout &lt;&lt; &quot;UI: Got result: &quot; &lt;&lt; result &lt;&lt; std::endl;    &#125;&#125;;int main() &#123;    Worker worker;    UI ui;    // 设置回调（建立连接）    worker.setCompletionCallback([&amp;ui](int result) &#123; ui.handleResult(result); &#125;);    worker.addProgressCallback([&amp;ui](int progress) &#123; ui.updateProgress(progress); &#125;);    // 也可以使用lambda直接处理    worker.addProgressCallback([](int progress) &#123;        std::cout &lt;&lt; &quot;Logger: Progress is &quot; &lt;&lt; progress &lt;&lt; &quot;%&quot; &lt;&lt; std::endl;    &#125;);    worker.doWork();    return 0;&#125;
+
+优点： 非常灵活，语法简单，C++11及以上标准支持良好。缺点： 一对多需要自己管理回调列表。要非常小心回调函数和对象的生命周期（上面的例子使用了lambda捕获引用&amp;ui，如果ui先于worker被销毁，就会导致未定义行为）。
+
+3. 基于事件的系统 (Event Bus)这是一个更高级、更通用的模式，常用于大型应用程序，它本身是一个中央调度器。
+简化实现：
+#include &lt;iostream&gt;#include &lt;map&gt;#include &lt;vector&gt;#include &lt;functional&gt;#include &lt;memory&gt;#include &lt;string&gt;// 任何需要传递的事件数据都可以继承自此类struct Event &#123;    virtual ~Event() = default;&#125;;// 具体的事件类型struct WorkCompletedEvent : public Event &#123;    int result;    WorkCompletedEvent(int r) : result(r) &#123;&#125;&#125;;struct ProgressUpdatedEvent : public Event &#123;    int progress;    ProgressUpdatedEvent(int p) : progress(p) &#123;&#125;&#125;;// 事件总线（通常是单例）class EventBus &#123;public:    using Subscriber = std::function&lt;void(const Event&amp;)&gt;;    // 订阅特定类型的事件    template &lt;typename EventType&gt;    void subscribe(Subscriber subscriber) &#123;        subscribers_[typeid(EventType).name()].push_back(subscriber);    &#125;    // 发布一个事件    template &lt;typename EventType&gt;    void publish(const EventType&amp; event) &#123;        auto it = subscribers_.find(typeid(EventType).name());        if (it != subscribers_.end()) &#123;            for (const auto&amp; subscriber : it-&gt;second) &#123;                subscriber(event);            &#125;        &#125;    &#125;private:    std::map&lt;std::string, std::vector&lt;Subscriber&gt;&gt; subscribers_;&#125;;// 使用示例int main() &#123;    EventBus bus;    Worker worker(bus); // 假设Worker接收一个EventBus引用    UI ui(bus);         // UI也接收一个EventBus引用    // 在UI内部某处进行订阅    bus.subscribe&lt;ProgressUpdatedEvent&gt;([](const Event&amp; e) &#123;        const auto&amp; event = static_cast&lt;const ProgressUpdatedEvent&amp;&gt;(e);        std::cout &lt;&lt; &quot;UI Event: Progress &quot; &lt;&lt; event.progress &lt;&lt; &quot;%&quot; &lt;&lt; std::endl;    &#125;);    bus.subscribe&lt;WorkCompletedEvent&gt;([](const Event&amp; e) &#123;        const auto&amp; event = static_cast&lt;const WorkCompletedEvent&amp;&gt;(e);        std::cout &lt;&lt; &quot;UI Event: Result &quot; &lt;&lt; event.result &lt;&lt; std::endl;    &#125;);    // Worker在执行过程中发布事件    // worker.doWork() 内部会调用 bus.publish(ProgressUpdatedEvent(50));    // 和 bus.publish(WorkCompletedEvent(100));    return 0;&#125;// 注：这是一个简化版，完整实现需要考虑线程安全、异常处理等。
+
+优点： 极度松耦合，组件之间通过事件通信，完全不知道对方的存在。非常灵活和强大。缺点： 实现相对复杂，调试可能更困难（事件流不直观）。
+总结：纯C++的解决方案
+
+
+方法
+适用场景
+优点
+缺点
+
+
+
+观察者模式
+经典的一对多通知，结构清晰
+松耦合，意图明确
+需要自己实现和管理，代码量稍大
+
+
+回调函数 (std::function)
+轻量级，一对一或简单一对多
+灵活，简单，现代C++标准支持
+生命周期管理需谨慎，一对多需自行维护列表
+
+
+事件总线 (Event Bus)
+大型应用，复杂组件间通信
+极度松耦合，高度灵活
+实现复杂，系统行为不易跟踪，调试难
+
+
+Qt的信号&#x2F;槽机制可以看作是这些模式的一个集大成者：它提供了观察者模式的清晰结构，用起来像回调函数一样简单直观，并且通过元对象系统实现了比手动事件总线更强大、更安全、更易用的功能。
+]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计时器</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E6%97%B6%E5%99%A8/</url>
+    <content><![CDATA[
+QTimer 通过start(int num)函数运行，(以num为间隔)不断发出timeout信号，stop停止
+QTimer::singleShot(1000,this,SLOT(timeoutSlot()));直接计时后运行
+connect(对象，信号，发送到对象，调用函数)，调用函数一般是自定义槽函数
+Qimage::load(path)加载图片R(“”)忽略转义，相对路径（加.qrc文件，:加相对路径）
+QPixmap pix(“D:\CACHE\Qt\objectTimer\pic\1.jpg”);另一种加载图片的方法*
+Widget::startTimer()返回一个ID,killTimer()停止，不建议使用
+
+
+code#include &quot;widget.h&quot;#include &quot;./ui_widget.h&quot;#define TIMEOUT 1000Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    timer=new QTimer;    picID=2;    QImage img;    img.load(R&quot;(D:\CACHE\Qt\Qtimer\pic\1.jpg)&quot;);    ui-&gt;label-&gt;setPixmap(QPixmap::fromImage(img));    connect(timer,&amp;QTimer::timeout,this,&amp;Widget::timeoutSlot);&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_startButton_clicked()&#123;    timer-&gt;start(TIMEOUT);&#125;void Widget::timeoutSlot()&#123;    QString path(R&quot;(D:\CACHE\Qt\Qtimer\pic\)&quot;);    path+=QString::number(picID);    path+=&quot;.jpg&quot;;    QImage img;    img.load(path);    ui-&gt;label-&gt;setPixmap(QPixmap::fromImage(img));    picID++;    if(picID==5)picID=1;&#125;void Widget::on_finishButton_clicked()&#123;    timer-&gt;stop();&#125;void Widget::on_nextButton_clicked()&#123;    QTimer::singleShot(1000,this,SLOT(timeoutSlot()));&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基本概念</title>
+    <url>/ljn-Blog/2025/10/26/ml/ml/</url>
+    <content><![CDATA[
+第01章
+]]></content>
+      <categories>
+        <category>ml</category>
+      </categories>
+      <tags>
+        <tag>ml</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>部署</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[
+windployqt部署
+]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/mysql/</url>
+    <content><![CDATA[本地learned
+.pro +sql
+QSqlDatabase::addDatabase(“NAME”)加载数据库
+QSqlquery::exec执行sql命令，返回true或false
+QString的拼接 .arg()
+
+QString sql=QString(&quot;insert into student values (%1,&#x27;%2&#x27;,&#x27;%3&#x27;);)&quot;).arg(id).arg(name).arg(birthday);
+
+code#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;#include &lt;QMessageBox&gt;#include &lt;QSqlQuery&gt;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    db = QSqlDatabase::addDatabase(&quot;QMYSQL&quot;);//加载MySQL数据库驱动    db.setDatabaseName(&quot;mydatabase&quot;);    db.setHostName(&quot;localhost&quot;);    db.setUserName(&quot;root&quot;);    db.setPassword(&quot;ljn20040118@@&quot;);    qDebug()&lt;&lt;QSqlDatabase::drivers();    if(db.open())    &#123;        QMessageBox::information(this,&quot;连接提示&quot;,&quot;连接成功&quot;);    &#125;    else&#123;        QMessageBox::warning(this,&quot;连接提示&quot;,&quot;连接失败&quot;);    &#125;&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_insertButton_clicked()&#123;    QString id = ui-&gt;numberEdit-&gt;text();    QString name = ui-&gt;numberEdit-&gt;text();    QString birthday = ui-&gt;birthdayEdit-&gt;text();    QString sql=QString(&quot;insert into student values (%1,&#x27;%2&#x27;,&#x27;%3&#x27;);)&quot;).arg(id).arg(name).arg(birthday);    QSqlQuery query;    if(query.exec(sql))    &#123;        QMessageBox::information(this,&quot;插入提示&quot;,&quot;插入成功&quot;);    &#125;    else    &#123;        QMessageBox::warning(this,&quot;插入提示&quot;,&quot;插入失败&quot;);    &#125;&#125;void Widget::on_findButton_clicked()&#123;    QSqlQuery query;    query.exec(&quot;select * from student&quot;);    while(query.next())    &#123;        qDebug()&lt;&lt;query.value(0);    &#125;&#125;
+
+网络learnedQSqlTableModel::-&gt;select方法+QTableView组件-&gt;setModel 方便显示
+code#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;#include &lt;QMessageBox&gt;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    QSqlDatabase db=QSqlDatabase::addDatabase(&quot;QMYSQL&quot;);    db.setHostName(&quot;192.168.217.129&quot;);    db.setDatabaseName(&quot;mydatabase&quot;);    db.setUserName(&quot;test0&quot;);    db.setPassword(&quot;ljn20040118LJN@@&quot;);    if(db.open())    &#123;        QMessageBox::information(this,&quot;连接提示&quot;,&quot;连接成功&quot;);        m=new QSqlTableModel();        m-&gt;setTable(&quot;student&quot;);        ui-&gt;tableView-&gt;setModel(m);    &#125;    else    &#123;        QMessageBox::warning(this,&quot;连接提示&quot;,&quot;连接失败&quot;);    &#125;&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_pushButton_clicked()&#123;    m-&gt;select();&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+</search>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"heydullsam.github.io","root":"/ljn-Blog/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"heydullsam.github.io","root":"/ljn-Blog/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="QTimer 通过start(int num)函数运行，(以num为间隔)不断发出timeout信号，stop停止 QTimer::singleShot(1000,this,SLOT(timeoutSlot()));直接计时后运行 connect(对象，信号，发送到对象，调用函数)，调用函数一般是自定义槽函数 Qimage::load(path)加载图片R(“”)忽略转义，相对路径（加.qrc文">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="QTimer 通过start(int num)函数运行，(以num为间隔)不断发出timeout信号，stop停止 QTimer::singleShot(1000,this,SLOT(timeoutSlot()));直接计时后运行 connect(对象，信号，发送到对象，调用函数)，调用函数一般是自定义槽函数 Qimage::load(path)加载图片R(“”)忽略转义，相对路径（加.qrc文">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-26T07:44:47.889Z">
-<meta property="article:modified_time" content="2025-10-26T08:33:07.692Z">
+<meta property="article:modified_time" content="2025-10-27T05:23:57.958Z">
 <meta property="article:author" content="blue_cat">
 <meta property="article:tag" content="Qt">
 <meta name="twitter:card" content="summary">
@@ -77,6 +77,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/ljn-Blog/atom.xml" title="studyLog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -104,6 +105,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -133,11 +135,38 @@
     <a href="/ljn-Blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -183,10 +212,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-10-26 15:44:47 / 修改时间：16:33:07" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-27 13:23:57" itemprop="dateModified" datetime="2025-10-27T13:23:57+08:00">2025-10-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -216,6 +251,7 @@
 <li>QPixmap pix(“D:\CACHE\Qt\objectTimer\pic\1.jpg”);另一种加载图片的方法*</li>
 <li>Widget::startTimer()返回一个ID,killTimer()停止，不建议使用</li>
 </ul>
+<span id="more"></span>
 <h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;widget.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;./ui_widget.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TIMEOUT 1000</span></span><br><span class="line">Widget::<span class="built_in">Widget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">    , <span class="built_in">ui</span>(<span class="keyword">new</span> Ui::Widget)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line">    timer=<span class="keyword">new</span> QTimer;</span><br><span class="line">    picID=<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    QImage img;</span><br><span class="line">    img.<span class="built_in">load</span>(<span class="string">R&quot;(D:\CACHE\Qt\Qtimer\pic\1.jpg)&quot;</span>);</span><br><span class="line">    ui-&gt;label-&gt;<span class="built_in">setPixmap</span>(QPixmap::<span class="built_in">fromImage</span>(img));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">connect</span>(timer,&amp;QTimer::timeout,<span class="keyword">this</span>,&amp;Widget::timeoutSlot);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget::~<span class="built_in">Widget</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Widget::on_startButton_clicked</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    timer-&gt;<span class="built_in">start</span>(TIMEOUT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Widget::timeoutSlot</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QString <span class="title">path</span><span class="params">(<span class="string">R&quot;(D:\CACHE\Qt\Qtimer\pic\)&quot;</span>)</span></span>;</span><br><span class="line">    path+=QString::<span class="built_in">number</span>(picID);</span><br><span class="line">    path+=<span class="string">&quot;.jpg&quot;</span>;</span><br><span class="line"></span><br><span class="line">    QImage img;</span><br><span class="line">    img.<span class="built_in">load</span>(path);</span><br><span class="line">    ui-&gt;label-&gt;<span class="built_in">setPixmap</span>(QPixmap::<span class="built_in">fromImage</span>(img));</span><br><span class="line"></span><br><span class="line">    picID++;</span><br><span class="line">    <span class="keyword">if</span>(picID==<span class="number">5</span>)picID=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Widget::on_finishButton_clicked</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    timer-&gt;<span class="built_in">stop</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Widget::on_nextButton_clicked</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QTimer::<span class="built_in">singleShot</span>(<span class="number">1000</span>,<span class="keyword">this</span>,<span class="built_in">SLOT</span>(<span class="built_in">timeoutSlot</span>()));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
     </div>
 
@@ -315,7 +351,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/ljn-Blog/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -336,6 +372,9 @@
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/Heydullsam" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Heydullsam" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:heydullsam@gmail.com" title="E-Mail → mailto:heydullsam@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -366,8 +405,10 @@
   </span>
   <span class="author" itemprop="copyrightHolder">blue_cat</span>
 </div>
+
+<!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div>
+  </div>-->
 
         
 
@@ -398,6 +439,7 @@
 <script src="/ljn-Blog/js/next-boot.js"></script>
 
 
+  <script defer src="/ljn-Blog/lib/three/three.min.js"></script>
 
 
   
@@ -405,6 +447,8 @@
 
 
 
+  
+<script src="/ljn-Blog/js/local-search.js"></script>
 
 
 
@@ -415,6 +459,23 @@
 
 
 
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
 
   
 
