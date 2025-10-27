@@ -200,6 +200,26 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
+              datetime="2025-10-27T14:02:34+08:00"
+              content="2025-10-27">
+          10-27
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/ljn-Blog/2025/10/27/ml/a/" itemprop="url">
+            <span itemprop="name">class1</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
               datetime="2025-10-26T15:44:47+08:00"
               content="2025-10-26">
           10-26
@@ -327,26 +347,6 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/ljn-Blog/2025/10/26/Qt_study/paste_pic/" itemprop="url">
-            <span itemprop="name">paste_pic</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-10-26T15:44:47+08:00"
-              content="2025-10-26">
-          10-26
-        </time>
-      </div>
-
-      <div class="post-title">
           <a class="post-title-link" href="/ljn-Blog/2025/10/26/Qt_study/player/" itemprop="url">
             <span itemprop="name">player</span>
           </a>
@@ -367,8 +367,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/ljn-Blog/2025/10/26/Qt_study/notepad/" itemprop="url">
-            <span itemprop="name">notepad</span>
+          <a class="post-title-link" href="/ljn-Blog/2025/10/26/Qt_study/paste_pic/" itemprop="url">
+            <span itemprop="name">paste_pic</span>
           </a>
       </div>
 
@@ -485,7 +485,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/ljn-Blog/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -527,9 +527,7 @@
   <span class="author" itemprop="copyrightHolder">blue_cat</span>
 </div>
 
-<!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div>-->
+<!---->
 
         
 
@@ -561,6 +559,7 @@
 
 
   <script defer src="/ljn-Blog/lib/three/three.min.js"></script>
+    <script defer src="/ljn-Blog/lib/three/canvas_lines.min.js"></script>
 
 
   
@@ -599,6 +598,59 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

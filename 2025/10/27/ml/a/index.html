@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/ljn-Blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/ljn-Blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/ljn-Blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/ljn-Blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/ljn-Blog/css/main.css">
+
+
+<link rel="stylesheet" href="/ljn-Blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"heydullsam.github.io","root":"/ljn-Blog/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1 supervised learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="class1">
+<meta property="og:url" content="https://heydullsam.github.io/ljn-Blog/2025/10/27/ml/a/index.html">
+<meta property="og:site_name" content="studyLog">
+<meta property="og:description" content="1 supervised learning">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://heydullsam.github.io/ljn-Blog/images/20250923100612.png">
+<meta property="og:image" content="https://heydullsam.github.io/ljn-Blog/images/20250923100900.png">
+<meta property="article:published_time" content="2025-10-27T06:02:34.428Z">
+<meta property="article:modified_time" content="2025-10-27T06:25:59.574Z">
+<meta property="article:author" content="blue_cat">
+<meta property="article:tag" content="ML">
+<meta property="article:tag" content="machine learning">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://heydullsam.github.io/ljn-Blog/images/20250923100612.png">
+
+<link rel="canonical" href="https://heydullsam.github.io/ljn-Blog/2025/10/27/ml/a/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>class1 | studyLog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/ljn-Blog/atom.xml" title="studyLog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/ljn-Blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">studyLog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/ljn-Blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/ljn-Blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/ljn-Blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/ljn-Blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/27/ml/a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          class1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-10-27 14:02:34 / 修改时间：14:25:59" itemprop="dateCreated datePublished" datetime="2025-10-27T14:02:34+08:00">2025-10-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-supervised-learning"><a href="#1-supervised-learning" class="headerlink" title="1 supervised learning"></a>1 supervised learning</h1><span id="more"></span>
+<h2 id="1-1-Regression回归"><a href="#1-1-Regression回归" class="headerlink" title="1.1 Regression回归"></a>1.1 Regression回归</h2><p>Predict a number infinitely many possible outputs.<br><img src="/ljn-Blog/images/20250923100612.png"></p>
+<h2 id="1-2-Classfication分类"><a href="#1-2-Classfication分类" class="headerlink" title="1.2 Classfication分类"></a>1.2 Classfication分类</h2><p>predict categnories small number of possible outputs.<br><img src="/ljn-Blog/images/20250923100900.png"></p>
+<h1 id="2-unsupervised-learning"><a href="#2-unsupervised-learning" class="headerlink" title="2 unsupervised learning"></a>2 unsupervised learning</h1><pre><code>data only comes with inputs x, but not output labels y. Algorithm has to find structure in the data
+</code></pre>
+<h2 id="2-1-Clustering"><a href="#2-1-Clustering" class="headerlink" title="2.1 Clustering"></a>2.1 Clustering</h2><pre><code>Group similar data points toger=ther
+</code></pre>
+<p>#eg : Goodgle news、DNA microarray、Grouping customers</p>
+<h2 id="2-2-Dimensionality-reduction"><a href="#2-2-Dimensionality-reduction" class="headerlink" title="2.2 Dimensionality reduction"></a>2.2 Dimensionality reduction</h2><pre><code>Compress data using fewer numbers
+</code></pre>
+<h2 id="2-3-Anomaly-detection"><a href="#2-3-Anomaly-detection" class="headerlink" title="2.3 Anomaly detection"></a>2.3 Anomaly detection</h2><pre><code>Find unusual data points
+</code></pre>
+<h1 id="3-linear-regression"><a href="#3-linear-regression" class="headerlink" title="3 linear regression"></a>3 linear regression</h1><pre><code>Training: Data used to train the model
+x = &quot;input&quot; variable feature
+y = &quot;output&quot; variable/ &quot;target&quot; vatiable
+m = number of training examples
+</code></pre>
+<p>$$(x^{(i)},y^{(i)})&#x3D;i^{th}\ training\ examples$$<br>$$Model：f_{w,b}(x)&#x3D;wx+b,(w,b\ named\ parameters\ or \ coefficients\ or\ weights)$$<br>[^1]<br>$$Cost\ function:\ J(w,b)&#x3D;\frac{1}{2m}\sum_{i&#x3D;1}^{m}(\hat y^{(i)}-y^{(i)})^2&#x3D;\frac{1}{2m}\sum_{i&#x3D;1}^{m}(f_{(w,b)}(x^{(i)})-y^{(i)})^2$$</p>
+<h2 id="3-1-Gradient-descent-algorithm"><a href="#3-1-Gradient-descent-algorithm" class="headerlink" title="3.1 Gradient descent algorithm"></a>3.1 Gradient descent algorithm</h2><p>$$w&#x3D;w-\alpha\frac{\partial}{\partial w}J(w,b)&#x3D;w-\alpha\frac{d}{dw}J(w),\ \alpha \ is\ learning\ rate$$<br>$$b&#x3D;b-\alpha\frac{\partial}{\partial b}J(w,b)$$</p>
+<p>Near a local minimum,</p>
+<ul>
+<li>derivative becomes smaller</li>
+<li>update steps become smaller<br>Can reach minimum without decreasing learning rate</li>
+</ul>
+<p>repeat until convergence:<br>$$w&#x3D;w-\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{w,b}(x^{(i)})-y^{(i)})x^{(i)}$$<br>$$b&#x3D;b-\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{w,b}(x^{(i)})-y^{(i)})$$</p>
+<h2 id="3-2-“Batch”-gradient-descent"><a href="#3-2-“Batch”-gradient-descent" class="headerlink" title="3.2 “Batch” gradient descent"></a>3.2 “Batch” gradient descent</h2><p>Each step of gradient descent uses all the training examples</p>
+<h2 id="3-3-mutiple-linear-regression"><a href="#3-3-mutiple-linear-regression" class="headerlink" title="3.3 mutiple linear regression"></a>3.3 mutiple linear regression</h2><p>$$f_{\vec w,b}&#x3D;\vec w·\vec x+b&#x3D;w_1x_1+w_2x_2+w_3x_3\cdots$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Vectorization can faster the process</span></span><br><span class="line">f=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">	f=f+w[j]*x[j]</span><br><span class="line">f=f+b</span><br><span class="line"></span><br><span class="line">f=np.dot(w,x)+b</span><br><span class="line"></span><br><span class="line">w=w-<span class="number">0.1</span>*d</span><br></pre></td></tr></table></figure>
+
+<p>Gradient descent:<br>repeat:<br>$$w&#x3D;w-\alpha\frac{\partial}{\partial w_j}J(\vec w,b)$$<br>$$b&#x3D;b-\alpha\frac{\partial}{\partial b}J(\vec w,b)$$</p>
+<h1 id="4-An-alternative-to-gradient-descent"><a href="#4-An-alternative-to-gradient-descent" class="headerlink" title="4 An alternative to gradient descent"></a>4 An alternative to gradient descent</h1><h2 id="4-1-Normal-equation"><a href="#4-1-Normal-equation" class="headerlink" title="4.1 Normal equation"></a>4.1 Normal equation</h2><ul>
+<li>Only for linear regression</li>
+<li>Solve for w,b without itertions</li>
+</ul>
+<h2 id="4-2-Disadvantages"><a href="#4-2-Disadvantages" class="headerlink" title="4.2 Disadvantages"></a>4.2 Disadvantages</h2><ul>
+<li>Doesn’t generalize to other learning algorithm</li>
+<li>Slow when number of features is large(&gt;10000)</li>
+</ul>
+<h1 id="5-normalization"><a href="#5-normalization" class="headerlink" title="5 normalization"></a>5 normalization</h1><h2 id="5-1-Feature-scaling"><a href="#5-1-Feature-scaling" class="headerlink" title="5.1 Feature scaling"></a>5.1 Feature scaling</h2><p>eg $x_1&lt;2000,x_{1,scaled}&#x3D;\frac{x_1}{2000}$</p>
+<h2 id="5-2-Mean-normalization"><a href="#5-2-Mean-normalization" class="headerlink" title="5.2 Mean normalization"></a>5.2 Mean normalization</h2><p>[^2]<br>eg $300\le x_1\le 2000,x_1&#x3D;\frac{x_1-u_1}{2000-300}$</p>
+<h2 id="5-3-Z-score-normalization"><a href="#5-3-Z-score-normalization" class="headerlink" title="5.3 Z-score normalization"></a>5.3 Z-score normalization</h2><p>[^3]<br>eg $x_1&#x3D;\frac{x_1-u_1}{\sigma _1}$</p>
+<h2 id="5-4-skills"><a href="#5-4-skills" class="headerlink" title="5.4 skills"></a>5.4 skills</h2><p>make values of $\alpha$ to be 3 times of itself<br>eg 0.001, 0.003, 0.01, 0.03</p>
+<h1 id="6-Feature-engineering"><a href="#6-Feature-engineering" class="headerlink" title="6 Feature engineering"></a>6 Feature engineering</h1><p>Using intuition to design new features, by transforming or combining original feature<br>eg $x_3&#x3D;x_1*x_2$</p>
+<h1 id="7-Polynomial-regression"><a href="#7-Polynomial-regression" class="headerlink" title="7 Polynomial regression"></a>7 Polynomial regression</h1><p>$$f_{\vec w,b}(x)&#x3D;w_1x+w_2x^2+b$$<br>	feature scaling: eg add x^3 to avoid the line from go dowm</p>
+<h1 id="8-Classification"><a href="#8-Classification" class="headerlink" title="8 Classification"></a>8 Classification</h1><p>“binary classification”</p>
+<h2 id="8-1-logistic-regression"><a href="#8-1-logistic-regression" class="headerlink" title="8.1 logistic regression"></a>8.1 logistic regression</h2><p>sigmoid funtion:outputs between 0 and 1<br>$$g(x)&#x3D;\frac{1}{1+e^{-x}},0&lt;g(x)&lt;1$$<br>$$f_{\vec w,b}(\vec x)&#x3D;g(\vec w ·\vec x+b)&#x3D;\frac{1}{1+e^{-\vec w·\vec x+b}}$$</p>
+<h2 id="8-2-Decision-Boundary"><a href="#8-2-Decision-Boundary" class="headerlink" title="8.2 Decision Boundary"></a>8.2 Decision Boundary</h2><p>eg. $z&#x3D;x_1+x_2-3$, easy to get $x_1+x_2&#x3D;3$</p>
+<h2 id="8-3-Non-linear-decision-boundaries"><a href="#8-3-Non-linear-decision-boundaries" class="headerlink" title="8.3 Non-linear decision boundaries"></a>8.3 Non-linear decision boundaries</h2><p>eg. $z&#x3D;x_1^2+x_2^2-1$</p>
+<h2 id="8-4-Cost"><a href="#8-4-Cost" class="headerlink" title="8.4 Cost"></a>8.4 Cost</h2><p>$$J(\vec w,b)&#x3D;\frac{1}{m}\sum_{i&#x3D;1}^{m}L(f_{\vec w,b}(\vec x^{(i)},y^{(i)})&#x3D;\begin{cases}-log(f_{\vec w,b}(\vec x^{(i)})),if\ y^{(i)}&#x3D;1\-log(1-f_{\vec w,b}(\vec x^{(i)},if\ y^{(i)}&#x3D;0))\end{cases}$$</p>
+<h2 id="8-5-Gradient-descent-for-logistic-regression"><a href="#8-5-Gradient-descent-for-logistic-regression" class="headerlink" title="8.5 Gradient descent for logistic regression"></a>8.5 Gradient descent for logistic regression</h2><p>[^4]<br>$$w_j&#x3D;w_j-\alpha[\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{\vec w,b}(\vec x^{(i)})-y^{(i)})x_j^{(i)}]$$<br>$$b&#x3D;b-\alpha[\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{\vec w,b}(\vec x^{(i)})-y^{(i)})]$$<br> Regularition</p>
+<pre><code>underfit, 
+just right,
+ overfit, Collect more training examples; select features to include/exclude, Regularition(Reduce the size of parameters w_j)
+</code></pre>
+<p>$$minJ(\vec w,b)&#x3D;min[\frac{1}{2m}\sum_{i&#x3D;1}^{m}(f_{\vec w,b}(\vec x^{(i)})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j&#x3D;1}^nw_j^2]$$<br> Gradient descent extremely - $\frac{\lambda}{m}w_j$<br>![[assets&#x2F;Pasted image 20250930090505.jpg]]</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/ljn-Blog/tags/ML/" rel="tag"># ML</a>
+              <a href="/ljn-Blog/tags/machine-learning/" rel="tag"># machine learning</a>
+              <a href="/ljn-Blog/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/" rel="prev" title="begin: my favorite color">
+      <i class="fa fa-chevron-left"></i> begin: my favorite color
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-supervised-learning"><span class="nav-number">1.</span> <span class="nav-text">1 supervised learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Regression%E5%9B%9E%E5%BD%92"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Regression回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Classfication%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Classfication分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-unsupervised-learning"><span class="nav-number">2.</span> <span class="nav-text">2 unsupervised learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Clustering"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Clustering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Dimensionality-reduction"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Dimensionality reduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Anomaly-detection"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Anomaly detection</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-linear-regression"><span class="nav-number">3.</span> <span class="nav-text">3 linear regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-Gradient-descent-algorithm"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Gradient descent algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E2%80%9CBatch%E2%80%9D-gradient-descent"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 “Batch” gradient descent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-mutiple-linear-regression"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 mutiple linear regression</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-An-alternative-to-gradient-descent"><span class="nav-number">4.</span> <span class="nav-text">4 An alternative to gradient descent</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Normal-equation"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Normal equation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Disadvantages"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Disadvantages</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-normalization"><span class="nav-number">5.</span> <span class="nav-text">5 normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Feature-scaling"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Feature scaling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-Mean-normalization"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 Mean normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Z-score-normalization"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 Z-score normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-skills"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 skills</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-Feature-engineering"><span class="nav-number">6.</span> <span class="nav-text">6 Feature engineering</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-Polynomial-regression"><span class="nav-number">7.</span> <span class="nav-text">7 Polynomial regression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-Classification"><span class="nav-number">8.</span> <span class="nav-text">8 Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-logistic-regression"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 logistic regression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-Decision-Boundary"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 Decision Boundary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-Non-linear-decision-boundaries"><span class="nav-number">8.3.</span> <span class="nav-text">8.3 Non-linear decision boundaries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-Cost"><span class="nav-number">8.4.</span> <span class="nav-text">8.4 Cost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5-Gradient-descent-for-logistic-regression"><span class="nav-number">8.5.</span> <span class="nav-text">8.5 Gradient descent for logistic regression</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="blue_cat"
+      src="/ljn-Blog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">blue_cat</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/ljn-Blog/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/ljn-Blog/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/ljn-Blog/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Heydullsam" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Heydullsam" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:heydullsam@gmail.com" title="E-Mail → mailto:heydullsam@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">blue_cat</span>
+</div>
+
+<!---->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/ljn-Blog/lib/anime.min.js"></script>
+  <script src="/ljn-Blog/lib/velocity/velocity.min.js"></script>
+  <script src="/ljn-Blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/ljn-Blog/js/utils.js"></script>
+
+<script src="/ljn-Blog/js/motion.js"></script>
+
+
+<script src="/ljn-Blog/js/schemes/muse.js"></script>
+
+
+<script src="/ljn-Blog/js/next-boot.js"></script>
+
+
+  <script defer src="/ljn-Blog/lib/three/three.min.js"></script>
+    <script defer src="/ljn-Blog/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/ljn-Blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

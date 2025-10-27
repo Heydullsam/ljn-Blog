@@ -22,13 +22,13 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="studyLog">
-<meta property="og:url" content="https://heydullsam.github.io/ljn-Blog/tags/ml/index.html">
+<meta property="og:url" content="https://heydullsam.github.io/ljn-Blog/tags/ML/index.html">
 <meta property="og:site_name" content="studyLog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="blue_cat">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://heydullsam.github.io/ljn-Blog/tags/ml/">
+<link rel="canonical" href="https://heydullsam.github.io/ljn-Blog/tags/ML/">
 
 
 <script id="page-configurations">
@@ -41,7 +41,7 @@
   };
 </script>
 
-  <title>标签: ml | studyLog</title>
+  <title>标签: ML | studyLog</title>
   
 
 
@@ -187,7 +187,7 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <h2 class="collection-header">ml
+        <h2 class="collection-header">ML
           <small>标签</small>
         </h2>
       </div>
@@ -202,15 +202,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2025-10-26T15:44:47+08:00"
-              content="2025-10-26">
-          10-26
+              datetime="2025-10-27T14:02:34+08:00"
+              content="2025-10-27">
+          10-27
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/ljn-Blog/2025/10/26/ml/ml/" itemprop="url">
-            <span itemprop="name">基本概念</span>
+          <a class="post-title-link" href="/ljn-Blog/2025/10/27/ml/a/" itemprop="url">
+            <span itemprop="name">class1</span>
           </a>
       </div>
 
@@ -303,7 +303,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/ljn-Blog/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -345,9 +345,7 @@
   <span class="author" itemprop="copyrightHolder">blue_cat</span>
 </div>
 
-<!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div>-->
+<!---->
 
         
 
@@ -379,6 +377,7 @@
 
 
   <script defer src="/ljn-Blog/lib/three/three.min.js"></script>
+    <script defer src="/ljn-Blog/lib/three/canvas_lines.min.js"></script>
 
 
   
@@ -417,6 +416,59 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

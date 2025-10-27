@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>begin: my favorite color</title>
+    <url>/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/</url>
+    <content><![CDATA[like color
+It is what I like to use in daily time
+]]></content>
+      <tags>
+        <tag>daily</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TCP</title>
     <url>/ljn-Blog/2025/10/26/Qt_study/TCP/</url>
     <content><![CDATA[clientlearned
@@ -28,6 +38,15 @@ code#include &quot;mythread.h&quot;myThread::myThread(QTcpSocket *s)&#123;    so
       </categories>
       <tags>
         <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Qt</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/content/</url>
+    <content><![CDATA[filters:  and:    - file.folder == this.file.folder    - file.path != this.file.path    - file.path != &quot;/assets/&quot;views:  - type: table    name: 表格    order:      - title      - file.name
+]]></content>
+      <tags>
+        <tag>sub_content</tag>
       </tags>
   </entry>
   <entry>
@@ -69,12 +88,63 @@ code#include &quot;widget.h&quot;#include &lt;QPixmap&gt;#include &lt;QDebug&gt;
       </tags>
   </entry>
   <entry>
-    <title>Qt</title>
-    <url>/ljn-Blog/2025/10/26/Qt_study/content/</url>
-    <content><![CDATA[filters:  and:    - file.folder == this.file.folder    - file.path != this.file.path    - file.path != &quot;/assets/&quot;views:  - type: table    name: 表格    order:      - title      - file.name
-]]></content>
+    <title>mysql</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/mysql/</url>
+    <content><![CDATA[本地learned
+.pro +sql
+QSqlDatabase::addDatabase(“NAME”)加载数据库
+QSqlquery::exec执行sql命令，返回true或false
+QString的拼接 .arg()
+
+QString sql=QString(&quot;insert into student values (%1,&#x27;%2&#x27;,&#x27;%3&#x27;);)&quot;).arg(id).arg(name).arg(birthday);
+
+code#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;#include &lt;QMessageBox&gt;#include &lt;QSqlQuery&gt;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    db = QSqlDatabase::addDatabase(&quot;QMYSQL&quot;);//加载MySQL数据库驱动    db.setDatabaseName(&quot;mydatabase&quot;);    db.setHostName(&quot;localhost&quot;);    db.setUserName(&quot;root&quot;);    db.setPassword(&quot;ljn20040118@@&quot;);    qDebug()&lt;&lt;QSqlDatabase::drivers();    if(db.open())    &#123;        QMessageBox::information(this,&quot;连接提示&quot;,&quot;连接成功&quot;);    &#125;    else&#123;        QMessageBox::warning(this,&quot;连接提示&quot;,&quot;连接失败&quot;);    &#125;&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_insertButton_clicked()&#123;    QString id = ui-&gt;numberEdit-&gt;text();    QString name = ui-&gt;numberEdit-&gt;text();    QString birthday = ui-&gt;birthdayEdit-&gt;text();    QString sql=QString(&quot;insert into student values (%1,&#x27;%2&#x27;,&#x27;%3&#x27;);)&quot;).arg(id).arg(name).arg(birthday);    QSqlQuery query;    if(query.exec(sql))    &#123;        QMessageBox::information(this,&quot;插入提示&quot;,&quot;插入成功&quot;);    &#125;    else    &#123;        QMessageBox::warning(this,&quot;插入提示&quot;,&quot;插入失败&quot;);    &#125;&#125;void Widget::on_findButton_clicked()&#123;    QSqlQuery query;    query.exec(&quot;select * from student&quot;);    while(query.next())    &#123;        qDebug()&lt;&lt;query.value(0);    &#125;&#125;
+
+网络learnedQSqlTableModel::-&gt;select方法+QTableView组件-&gt;setModel 方便显示
+code#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;#include &lt;QMessageBox&gt;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    QSqlDatabase db=QSqlDatabase::addDatabase(&quot;QMYSQL&quot;);    db.setHostName(&quot;192.168.217.129&quot;);    db.setDatabaseName(&quot;mydatabase&quot;);    db.setUserName(&quot;test0&quot;);    db.setPassword(&quot;ljn20040118LJN@@&quot;);    if(db.open())    &#123;        QMessageBox::information(this,&quot;连接提示&quot;,&quot;连接成功&quot;);        m=new QSqlTableModel();        m-&gt;setTable(&quot;student&quot;);        ui-&gt;tableView-&gt;setModel(m);    &#125;    else    &#123;        QMessageBox::warning(this,&quot;连接提示&quot;,&quot;连接失败&quot;);    &#125;&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_pushButton_clicked()&#123;    m-&gt;select();&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
       <tags>
-        <tag>sub_content</tag>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>player</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/player/</url>
+    <content><![CDATA[MediaPlayer+AudioOutput(m_mediaPlayer-&gt;setAudioOutput(m_audioOutput);)获取文件目录QDirIterator，.hasNext()进行遍历播放逻辑
+
+void MusicPlayer::on_musicListView_doubleClicked(const QModelIndex &amp;index)&#123;    auto url=index.data(Qt::UserRole+1).toUrl();    m_mediaPlayer-&gt;setSource(url);    m_mediaPlayer-&gt;play();&#125;
+
+StandardItemModel在viewList上展示(数据处理setModel,appendRow)
+]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>notepad</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/notepad/</url>
+    <content><![CDATA[learned
+QFileDialog用于获取需要打开的文件（点击）
+QFile::open打开文件，readAll()获取QByteArray类型的数据
+键与槽函数Qt::ControlModifier,mousePressEvent，QPoint
+
+if(QKetEvent* k-&gt;modifiers()==Qt::ControlModifier &amp;&amp; k-&gt;key()==Qt::Key_S)        &#123;            saveActionSlot();        &#125;
+
+
+槽函数的连接（与按键事件）
+
+connect(ui-&gt;newAction,&amp;QAction::triggered,this,&amp;MainWindow::newActionSlot);
+code#include &quot;mainwindow.h&quot;#include &quot;./ui_mainwindow.h&quot;#include &lt;QFileDialog&gt;#include &lt;QMessageBox&gt;MainWindow::MainWindow(QWidget *parent)    : QMainWindow(parent)    , ui(new Ui::MainWindow)&#123;    ui-&gt;setupUi(this);    connect(ui-&gt;newAction,&amp;QAction::triggered,this,&amp;MainWindow::newActionSlot);    connect(ui-&gt;openAction,&amp;QAction::triggered,this,&amp;MainWindow::openActionSlot);    connect(ui-&gt;saveAction,&amp;QAction::triggered,this,&amp;MainWindow::saveActionSlot);&#125;MainWindow::~MainWindow()&#123;    delete ui;&#125;void MainWindow::newActionSlot()&#123;    ui-&gt;textEdit-&gt;clear();    this-&gt;setWindowTitle(&quot;新建文本文档.txt&quot;);&#125;void MainWindow::openActionSlot()&#123;    QString fileName = QFileDialog::getOpenFileName(this,&quot;打开&quot;,                                 QCoreApplication::applicationFilePath(),&quot;*.cpp&quot;);    if(fileName.isEmpty())    &#123;        QMessageBox::warning(this,&quot;警告&quot;,&quot;请选择一个文件&quot;);    &#125;    else    &#123;        // qDebug()&lt;&lt;fileName;        QFile file(fileName);        file.open(QIODevice::ReadOnly);        QByteArray ba=file.readAll();        ui-&gt;textEdit-&gt;setText(QString(ba));        file.close();    &#125;&#125;void MainWindow::saveActionSlot()&#123;    QString fileName = QFileDialog::getSaveFileName(this,&quot;保存&quot;,                                                    QCoreApplication::applicationFilePath());    if(fileName.isEmpty())    &#123;        QMessageBox::warning(this,&quot;警告&quot;,&quot;请选择一个文件&quot;);    &#125;    else    &#123;        // qDebug()&lt;&lt;fileName;        QFile file(fileName);        file.open(QIODevice::WriteOnly);        QByteArray ba;        ba.append(qPrintable(ui-&gt;textEdit-&gt;toPlainText()));        file.write(ba);        file.close();    &#125;&#125;void MainWindow::keyPressEvent(QKeyEvent *k)&#123;    if(k-&gt;modifiers()==Qt::ControlModifier &amp;&amp; k-&gt;key()==Qt::Key_S)    &#123;        saveActionSlot();    &#125;    else if(k-&gt;modifiers()==Qt::ControlModifier&amp;&amp;k-&gt;key()==Qt::Key_N)    &#123;        newActionSlot();    &#125;    else if(k-&gt;modifiers()==Qt::ControlModifier&amp;&amp;k-&gt;key()==Qt::Key_O)    &#123;        openActionSlot();    &#125;&#125;void MainWindow::mousePressEvent(QMouseEvent *m)&#123;    QPoint pt = m-&gt;pos();    qDebug()&lt;&lt;pt;    if(m-&gt;button()==Qt::LeftButton)    &#123;        qDebug()&lt;&lt;&quot;左键被按下&quot;;    &#125;    else if(m-&gt;button()==Qt::RightButton)    &#123;        qDebug()&lt;&lt;&quot;右键被按下&quot;;    &#125;&#125;]]></content>
+      <categories>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
       </tags>
   </entry>
   <entry>
@@ -110,75 +180,6 @@ class SetHotkeyDialog : public QDialog &#123;    Q_OBJECTpublic:    SetHotkeyDia
 void SnipasteApp::setHotkey()&#123;    SetHotkeyDialog dlg;    if (dlg.exec() == QDialog::Accepted) &#123;        QKeySequence seq = dlg.keySequence();        if (!seq.isEmpty()) &#123;            if (m_hotkey) &#123;                m_hotkey-&gt;setRegistered(false);                delete m_hotkey;            &#125;            m_hotkey = new QHotkey(seq, true, this); // true 表示立即注册            connect(m_hotkey, &amp;QHotkey::activated, this, &amp;SnipasteApp::grapScreen);        &#125;    &#125;&#125;
 
 ]]></content>
-      <categories>
-        <category>Qt</category>
-      </categories>
-      <tags>
-        <tag>Qt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>notepad</title>
-    <url>/ljn-Blog/2025/10/26/Qt_study/notepad/</url>
-    <content><![CDATA[learned
-QFileDialog用于获取需要打开的文件（点击）
-QFile::open打开文件，readAll()获取QByteArray类型的数据
-键与槽函数Qt::ControlModifier,mousePressEvent，QPoint
-
-if(QKetEvent* k-&gt;modifiers()==Qt::ControlModifier &amp;&amp; k-&gt;key()==Qt::Key_S)        &#123;            saveActionSlot();        &#125;
-
-
-槽函数的连接（与按键事件）
-
-connect(ui-&gt;newAction,&amp;QAction::triggered,this,&amp;MainWindow::newActionSlot);
-code#include &quot;mainwindow.h&quot;#include &quot;./ui_mainwindow.h&quot;#include &lt;QFileDialog&gt;#include &lt;QMessageBox&gt;MainWindow::MainWindow(QWidget *parent)    : QMainWindow(parent)    , ui(new Ui::MainWindow)&#123;    ui-&gt;setupUi(this);    connect(ui-&gt;newAction,&amp;QAction::triggered,this,&amp;MainWindow::newActionSlot);    connect(ui-&gt;openAction,&amp;QAction::triggered,this,&amp;MainWindow::openActionSlot);    connect(ui-&gt;saveAction,&amp;QAction::triggered,this,&amp;MainWindow::saveActionSlot);&#125;MainWindow::~MainWindow()&#123;    delete ui;&#125;void MainWindow::newActionSlot()&#123;    ui-&gt;textEdit-&gt;clear();    this-&gt;setWindowTitle(&quot;新建文本文档.txt&quot;);&#125;void MainWindow::openActionSlot()&#123;    QString fileName = QFileDialog::getOpenFileName(this,&quot;打开&quot;,                                 QCoreApplication::applicationFilePath(),&quot;*.cpp&quot;);    if(fileName.isEmpty())    &#123;        QMessageBox::warning(this,&quot;警告&quot;,&quot;请选择一个文件&quot;);    &#125;    else    &#123;        // qDebug()&lt;&lt;fileName;        QFile file(fileName);        file.open(QIODevice::ReadOnly);        QByteArray ba=file.readAll();        ui-&gt;textEdit-&gt;setText(QString(ba));        file.close();    &#125;&#125;void MainWindow::saveActionSlot()&#123;    QString fileName = QFileDialog::getSaveFileName(this,&quot;保存&quot;,                                                    QCoreApplication::applicationFilePath());    if(fileName.isEmpty())    &#123;        QMessageBox::warning(this,&quot;警告&quot;,&quot;请选择一个文件&quot;);    &#125;    else    &#123;        // qDebug()&lt;&lt;fileName;        QFile file(fileName);        file.open(QIODevice::WriteOnly);        QByteArray ba;        ba.append(qPrintable(ui-&gt;textEdit-&gt;toPlainText()));        file.write(ba);        file.close();    &#125;&#125;void MainWindow::keyPressEvent(QKeyEvent *k)&#123;    if(k-&gt;modifiers()==Qt::ControlModifier &amp;&amp; k-&gt;key()==Qt::Key_S)    &#123;        saveActionSlot();    &#125;    else if(k-&gt;modifiers()==Qt::ControlModifier&amp;&amp;k-&gt;key()==Qt::Key_N)    &#123;        newActionSlot();    &#125;    else if(k-&gt;modifiers()==Qt::ControlModifier&amp;&amp;k-&gt;key()==Qt::Key_O)    &#123;        openActionSlot();    &#125;&#125;void MainWindow::mousePressEvent(QMouseEvent *m)&#123;    QPoint pt = m-&gt;pos();    qDebug()&lt;&lt;pt;    if(m-&gt;button()==Qt::LeftButton)    &#123;        qDebug()&lt;&lt;&quot;左键被按下&quot;;    &#125;    else if(m-&gt;button()==Qt::RightButton)    &#123;        qDebug()&lt;&lt;&quot;右键被按下&quot;;    &#125;&#125;]]></content>
-      <categories>
-        <category>Qt</category>
-      </categories>
-      <tags>
-        <tag>Qt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>player</title>
-    <url>/ljn-Blog/2025/10/26/Qt_study/player/</url>
-    <content><![CDATA[MediaPlayer+AudioOutput(m_mediaPlayer-&gt;setAudioOutput(m_audioOutput);)获取文件目录QDirIterator，.hasNext()进行遍历播放逻辑
-
-void MusicPlayer::on_musicListView_doubleClicked(const QModelIndex &amp;index)&#123;    auto url=index.data(Qt::UserRole+1).toUrl();    m_mediaPlayer-&gt;setSource(url);    m_mediaPlayer-&gt;play();&#125;
-
-StandardItemModel在viewList上展示(数据处理setModel,appendRow)
-]]></content>
-      <categories>
-        <category>Qt</category>
-      </categories>
-      <tags>
-        <tag>Qt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>begin: my favorite color</title>
-    <url>/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/</url>
-    <content><![CDATA[like color
-It is what I like to use in daily time
-]]></content>
-      <tags>
-        <tag>daily</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算器</title>
-    <url>/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E7%AE%97%E5%99%A8/</url>
-    <content><![CDATA[learned
-QChar包含了所有的字符()&gt;char, 而switch语句期望获得一个数字，可以用QChar::unicode()进行转换
-函数多使用驼峰式命名，与cpp内置函数有所不同
-整数处理方式
-
-std::abs(result - std::round(result)) &lt; 1e-10
-
-槽的使用
-
-
-主要代码#include &quot;calculator.h&quot;#include &lt;QStack&gt;#include &lt;QString&gt;#include &lt;QChar&gt;#include &lt;cmath&gt;// 辅助函数：获取运算符优先级int getPriority(QChar op) &#123;    if (op == &#x27;+&#x27; || op == &#x27;-&#x27;) return 1;    if (op == &#x27;*&#x27; || op == &#x27;/&#x27;) return 2;    return 0;&#125;// 辅助函数：执行运算double applyOperation(double a, double b, QChar op) &#123;    switch (op.unicode()) &#123;    case &#x27;+&#x27;: return a + b;    case &#x27;-&#x27;: return a - b;    case &#x27;*&#x27;: return a * b;    case &#x27;/&#x27;:        if (b == 0) throw &quot;Division by zero&quot;;        return a / b;    default: return 0;    &#125;&#125;QString calculate(QString expression)&#123;    try &#123;        // 移除所有空格        expression = expression.replace(&quot; &quot;, &quot;&quot;);        QStack&lt;double&gt; values;        QStack&lt;QChar&gt; operators;        for (int i = 0; i &lt; expression.length(); i++) &#123;            QChar c = expression[i];            // 如果是数字，读取完整数字            if (c.isDigit() || c == &#x27;.&#x27;) &#123;                QString numStr;                while (i &lt; expression.length() &amp;&amp;                       (expression[i].isDigit() || expression[i] == &#x27;.&#x27;)) &#123;                    numStr += expression[i];                    i++;                &#125;                i--; // 回退一个字符                bool ok;                double num = numStr.toDouble(&amp;ok);                if (!ok) throw &quot;Invalid number format&quot;;                values.push(num);            &#125;            // 如果是左括号，压入运算符栈            else if (c == &#x27;(&#x27;) &#123;                operators.push(c);            &#125;            // 如果是右括号，计算括号内的表达式            else if (c == &#x27;)&#x27;) &#123;                while (!operators.empty() &amp;&amp; operators.top() != &#x27;(&#x27;) &#123;                    if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;                    double b = values.top(); values.pop();                    double a = values.top(); values.pop();                    QChar op = operators.top(); operators.pop();                    values.push(applyOperation(a, b, op));                &#125;                if (operators.empty()) throw &quot;Mismatched parentheses&quot;;                operators.pop(); // 弹出左括号            &#125;            // 如果是运算符            else if (c == &#x27;+&#x27; || c == &#x27;-&#x27; || c == &#x27;*&#x27; || c == &#x27;/&#x27;) &#123;                // 处理负号（一元运算符）                if (c == &#x27;-&#x27; &amp;&amp; (i == 0 || expression[i-1] == &#x27;(&#x27; ||                                 expression[i-1] == &#x27;+&#x27; || expression[i-1] == &#x27;-&#x27; ||                                 expression[i-1] == &#x27;*&#x27; || expression[i-1] == &#x27;/&#x27;)) &#123;                    // 这是一个负号而不是减号                    QString numStr = &quot;-&quot;;                    i++;                    while (i &lt; expression.length() &amp;&amp;                           (expression[i].isDigit() || expression[i] == &#x27;.&#x27;)) &#123;                        numStr += expression[i];                        i++;                    &#125;                    i--;                    bool ok;                    double num = numStr.toDouble(&amp;ok);                    if (!ok) throw &quot;Invalid number format&quot;;                    values.push(num);                    continue;                &#125;                // 处理普通运算符                while (!operators.empty() &amp;&amp;                       getPriority(operators.top()) &gt;= getPriority(c)) &#123;                    if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;                    double b = values.top(); values.pop();                    double a = values.top(); values.pop();                    QChar op = operators.top(); operators.pop();                    values.push(applyOperation(a, b, op));                &#125;                operators.push(c);            &#125;            else &#123;                throw &quot;Invalid character in expression&quot;;            &#125;        &#125;        // 处理剩余的运算符        while (!operators.empty()) &#123;            if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;            double b = values.top(); values.pop();            double a = values.top(); values.pop();            QChar op = operators.top(); operators.pop();            values.push(applyOperation(a, b, op));        &#125;        // 检查最终结果        if (values.size() != 1 || !operators.empty()) &#123;            throw &quot;Invalid expression&quot;;        &#125;        double result = values.top();        // 处理浮点数精度问题，如果结果是整数则显示为整数        if (std::abs(result - std::round(result)) &lt; 1e-10) &#123;            return QString::number(static_cast&lt;long long&gt;(std::round(result)));        &#125; else &#123;            return QString::number(result, &#x27;g&#x27;, 15); // 保留15位有效数字        &#125;    &#125;    catch (const char* error) &#123;        return QString(&quot;Error: &quot;) + error;    &#125;    catch (...) &#123;        return &quot;Error: Unknown error&quot;;    &#125;&#125;]]></content>
       <categories>
         <category>Qt</category>
       </categories>
@@ -268,19 +269,6 @@ code#include &quot;widget.h&quot;#include &quot;./ui_widget.h&quot;#define TIMEO
       </tags>
   </entry>
   <entry>
-    <title>基本概念</title>
-    <url>/ljn-Blog/2025/10/26/ml/ml/</url>
-    <content><![CDATA[
-第01章
-]]></content>
-      <categories>
-        <category>ml</category>
-      </categories>
-      <tags>
-        <tag>ml</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>部署</title>
     <url>/ljn-Blog/2025/10/26/Qt_study/%E9%83%A8%E7%BD%B2/</url>
     <content><![CDATA[
@@ -294,25 +282,92 @@ windployqt部署
       </tags>
   </entry>
   <entry>
-    <title>mysql</title>
-    <url>/ljn-Blog/2025/10/26/Qt_study/mysql/</url>
-    <content><![CDATA[本地learned
-.pro +sql
-QSqlDatabase::addDatabase(“NAME”)加载数据库
-QSqlquery::exec执行sql命令，返回true或false
-QString的拼接 .arg()
+    <title>计算器</title>
+    <url>/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E7%AE%97%E5%99%A8/</url>
+    <content><![CDATA[learned
+QChar包含了所有的字符()&gt;char, 而switch语句期望获得一个数字，可以用QChar::unicode()进行转换
+函数多使用驼峰式命名，与cpp内置函数有所不同
+整数处理方式
 
-QString sql=QString(&quot;insert into student values (%1,&#x27;%2&#x27;,&#x27;%3&#x27;);)&quot;).arg(id).arg(name).arg(birthday);
+std::abs(result - std::round(result)) &lt; 1e-10
 
-code#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;#include &lt;QMessageBox&gt;#include &lt;QSqlQuery&gt;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    db = QSqlDatabase::addDatabase(&quot;QMYSQL&quot;);//加载MySQL数据库驱动    db.setDatabaseName(&quot;mydatabase&quot;);    db.setHostName(&quot;localhost&quot;);    db.setUserName(&quot;root&quot;);    db.setPassword(&quot;ljn20040118@@&quot;);    qDebug()&lt;&lt;QSqlDatabase::drivers();    if(db.open())    &#123;        QMessageBox::information(this,&quot;连接提示&quot;,&quot;连接成功&quot;);    &#125;    else&#123;        QMessageBox::warning(this,&quot;连接提示&quot;,&quot;连接失败&quot;);    &#125;&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_insertButton_clicked()&#123;    QString id = ui-&gt;numberEdit-&gt;text();    QString name = ui-&gt;numberEdit-&gt;text();    QString birthday = ui-&gt;birthdayEdit-&gt;text();    QString sql=QString(&quot;insert into student values (%1,&#x27;%2&#x27;,&#x27;%3&#x27;);)&quot;).arg(id).arg(name).arg(birthday);    QSqlQuery query;    if(query.exec(sql))    &#123;        QMessageBox::information(this,&quot;插入提示&quot;,&quot;插入成功&quot;);    &#125;    else    &#123;        QMessageBox::warning(this,&quot;插入提示&quot;,&quot;插入失败&quot;);    &#125;&#125;void Widget::on_findButton_clicked()&#123;    QSqlQuery query;    query.exec(&quot;select * from student&quot;);    while(query.next())    &#123;        qDebug()&lt;&lt;query.value(0);    &#125;&#125;
+槽的使用
 
-网络learnedQSqlTableModel::-&gt;select方法+QTableView组件-&gt;setModel 方便显示
-code#include &quot;widget.h&quot;#include &quot;ui_widget.h&quot;#include &lt;QMessageBox&gt;Widget::Widget(QWidget *parent)    : QWidget(parent)    , ui(new Ui::Widget)&#123;    ui-&gt;setupUi(this);    QSqlDatabase db=QSqlDatabase::addDatabase(&quot;QMYSQL&quot;);    db.setHostName(&quot;192.168.217.129&quot;);    db.setDatabaseName(&quot;mydatabase&quot;);    db.setUserName(&quot;test0&quot;);    db.setPassword(&quot;ljn20040118LJN@@&quot;);    if(db.open())    &#123;        QMessageBox::information(this,&quot;连接提示&quot;,&quot;连接成功&quot;);        m=new QSqlTableModel();        m-&gt;setTable(&quot;student&quot;);        ui-&gt;tableView-&gt;setModel(m);    &#125;    else    &#123;        QMessageBox::warning(this,&quot;连接提示&quot;,&quot;连接失败&quot;);    &#125;&#125;Widget::~Widget()&#123;    delete ui;&#125;void Widget::on_pushButton_clicked()&#123;    m-&gt;select();&#125;]]></content>
+
+主要代码#include &quot;calculator.h&quot;#include &lt;QStack&gt;#include &lt;QString&gt;#include &lt;QChar&gt;#include &lt;cmath&gt;// 辅助函数：获取运算符优先级int getPriority(QChar op) &#123;    if (op == &#x27;+&#x27; || op == &#x27;-&#x27;) return 1;    if (op == &#x27;*&#x27; || op == &#x27;/&#x27;) return 2;    return 0;&#125;// 辅助函数：执行运算double applyOperation(double a, double b, QChar op) &#123;    switch (op.unicode()) &#123;    case &#x27;+&#x27;: return a + b;    case &#x27;-&#x27;: return a - b;    case &#x27;*&#x27;: return a * b;    case &#x27;/&#x27;:        if (b == 0) throw &quot;Division by zero&quot;;        return a / b;    default: return 0;    &#125;&#125;QString calculate(QString expression)&#123;    try &#123;        // 移除所有空格        expression = expression.replace(&quot; &quot;, &quot;&quot;);        QStack&lt;double&gt; values;        QStack&lt;QChar&gt; operators;        for (int i = 0; i &lt; expression.length(); i++) &#123;            QChar c = expression[i];            // 如果是数字，读取完整数字            if (c.isDigit() || c == &#x27;.&#x27;) &#123;                QString numStr;                while (i &lt; expression.length() &amp;&amp;                       (expression[i].isDigit() || expression[i] == &#x27;.&#x27;)) &#123;                    numStr += expression[i];                    i++;                &#125;                i--; // 回退一个字符                bool ok;                double num = numStr.toDouble(&amp;ok);                if (!ok) throw &quot;Invalid number format&quot;;                values.push(num);            &#125;            // 如果是左括号，压入运算符栈            else if (c == &#x27;(&#x27;) &#123;                operators.push(c);            &#125;            // 如果是右括号，计算括号内的表达式            else if (c == &#x27;)&#x27;) &#123;                while (!operators.empty() &amp;&amp; operators.top() != &#x27;(&#x27;) &#123;                    if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;                    double b = values.top(); values.pop();                    double a = values.top(); values.pop();                    QChar op = operators.top(); operators.pop();                    values.push(applyOperation(a, b, op));                &#125;                if (operators.empty()) throw &quot;Mismatched parentheses&quot;;                operators.pop(); // 弹出左括号            &#125;            // 如果是运算符            else if (c == &#x27;+&#x27; || c == &#x27;-&#x27; || c == &#x27;*&#x27; || c == &#x27;/&#x27;) &#123;                // 处理负号（一元运算符）                if (c == &#x27;-&#x27; &amp;&amp; (i == 0 || expression[i-1] == &#x27;(&#x27; ||                                 expression[i-1] == &#x27;+&#x27; || expression[i-1] == &#x27;-&#x27; ||                                 expression[i-1] == &#x27;*&#x27; || expression[i-1] == &#x27;/&#x27;)) &#123;                    // 这是一个负号而不是减号                    QString numStr = &quot;-&quot;;                    i++;                    while (i &lt; expression.length() &amp;&amp;                           (expression[i].isDigit() || expression[i] == &#x27;.&#x27;)) &#123;                        numStr += expression[i];                        i++;                    &#125;                    i--;                    bool ok;                    double num = numStr.toDouble(&amp;ok);                    if (!ok) throw &quot;Invalid number format&quot;;                    values.push(num);                    continue;                &#125;                // 处理普通运算符                while (!operators.empty() &amp;&amp;                       getPriority(operators.top()) &gt;= getPriority(c)) &#123;                    if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;                    double b = values.top(); values.pop();                    double a = values.top(); values.pop();                    QChar op = operators.top(); operators.pop();                    values.push(applyOperation(a, b, op));                &#125;                operators.push(c);            &#125;            else &#123;                throw &quot;Invalid character in expression&quot;;            &#125;        &#125;        // 处理剩余的运算符        while (!operators.empty()) &#123;            if (values.size() &lt; 2) throw &quot;Invalid expression&quot;;            double b = values.top(); values.pop();            double a = values.top(); values.pop();            QChar op = operators.top(); operators.pop();            values.push(applyOperation(a, b, op));        &#125;        // 检查最终结果        if (values.size() != 1 || !operators.empty()) &#123;            throw &quot;Invalid expression&quot;;        &#125;        double result = values.top();        // 处理浮点数精度问题，如果结果是整数则显示为整数        if (std::abs(result - std::round(result)) &lt; 1e-10) &#123;            return QString::number(static_cast&lt;long long&gt;(std::round(result)));        &#125; else &#123;            return QString::number(result, &#x27;g&#x27;, 15); // 保留15位有效数字        &#125;    &#125;    catch (const char* error) &#123;        return QString(&quot;Error: &quot;) + error;    &#125;    catch (...) &#123;        return &quot;Error: Unknown error&quot;;    &#125;&#125;]]></content>
       <categories>
         <category>Qt</category>
       </categories>
       <tags>
         <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>class1</title>
+    <url>/ljn-Blog/2025/10/27/ml/a/</url>
+    <content><![CDATA[1 supervised learning
+1.1 Regression回归Predict a number infinitely many possible outputs.
+1.2 Classfication分类predict categnories small number of possible outputs.
+2 unsupervised learningdata only comes with inputs x, but not output labels y. Algorithm has to find structure in the data
+
+2.1 ClusteringGroup similar data points toger=ther
+
+#eg : Goodgle news、DNA microarray、Grouping customers
+2.2 Dimensionality reductionCompress data using fewer numbers
+
+2.3 Anomaly detectionFind unusual data points
+
+3 linear regressionTraining: Data used to train the model
+x = &quot;input&quot; variable feature
+y = &quot;output&quot; variable/ &quot;target&quot; vatiable
+m = number of training examples
+
+$$(x^{(i)},y^{(i)})&#x3D;i^{th}\ training\ examples$$$$Model：f_{w,b}(x)&#x3D;wx+b,(w,b\ named\ parameters\ or \ coefficients\ or\ weights)$$[^1]$$Cost\ function:\ J(w,b)&#x3D;\frac{1}{2m}\sum_{i&#x3D;1}^{m}(\hat y^{(i)}-y^{(i)})^2&#x3D;\frac{1}{2m}\sum_{i&#x3D;1}^{m}(f_{(w,b)}(x^{(i)})-y^{(i)})^2$$
+3.1 Gradient descent algorithm$$w&#x3D;w-\alpha\frac{\partial}{\partial w}J(w,b)&#x3D;w-\alpha\frac{d}{dw}J(w),\ \alpha \ is\ learning\ rate$$$$b&#x3D;b-\alpha\frac{\partial}{\partial b}J(w,b)$$
+Near a local minimum,
+
+derivative becomes smaller
+update steps become smallerCan reach minimum without decreasing learning rate
+
+repeat until convergence:$$w&#x3D;w-\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{w,b}(x^{(i)})-y^{(i)})x^{(i)}$$$$b&#x3D;b-\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{w,b}(x^{(i)})-y^{(i)})$$
+3.2 “Batch” gradient descentEach step of gradient descent uses all the training examples
+3.3 mutiple linear regression$$f_{\vec w,b}&#x3D;\vec w·\vec x+b&#x3D;w_1x_1+w_2x_2+w_3x_3\cdots$$
+#Vectorization can faster the processf=0for f in range(n):	f=f+w[j]*x[j]f=f+bf=np.dot(w,x)+bw=w-0.1*d
+
+Gradient descent:repeat:$$w&#x3D;w-\alpha\frac{\partial}{\partial w_j}J(\vec w,b)$$$$b&#x3D;b-\alpha\frac{\partial}{\partial b}J(\vec w,b)$$
+4 An alternative to gradient descent4.1 Normal equation
+Only for linear regression
+Solve for w,b without itertions
+
+4.2 Disadvantages
+Doesn’t generalize to other learning algorithm
+Slow when number of features is large(&gt;10000)
+
+5 normalization5.1 Feature scalingeg $x_1&lt;2000,x_{1,scaled}&#x3D;\frac{x_1}{2000}$
+5.2 Mean normalization[^2]eg $300\le x_1\le 2000,x_1&#x3D;\frac{x_1-u_1}{2000-300}$
+5.3 Z-score normalization[^3]eg $x_1&#x3D;\frac{x_1-u_1}{\sigma _1}$
+5.4 skillsmake values of $\alpha$ to be 3 times of itselfeg 0.001, 0.003, 0.01, 0.03
+6 Feature engineeringUsing intuition to design new features, by transforming or combining original featureeg $x_3&#x3D;x_1*x_2$
+7 Polynomial regression$$f_{\vec w,b}(x)&#x3D;w_1x+w_2x^2+b$$	feature scaling: eg add x^3 to avoid the line from go dowm
+8 Classification“binary classification”
+8.1 logistic regressionsigmoid funtion:outputs between 0 and 1$$g(x)&#x3D;\frac{1}{1+e^{-x}},0&lt;g(x)&lt;1$$$$f_{\vec w,b}(\vec x)&#x3D;g(\vec w ·\vec x+b)&#x3D;\frac{1}{1+e^{-\vec w·\vec x+b}}$$
+8.2 Decision Boundaryeg. $z&#x3D;x_1+x_2-3$, easy to get $x_1+x_2&#x3D;3$
+8.3 Non-linear decision boundarieseg. $z&#x3D;x_1^2+x_2^2-1$
+8.4 Cost$$J(\vec w,b)&#x3D;\frac{1}{m}\sum_{i&#x3D;1}^{m}L(f_{\vec w,b}(\vec x^{(i)},y^{(i)})&#x3D;\begin{cases}-log(f_{\vec w,b}(\vec x^{(i)})),if\ y^{(i)}&#x3D;1\-log(1-f_{\vec w,b}(\vec x^{(i)},if\ y^{(i)}&#x3D;0))\end{cases}$$
+8.5 Gradient descent for logistic regression[^4]$$w_j&#x3D;w_j-\alpha[\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{\vec w,b}(\vec x^{(i)})-y^{(i)})x_j^{(i)}]$$$$b&#x3D;b-\alpha[\frac{1}{m}\sum_{i&#x3D;1}^{m}(f_{\vec w,b}(\vec x^{(i)})-y^{(i)})]$$ Regularition
+underfit, 
+just right,
+ overfit, Collect more training examples; select features to include/exclude, Regularition(Reduce the size of parameters w_j)
+
+$$minJ(\vec w,b)&#x3D;min[\frac{1}{2m}\sum_{i&#x3D;1}^{m}(f_{\vec w,b}(\vec x^{(i)})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j&#x3D;1}^nw_j^2]$$ Gradient descent extremely - $\frac{\lambda}{m}w_j$![[assets&#x2F;Pasted image 20250930090505.jpg]]
+]]></content>
+      <categories>
+        <category>ML</category>
+      </categories>
+      <tags>
+        <tag>ML</tag>
+        <tag>machine learning</tag>
+        <tag>机器学习</tag>
       </tags>
   </entry>
 </search>
