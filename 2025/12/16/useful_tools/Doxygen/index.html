@@ -20,20 +20,25 @@
     var CONFIG = {"hostname":"heydullsam.github.io","root":"/ljn-Blog/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="windployqt部署">
+  <meta name="description" content="核心作用 自动生成专业的文档 提高代码可维护性 包含继承关系图，各种表格，方便观看生成的文档为html，pdf（基于latex），可以搜索、链接、">
 <meta property="og:type" content="article">
-<meta property="og:title" content="部署">
-<meta property="og:url" content="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:title" content="注释与代码文档生成--Doxygen">
+<meta property="og:url" content="https://heydullsam.github.io/ljn-Blog/2025/12/16/useful_tools/Doxygen/index.html">
 <meta property="og:site_name" content="studyLog">
-<meta property="og:description" content="windployqt部署">
+<meta property="og:description" content="核心作用 自动生成专业的文档 提高代码可维护性 包含继承关系图，各种表格，方便观看生成的文档为html，pdf（基于latex），可以搜索、链接、">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-26T07:44:47.901Z">
-<meta property="article:modified_time" content="2025-10-27T05:23:49.806Z">
+<meta property="og:image" content="https://heydullsam.github.io/ljn-Blog/images/20251216222613.png">
+<meta property="og:image" content="https://heydullsam.github.io/ljn-Blog/images/20251216222711.png">
+<meta property="og:image" content="https://heydullsam.github.io/ljn-Blog/images/20251216223149.png">
+<meta property="og:image" content="https://heydullsam.github.io/ljn-Blog/images/20251216223232.png">
+<meta property="article:published_time" content="2025-12-16T14:34:30.748Z">
+<meta property="article:modified_time" content="2025-12-16T14:41:54.550Z">
 <meta property="article:author" content="blue_cat">
-<meta property="article:tag" content="Qt">
+<meta property="article:tag" content="useful_tools">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://heydullsam.github.io/ljn-Blog/images/20251216222613.png">
 
-<link rel="canonical" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/%E9%83%A8%E7%BD%B2/">
+<link rel="canonical" href="https://heydullsam.github.io/ljn-Blog/2025/12/16/useful_tools/Doxygen/">
 
 
 <script id="page-configurations">
@@ -46,7 +51,7 @@
   };
 </script>
 
-  <title>部署 | studyLog</title>
+  <title>注释与代码文档生成--Doxygen | studyLog</title>
   
 
 
@@ -190,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/12/16/useful_tools/Doxygen/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -203,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          部署
+          注释与代码文档生成--Doxygen
         </h1>
 
         <div class="post-meta">
@@ -212,23 +217,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2025-12-16 22:34:30 / 修改时间：22:41:54" itemprop="dateCreated datePublished" datetime="2025-12-16T22:34:30+08:00">2025-12-16</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:23:49" itemprop="dateModified" datetime="2025-10-27T13:23:49+08:00">2025-10-27</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/useful-tools/" itemprop="url" rel="index"><span itemprop="name">useful_tools</span></a>
                 </span>
             </span>
 
@@ -243,8 +242,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <span id="more"></span>
-<p>windployqt部署</p>
+        <h1 id="核心作用"><a href="#核心作用" class="headerlink" title="核心作用"></a>核心作用</h1><ol>
+<li>自动生成专业的文档</li>
+<li>提高代码可维护性</li>
+<li>包含继承关系图，各种表格，方便观看<br>生成的文档为html，pdf（基于latex），可以搜索、链接、</li>
+</ol>
+<span id="more"></span>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>官网下载（推荐）<br>访问 <a target="_blank" rel="noopener" href="https://www.doxygen.nl/download.html">https://www.doxygen.nl/download.html</a><br>vscode插件搜索doxygen就行<br><img src="/ljn-Blog/images/20251216222613.png" alt="left"></p>
+<h1 id="常用-一般输入-回车就可以了"><a href="#常用-一般输入-回车就可以了" class="headerlink" title="常用(一般输入&#x2F;**+回车就可以了)"></a>常用(一般输入&#x2F;**+回车就可以了)</h1><p><img src="/ljn-Blog/images/20251216222711.png" alt="left"><br>然后自己填写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/** @brief 一句话描述 */</span><br><span class="line">/** @param 参数说明 */</span><br><span class="line">/** @return 返回值说明 */</span><br><span class="line">/** @note 注意事项 */</span><br><span class="line">/** @code 示例代码 @endcode */</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/** @warning 警告信息 */</span><br><span class="line">/** @todo 待办事项 */</span><br><span class="line">/** @see 相关参考 */</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/** @exception 异常说明 */</span><br><span class="line">/** @deprecated 已弃用 */</span><br><span class="line">/** @ingroup 分组管理 */</span><br></pre></td></tr></table></figure>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><p>运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doxygen -g</span><br></pre></td></tr></table></figure>
+<p>找到生成的Doxyfile</p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 搜索并修改：</span><br><span class="line"></span><br><span class="line"># 第35行左右</span><br><span class="line">PROJECT_NAME           = &quot;我的第一个项目&quot;</span><br><span class="line"></span><br><span class="line"># 第38行左右</span><br><span class="line">PROJECT_NUMBER         = 1.0.0</span><br><span class="line"></span><br><span class="line"># 第42行左右（可选）</span><br><span class="line">PROJECT_BRIEF          = &quot;一个CPP和Python混合项目&quot;</span><br><span class="line"></span><br><span class="line"># 第872行左右</span><br><span class="line">OUTPUT_DIRECTORY       = ./docs</span><br><span class="line"></span><br><span class="line"># 第985行左右</span><br><span class="line">INPUT                  = .       # 扫描当前目录</span><br><span class="line"></span><br><span class="line"># 第991行左右</span><br><span class="line">FILE_PATTERNS          = *.cpp *.h *.hpp *.py  # 包含Python文件</span><br><span class="line"></span><br><span class="line"># 第1015行左右</span><br><span class="line">RECURSIVE              = YES     # 搜索子目录</span><br><span class="line"></span><br><span class="line"># 第1157行左右</span><br><span class="line">EXTRACT_ALL            = YES     # 提取所有内容</span><br></pre></td></tr></table></figure>
+<h2 id="生成文档"><a href="#生成文档" class="headerlink" title="生成文档"></a>生成文档</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键生成</span></span><br><span class="line">doxygen Doxyfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看生成的文件</span></span><br><span class="line"><span class="built_in">dir</span> docs\</span><br></pre></td></tr></table></figure>
+<h2 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start docs\html\index.html</span><br></pre></td></tr></table></figure>
+
+<p><img src="/ljn-Blog/images/20251216223149.png"></p>
+<h2 id="生成pdf-如果需要"><a href="#生成pdf-如果需要" class="headerlink" title="生成pdf(如果需要)"></a>生成pdf(如果需要)</h2><p>自行配置latex环境<br>配置文件搜索（LATEX）</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启用LaTeX输出</span></span><br><span class="line">GENERATE_LATEX         = YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：设置PDF输出（如果安装完整LaTeX）</span></span><br><span class="line">PDF_HYPERLINKS         = YES</span><br><span class="line">USE_PDFLATEX           = YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置输出目录</span></span><br><span class="line">LATEX_OUTPUT           = docs/latex</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果要生成PDF，设置这个</span></span><br><span class="line">GENERATE_PDFLATEX      = YES  <span class="comment"># 自动调用pdflatex</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> docs/latex</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>打开refman<br><img src="/ljn-Blog/images/20251216223232.png"></p>
+<h2 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h2><p>windows下powershell运行脚本可能存在问题，建议使用cmd</p>
 
     </div>
 
@@ -254,7 +274,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/ljn-Blog/tags/Qt/" rel="tag"># Qt</a>
+              <a href="/ljn-Blog/tags/useful-tools/" rel="tag"># useful_tools</a>
           </div>
 
         
@@ -268,13 +288,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E7%AE%97%E5%99%A8/" rel="prev" title="计算器">
-      <i class="fa fa-chevron-left"></i> 计算器
+    <a href="/ljn-Blog/2025/10/27/ml/a/" rel="prev" title="class1">
+      <i class="fa fa-chevron-left"></i> class1
     </a></div>
-      <div class="post-nav-item">
-    <a href="/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/" rel="next" title="begin: my favorite color">
-      begin: my favorite color <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -333,6 +350,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">核心作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-%E4%B8%80%E8%88%AC%E8%BE%93%E5%85%A5-%E5%9B%9E%E8%BD%A6%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BA%86"><span class="nav-number">3.</span> <span class="nav-text">常用(一般输入&#x2F;**+回车就可以了)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">生成配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%96%87%E6%A1%A3"><span class="nav-number">4.3.</span> <span class="nav-text">生成文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%BB%93%E6%9E%9C"><span class="nav-number">4.4.</span> <span class="nav-text">查看结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90pdf-%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81"><span class="nav-number">4.5.</span> <span class="nav-text">生成pdf(如果需要)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.6.</span> <span class="nav-text">可能出现的问题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

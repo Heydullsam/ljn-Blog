@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heydullsam.github.io/ljn-Blog/2025/12/16/useful_tools/Doxygen/</loc>
+    
+    <lastmod>2025-12-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://heydullsam.github.io/ljn-Blog/2025/10/27/ml/a/</loc>
     
     <lastmod>2025-10-27</lastmod>
@@ -139,7 +148,7 @@
 
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -147,42 +156,49 @@
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/tags/daily/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/tags/Qt/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/tags/sub-content/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/tags/ML/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/tags/machine-learning/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://heydullsam.github.io/ljn-Blog/tags/useful-tools/</loc>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -191,14 +207,21 @@
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/categories/Qt/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://heydullsam.github.io/ljn-Blog/categories/ML/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-12-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://heydullsam.github.io/ljn-Blog/categories/useful-tools/</loc>
+    <lastmod>2025-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

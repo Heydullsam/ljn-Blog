@@ -370,4 +370,38 @@ $$minJ(\vec w,b)&#x3D;min[\frac{1}{2m}\sum_{i&#x3D;1}^{m}(f_{\vec w,b}(\vec x^{(
         <tag>机器学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>注释与代码文档生成--Doxygen</title>
+    <url>/ljn-Blog/2025/12/16/useful_tools/Doxygen/</url>
+    <content><![CDATA[核心作用
+自动生成专业的文档
+提高代码可维护性
+包含继承关系图，各种表格，方便观看生成的文档为html，pdf（基于latex），可以搜索、链接、
+
+
+下载官网下载（推荐）访问 https://www.doxygen.nl/download.htmlvscode插件搜索doxygen就行
+常用(一般输入&#x2F;**+回车就可以了)然后自己填写
+/** @brief 一句话描述 *//** @param 参数说明 *//** @return 返回值说明 *//** @note 注意事项 *//** @code 示例代码 @endcode *//** @warning 警告信息 *//** @todo 待办事项 *//** @see 相关参考 *//** @exception 异常说明 *//** @deprecated 已弃用 *//** @ingroup 分组管理 */
+使用方法生成配置文件运行
+doxygen -g
+找到生成的Doxyfile
+修改配置文件# 搜索并修改：# 第35行左右PROJECT_NAME           = &quot;我的第一个项目&quot;# 第38行左右PROJECT_NUMBER         = 1.0.0# 第42行左右（可选）PROJECT_BRIEF          = &quot;一个CPP和Python混合项目&quot;# 第872行左右OUTPUT_DIRECTORY       = ./docs# 第985行左右INPUT                  = .       # 扫描当前目录# 第991行左右FILE_PATTERNS          = *.cpp *.h *.hpp *.py  # 包含Python文件# 第1015行左右RECURSIVE              = YES     # 搜索子目录# 第1157行左右EXTRACT_ALL            = YES     # 提取所有内容
+生成文档# 一键生成doxygen Doxyfile# 查看生成的文件dir docs\
+查看结果start docs\html\index.html
+
+
+生成pdf(如果需要)自行配置latex环境配置文件搜索（LATEX）
+# 启用LaTeX输出GENERATE_LATEX         = YES# 可选：设置PDF输出（如果安装完整LaTeX）PDF_HYPERLINKS         = YESUSE_PDFLATEX           = YES# 设置输出目录LATEX_OUTPUT           = docs/latex# 如果要生成PDF，设置这个GENERATE_PDFLATEX      = YES  # 自动调用pdflatex
+
+cd docs/latexmake
+打开refman
+可能出现的问题windows下powershell运行脚本可能存在问题，建议使用cmd
+]]></content>
+      <categories>
+        <category>useful_tools</category>
+      </categories>
+      <tags>
+        <tag>useful_tools</tag>
+      </tags>
+  </entry>
 </search>
