@@ -404,4 +404,18 @@ cd docs/latexmake
         <tag>useful_tools</tag>
       </tags>
   </entry>
+  <entry>
+    <title>2026/7/1 第三题Certainty Forcing 训练损失计算</title>
+    <url>/ljn-Blog/2026/07/06/code/5131_perfect/</url>
+    <content><![CDATA[思路由于题目描述十分清晰且给出了每一步计算的流程与结果，可以十分方便的调试这里公式部分按照自己习惯，核心部分应该最后token的选择和loss计算
+解题过程token的选择：在b的最大影响限制下，取出价值最大的token，计算token的$\sum Hi$,可以简化为01背包问题，这里用@cache+记忆化搜索实现。需要计算$\sum Hi$,因此背包不仅仅需要计算最小值，还需要返回选择的目标，这里使用一个长数字的二进制来返回选择的结果
+复杂度记忆化的时间复杂度是背包的大小:$O(n*b)$,因为每个位置最多计算一次记忆化的空间复杂度同理
+from math import exp,log,inffrom functools import cachexin=input().split()n,v,b=map(int,xin[:3])la=float(xin[3])tokens=[[float(i) for i in input().split()] for _ in range(n)]def Softmax(z):    m=[max(i) for i in z]    U=[sum(exp(j-m[i]) for j in row) for i,row in enumerate(z)]    return [[exp(z[i][j]-m[i])/U[i] for j in range(len(z[0]))] for i in range(len(z))]l1=[]H1=[]ci=[]for idx,token in enumerate(tokens):    y,c=map(int,token[-2:])    token=token[:-2]    pi=softmax=Softmax([token])[0]    l1.append(-log(pi[y]))  #cross_entropy    H1.append(-sum(pi[j]*log(pi[j]) for j in range(v)))    ci.append(c)base_loss=sum(l1)@cachedef dfs(i,left_b):    if left_b&lt;0:return -inf ,0    if i&lt;0:return 0 ,0    no_choose=dfs(i-1,left_b)    choose=dfs(i-1,left_b-ci[i])    if choose[0]+l1[i]&gt;no_choose[0]:return choose[0]+l1[i],choose[1]|1&lt;&lt;i     return no_choose# dp=[-inf]*(b+1)# dp[0]=0# for i,x in enumerate(ci):#     for j in range(b,x-1,-1):#         dp[j]=max(dp[j],dp[j-x]+l1[i])_,choose=dfs(n-1,b)H_sum=0.0for i in range(n):    if choose&amp;1&lt;&lt;i:        H_sum+=H1[i]print(f&#x27;&#123;base_loss+la*H_sum:.2f&#125;&#x27;)]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>practice</tag>
+      </tags>
+  </entry>
 </search>
