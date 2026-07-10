@@ -449,9 +449,34 @@ Problem: LCR 177. 撞色搭配
 时间复杂度: $O(n)$
 空间复杂度: $O(1)$
 
-Code[]class Solution:    def sockCollocation(self, sockets: List[int]) -&gt; List[int]:        xor_sum=reduce(xor,sockets)        mask=xor_sum&amp;-xor_sum        a=b=0        for i in sockets:            if i&amp;mask:a^=i             else:b^=i         return [a,b]]]></content>
+Codeclass Solution:    def sockCollocation(self, sockets: List[int]) -&gt; List[int]:        xor_sum=reduce(xor,sockets)        mask=xor_sum&amp;-xor_sum        a=b=0        for i in sockets:            if i&amp;mask:a^=i             else:b^=i         return [a,b]]]></content>
       <categories>
         <category>分组异或和</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>lc3093. 最长公共后缀查询</title>
+    <url>/ljn-Blog/2026/07/10/code/lc3093/</url>
+    <content><![CDATA[
+Problem: 3093. 最长公共后缀查询
+
+[TOC]
+思路
+排序加字典树可以简化题目中的要求
+
+解题过程
+按照(长度,出现时间)进行排序,并把排序后的每一个词语加入字典树,同时在第一次创建该树节点的时候填写val(字典树走到此处时哪一个点是结果).因为填写的顺序,使得每一个节点的数字正好是访问的答案,后续进行访问即可.
+
+复杂度
+时间复杂度: $O(nlog(n))$排序建树查询均是nlog(n)
+空间复杂度: $O(n*m)$最多每一个字母分配一个trie,但是实际上son只有26,结果会小很多
+
+Codestruct trie&#123;        int val;        trie* son[26]&#123;&#125;;        trie(int val=0)&#123;            this-&gt;val=val;        &#125;        ~trie() &#123;        for (int i = 0; i &lt; 26; ++i) &#123;            delete son[i];        &#125;    &#125;    &#125;;#define all(x) x.begin(),x.end()class Solution &#123;public:    vector&lt;int&gt; stringIndices(vector&lt;string&gt;&amp; wordsContainer, vector&lt;string&gt;&amp; wordsQuery) &#123;      vector&lt;pair&lt;string,int&gt;&gt;dc;      for(int i=0;i&lt;wordsContainer.size();++i)&#123;        reverse(all(wordsContainer[i]));        dc.emplace_back(wordsContainer[i],i);      &#125;        ranges::sort(dc,&#123;&#125;,[](auto x)&#123;return make_pair(x.first.size(),x.second); &#125;);      trie* root=new trie(dc[0].second);      for(auto[w,i]:dc)&#123;        auto cur=root;        for(auto c:w)&#123;            if(!cur-&gt;son[c-&#x27;a&#x27;])&#123;                cur-&gt;son[c-&#x27;a&#x27;]=new trie(i);            &#125;cur=cur-&gt;son[c-&#x27;a&#x27;];        &#125;      &#125;      vector&lt;int&gt;ans(wordsQuery.size());      for(int i=0;i&lt;wordsQuery.size();++i)&#123;        auto w=wordsQuery[i];        reverse(all(w));        auto cur=root;        int f=1;        for(auto c:w)&#123;            if(!cur-&gt;son[c-&#x27;a&#x27;])&#123;                break;            &#125;            cur=cur-&gt;son[c-&#x27;a&#x27;];        &#125;ans[i]=cur-&gt;val;      &#125;      delete root;      return ans;    &#125;&#125;;]]></content>
+      <categories>
+        <category>排序+字典树</category>
       </categories>
       <tags>
         <tag>leetcode</tag>

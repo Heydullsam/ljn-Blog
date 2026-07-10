@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"heydullsam.github.io","root":"/ljn-Blog/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="MediaPlayer+AudioOutput(m_mediaPlayer-&gt;setAudioOutput(m_audioOutput);)获取文件目录QDirIterator，.hasNext()进行遍历播放逻辑">
+  <meta name="description" content="Problem: 3093. 最长公共后缀查询  [TOC] 思路 排序加字典树可以简化题目中的要求  解题过程 按照(长度,出现时间)进行排序,并把排序后的每一个词语加入字典树,同时在第一次创建该树节点的时候填写val(字典树走到此处时哪一个点是结果).因为填写的顺序,使得每一个节点的数字正好是访问的答案,后续进行访问即可.  复杂度 时间复杂度: $O(nlog(n))$排序建树查询均是nl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="player">
-<meta property="og:url" content="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/player/index.html">
+<meta property="og:title" content="lc3093. 最长公共后缀查询">
+<meta property="og:url" content="https://heydullsam.github.io/ljn-Blog/2026/07/10/code/lc3093/index.html">
 <meta property="og:site_name" content="studyLog">
-<meta property="og:description" content="MediaPlayer+AudioOutput(m_mediaPlayer-&gt;setAudioOutput(m_audioOutput);)获取文件目录QDirIterator，.hasNext()进行遍历播放逻辑">
+<meta property="og:description" content="Problem: 3093. 最长公共后缀查询  [TOC] 思路 排序加字典树可以简化题目中的要求  解题过程 按照(长度,出现时间)进行排序,并把排序后的每一个词语加入字典树,同时在第一次创建该树节点的时候填写val(字典树走到此处时哪一个点是结果).因为填写的顺序,使得每一个节点的数字正好是访问的答案,后续进行访问即可.  复杂度 时间复杂度: $O(nlog(n))$排序建树查询均是nl">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-26T07:44:47.880Z">
-<meta property="article:modified_time" content="2025-10-27T05:24:50.670Z">
+<meta property="article:published_time" content="2026-07-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-10T15:08:45.707Z">
 <meta property="article:author" content="blue_cat">
-<meta property="article:tag" content="Qt">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/player/">
+<link rel="canonical" href="https://heydullsam.github.io/ljn-Blog/2026/07/10/code/lc3093/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>player | studyLog</title>
+  <title>lc3093. 最长公共后缀查询 | studyLog</title>
   
 
 
@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/player/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/07/10/code/lc3093/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          player
+          lc3093. 最长公共后缀查询
         </h1>
 
         <div class="post-meta">
@@ -212,23 +212,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-07-10 00:00:00 / 修改时间：23:08:45" itemprop="dateCreated datePublished" datetime="2026-07-10T00:00:00+08:00">2026-07-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:50" itemprop="dateModified" datetime="2025-10-27T13:24:50+08:00">2025-10-27</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E6%8E%92%E5%BA%8F-%E5%AD%97%E5%85%B8%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">排序+字典树</span></a>
                 </span>
             </span>
 
@@ -243,12 +237,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>MediaPlayer+AudioOutput(m_mediaPlayer-&gt;setAudioOutput(m_audioOutput);)<br>获取文件目录<br>QDirIterator，.hasNext()进行遍历<br>播放逻辑</p>
-<span id="more"></span>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MusicPlayer::on_musicListView_doubleClicked</span><span class="params">(<span class="type">const</span> QModelIndex &amp;index)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> url=index.<span class="built_in">data</span>(Qt::UserRole<span class="number">+1</span>).<span class="built_in">toUrl</span>();</span><br><span class="line">    m_mediaPlayer-&gt;<span class="built_in">setSource</span>(url);</span><br><span class="line">    m_mediaPlayer-&gt;<span class="built_in">play</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>StandardItemModel在viewList上展示(数据处理setModel,appendRow)</p>
-
+        <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-suffix-queries/description/">3093. 最长公共后缀查询</a></p>
+</blockquote>
+<p>[TOC]</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>排序加字典树可以简化题目中的要求</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>按照(长度,出现时间)进行排序,并把排序后的每一个词语加入字典树,同时在第一次创建该树节点的时候填写val(字典树走到此处时哪一个点是结果).因为填写的顺序,使得每一个节点的数字正好是访问的答案,后续进行访问即可.</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(nlog(n))$排序建树查询均是nlog(n)</li>
+<li>空间复杂度: $O(n*m)$最多每一个字母分配一个trie,但是实际上son只有26,结果会小很多</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">trie</span>&#123;</span><br><span class="line">        <span class="type">int</span> val;</span><br><span class="line">        trie* son[<span class="number">26</span>]&#123;&#125;;</span><br><span class="line">        <span class="built_in">trie</span>(<span class="type">int</span> val=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;val=val;</span><br><span class="line">        &#125;</span><br><span class="line">        ~<span class="built_in">trie</span>() &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">delete</span> son[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> all(x) x.begin(),x.end()</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">stringIndices</span><span class="params">(vector&lt;string&gt;&amp; wordsContainer, vector&lt;string&gt;&amp; wordsQuery)</span> </span>&#123;</span><br><span class="line">      vector&lt;pair&lt;string,<span class="type">int</span>&gt;&gt;dc;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;wordsContainer.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">        <span class="built_in">reverse</span>(<span class="built_in">all</span>(wordsContainer[i]));</span><br><span class="line">        dc.<span class="built_in">emplace_back</span>(wordsContainer[i],i);</span><br><span class="line">      &#125;  </span><br><span class="line">      ranges::<span class="built_in">sort</span>(dc,&#123;&#125;,[](<span class="keyword">auto</span> x)&#123;<span class="keyword">return</span> <span class="built_in">make_pair</span>(x.first.<span class="built_in">size</span>(),x.second); &#125;);</span><br><span class="line">      trie* root=<span class="keyword">new</span> <span class="built_in">trie</span>(dc[<span class="number">0</span>].second);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">auto</span>[w,i]:dc)&#123;</span><br><span class="line">        <span class="keyword">auto</span> cur=root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c:w)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>])&#123;</span><br><span class="line">                cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>]=<span class="keyword">new</span> <span class="built_in">trie</span>(i);</span><br><span class="line">            &#125;cur=cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      vector&lt;<span class="type">int</span>&gt;<span class="built_in">ans</span>(wordsQuery.<span class="built_in">size</span>());</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;wordsQuery.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">        <span class="keyword">auto</span> w=wordsQuery[i];</span><br><span class="line">        <span class="built_in">reverse</span>(<span class="built_in">all</span>(w));</span><br><span class="line">        <span class="keyword">auto</span> cur=root;</span><br><span class="line">        <span class="type">int</span> f=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c:w)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            cur=cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;ans[i]=cur-&gt;val;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">delete</span> root;</span><br><span class="line">      <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -257,7 +260,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/ljn-Blog/tags/Qt/" rel="tag"># Qt</a>
+              <a href="/ljn-Blog/tags/leetcode/" rel="tag"># leetcode</a>
           </div>
 
         
@@ -266,12 +269,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/ljn-Blog/2025/10/26/Qt_study/paste_pic/" rel="prev" title="paste_pic">
-      <i class="fa fa-chevron-left"></i> paste_pic
+    <a href="/ljn-Blog/2026/07/08/code/lc2100/" rel="prev" title="Problem: 2100. 适合野炊的日子">
+      <i class="fa fa-chevron-left"></i> Problem: 2100. 适合野炊的日子
     </a></div>
       <div class="post-nav-item">
-    <a href="/ljn-Blog/2025/10/26/Qt_study/TCP/" rel="next" title="TCP">
-      TCP <i class="fa fa-chevron-right"></i>
+    <a href="/ljn-Blog/2026/07/10/code/lcr177/" rel="next" title="LCR177 撞色搭配">
+      LCR177 撞色搭配 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -331,6 +334,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">解题过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
