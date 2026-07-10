@@ -421,12 +421,37 @@ from math import exp,log,inffrom functools import cachexin=input().split()n,v,b=
   <entry>
     <title>Problem: 2100. 适合野炊的日子</title>
     <url>/ljn-Blog/2026/07/08/code/lc2100/</url>
-    <content><![CDATA[思路解题过程复杂度Code思路使用pre记录到当前位置时左边连续大于自身右边的数目,suf记录当前位置时右边连续大于自身左边的数目,当两者都&gt;&#x3D;time时,将其加入答案
+    <content><![CDATA[思路使用pre记录到当前位置时左边连续大于自身右边的数目,suf记录当前位置时右边连续大于自身左边的数目,当两者都&gt;&#x3D;time时,将其加入答案
 解题过程time&#x3D;&#x3D;0时答案为整个数组的下标,pre数组可以用一个变量替代
 复杂度时间复杂度: O(n),两次遍历就可以解决问题空间复杂度: O(n),suf的空间
 class Solution:    def goodDaysToRobBank(self, security: List[int], time: int) -&gt; List[int]:        n=len(security)        if time==0:return list(range(n))        suf=[0]*n        for i in range(n-2,-1,-1):            suf[i]=suf[i+1]+1 if security[i]&lt;=security[i+1] else 0        pre=0        ans=[]        for i in range(1,n):            pre=pre+1 if security[i]&lt;=security[i-1] else 0            if pre&gt;=time and suf[i]&gt;=time:ans.append(i)        return ans]]></content>
       <categories>
         <category>前后缀分离</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LCR177 撞色搭配</title>
+    <url>/ljn-Blog/2026/07/10/code/lcr177/</url>
+    <content><![CDATA[
+Problem: LCR 177. 撞色搭配
+
+[TOC]
+思路
+由于其他数字都成对，我们进行异或和最终两两相消，得到的是结果的两数的异或值，现在问题是怎么把它分开得到两个数。注意到异或结果不可能为0（两数不相等），则二进制位中1的地方，正好结果对应的两个数的对应位置是1和0。以此为基准，我们又可以把sockets分为两组（该位为1或该位为0），进而再次异或，依旧两两相消，最后的结果一定是要找的两个数
+
+解题过程
+使用库函数reduce快速得到异或和，i&amp;-i是常见的取二进制最低位的方法（树状数组常用）。a,b记录每个分组的异或和，即可解决问题
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(1)$
+
+Code[]class Solution:    def sockCollocation(self, sockets: List[int]) -&gt; List[int]:        xor_sum=reduce(xor,sockets)        mask=xor_sum&amp;-xor_sum        a=b=0        for i in sockets:            if i&amp;mask:a^=i             else:b^=i         return [a,b]]]></content>
+      <categories>
+        <category>分组异或和</category>
       </categories>
       <tags>
         <tag>leetcode</tag>
