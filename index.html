@@ -184,6 +184,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/07/11/code/lc3781/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/07/11/code/lc3781/" class="post-title-link" itemprop="url">3781. 二进制交换后的最大分数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-07-11 00:00:00 / 修改时间：08:30:20" itemprop="dateCreated datePublished" datetime="2026-07-11T00:00:00+08:00">2026-07-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E5%A0%86%EF%BC%8C%E8%B4%AA%E5%BF%83/" itemprop="url" rel="index"><span itemprop="name">堆，贪心</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-score-after-binary-swaps/description/">3781. 二进制交换后的最大分数</a></p>
+</blockquote>
+<p>[TOC]</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>问题简化：s[i]为‘1’时，取前面已有且未选数中的最大值，因为1只能前移</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>大堆维护，s[i]为1时弹出并加入结果</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(nlog(n))$</li>
+<li>空间复杂度: $O(n)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximumScore</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        pq=[]</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i,x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            heappush(pq,-x)</span><br><span class="line">            <span class="keyword">if</span> s[i]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                ans-=heappop(pq)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/07/10/code/lcr177/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,7 +280,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2026/07/10/code/lcr177/" class="post-title-link" itemprop="url">LCR177 撞色搭配</a>
+            <a href="/ljn-Blog/2026/07/10/code/lcr177/" class="post-title-link" itemprop="url">LCR 177 撞色搭配</a>
         </h2>
 
         <div class="post-meta">
@@ -207,17 +289,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-07-10 00:00:00 / 修改时间：23:08:55" itemprop="dateCreated datePublished" datetime="2026-07-10T00:00:00+08:00">2026-07-10</time>
+              <time title="创建时间：2026-07-10 00:00:00" itemprop="dateCreated datePublished" datetime="2026-07-10T00:00:00+08:00">2026-07-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/%E5%88%86%E7%BB%84%E5%BC%82%E6%88%96%E5%92%8C/" itemprop="url" rel="index"><span itemprop="name">分组异或和</span></a>
+                  <a href="/ljn-Blog/categories/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">位运算</span></a>
                 </span>
             </span>
 
@@ -235,7 +323,6 @@
           <blockquote>
 <p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/description/">LCR 177. 撞色搭配</a></p>
 </blockquote>
-<p>[TOC]</p>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
 <p>由于其他数字都成对，我们进行异或和最终两两相消，得到的是结果的两数的异或值，现在问题是怎么把它分开得到两个数。注意到异或结果不可能为0（两数不相等），则二进制位中1的地方，正好结果对应的两个数的对应位置是1和0。以此为基准，我们又可以把sockets分为两组（该位为1或该位为0），进而再次异或，依旧两两相消，最后的结果一定是要找的两个数</p>
 </blockquote>
@@ -247,157 +334,7 @@
 <li>空间复杂度: $O(1)$</li>
 </ul>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sockCollocation</span>(<span class="params">self, sockets: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        xor_sum=reduce(xor,sockets)</span><br><span class="line">        mask=xor_sum&amp;-xor_sum</span><br><span class="line">        a=b=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> sockets:</span><br><span class="line">            <span class="keyword">if</span> i&amp;mask:a^=i </span><br><span class="line">            <span class="keyword">else</span>:b^=i </span><br><span class="line">        <span class="keyword">return</span> [a,b]</span><br></pre></td></tr></table></figure>
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/07/10/code/lc3093/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2026/07/10/code/lc3093/" class="post-title-link" itemprop="url">lc3093. 最长公共后缀查询</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-07-10 00:00:00 / 修改时间：23:08:45" itemprop="dateCreated datePublished" datetime="2026-07-10T00:00:00+08:00">2026-07-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/%E6%8E%92%E5%BA%8F-%E5%AD%97%E5%85%B8%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">排序+字典树</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-suffix-queries/description/">3093. 最长公共后缀查询</a></p>
-</blockquote>
-<p>[TOC]</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
-<p>排序加字典树可以简化题目中的要求</p>
-</blockquote>
-<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
-<p>按照(长度,出现时间)进行排序,并把排序后的每一个词语加入字典树,同时在第一次创建该树节点的时候填写val(字典树走到此处时哪一个点是结果).因为填写的顺序,使得每一个节点的数字正好是访问的答案,后续进行访问即可.</p>
-</blockquote>
-<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
-<li>时间复杂度: $O(nlog(n))$排序建树查询均是nlog(n)</li>
-<li>空间复杂度: $O(n*m)$最多每一个字母分配一个trie,但是实际上son只有26,结果会小很多</li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">trie</span>&#123;</span><br><span class="line">        <span class="type">int</span> val;</span><br><span class="line">        trie* son[<span class="number">26</span>]&#123;&#125;;</span><br><span class="line">        <span class="built_in">trie</span>(<span class="type">int</span> val=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;val=val;</span><br><span class="line">        &#125;</span><br><span class="line">        ~<span class="built_in">trie</span>() &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">delete</span> son[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> all(x) x.begin(),x.end()</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">stringIndices</span><span class="params">(vector&lt;string&gt;&amp; wordsContainer, vector&lt;string&gt;&amp; wordsQuery)</span> </span>&#123;</span><br><span class="line">      vector&lt;pair&lt;string,<span class="type">int</span>&gt;&gt;dc;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;wordsContainer.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">        <span class="built_in">reverse</span>(<span class="built_in">all</span>(wordsContainer[i]));</span><br><span class="line">        dc.<span class="built_in">emplace_back</span>(wordsContainer[i],i);</span><br><span class="line">      &#125;  </span><br><span class="line">      ranges::<span class="built_in">sort</span>(dc,&#123;&#125;,[](<span class="keyword">auto</span> x)&#123;<span class="keyword">return</span> <span class="built_in">make_pair</span>(x.first.<span class="built_in">size</span>(),x.second); &#125;);</span><br><span class="line">      trie* root=<span class="keyword">new</span> <span class="built_in">trie</span>(dc[<span class="number">0</span>].second);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">auto</span>[w,i]:dc)&#123;</span><br><span class="line">        <span class="keyword">auto</span> cur=root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c:w)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>])&#123;</span><br><span class="line">                cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>]=<span class="keyword">new</span> <span class="built_in">trie</span>(i);</span><br><span class="line">            &#125;cur=cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      vector&lt;<span class="type">int</span>&gt;<span class="built_in">ans</span>(wordsQuery.<span class="built_in">size</span>());</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;wordsQuery.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">        <span class="keyword">auto</span> w=wordsQuery[i];</span><br><span class="line">        <span class="built_in">reverse</span>(<span class="built_in">all</span>(w));</span><br><span class="line">        <span class="keyword">auto</span> cur=root;</span><br><span class="line">        <span class="type">int</span> f=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c:w)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            cur=cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;ans[i]=cur-&gt;val;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">delete</span> root;</span><br><span class="line">      <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/07/08/code/lc2100/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2026/07/08/code/lc2100/" class="post-title-link" itemprop="url">Problem: 2100. 适合野炊的日子</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-07-08 00:00:00 / 修改时间：15:11:09" itemprop="dateCreated datePublished" datetime="2026-07-08T00:00:00+08:00">2026-07-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/%E5%89%8D%E5%90%8E%E7%BC%80%E5%88%86%E7%A6%BB/" itemprop="url" rel="index"><span itemprop="name">前后缀分离</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>使用pre记录到当前位置时左边连续大于自身右边的数目,suf记录当前位置时右边连续大于自身左边的数目,当两者都&gt;&#x3D;time时,将其加入答案</p>
-<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>time&#x3D;&#x3D;0时答案为整个数组的下标,pre数组可以用一个变量替代</p>
-<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>时间复杂度: O(n),两次遍历就可以解决问题<br>空间复杂度: O(n),suf的空间</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">goodDaysToRobBank</span>(<span class="params">self, security: <span class="type">List</span>[<span class="built_in">int</span>], time: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        n=<span class="built_in">len</span>(security)</span><br><span class="line">        <span class="keyword">if</span> time==<span class="number">0</span>:<span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">range</span>(n))</span><br><span class="line">        suf=[<span class="number">0</span>]*n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">2</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            suf[i]=suf[i+<span class="number">1</span>]+<span class="number">1</span> <span class="keyword">if</span> security[i]&lt;=security[i+<span class="number">1</span>] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">        pre=<span class="number">0</span></span><br><span class="line">        ans=[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            pre=pre+<span class="number">1</span> <span class="keyword">if</span> security[i]&lt;=security[i-<span class="number">1</span>] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> pre&gt;=time <span class="keyword">and</span> suf[i]&gt;=time:ans.append(i)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -492,7 +429,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/12/16/useful_tools/Doxygen/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/20/code/lc2100/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -506,161 +443,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/12/16/useful_tools/Doxygen/" class="post-title-link" itemprop="url">注释与代码文档生成--Doxygen</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-12-16 22:34:30 / 修改时间：22:41:54" itemprop="dateCreated datePublished" datetime="2025-12-16T22:34:30+08:00">2025-12-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/useful-tools/" itemprop="url" rel="index"><span itemprop="name">useful_tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="核心作用"><a href="#核心作用" class="headerlink" title="核心作用"></a>核心作用</h1><ol>
-<li>自动生成专业的文档</li>
-<li>提高代码可维护性</li>
-<li>包含继承关系图，各种表格，方便观看<br>生成的文档为html，pdf（基于latex），可以搜索、链接、</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/12/16/useful_tools/Doxygen/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/27/ml/a/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2025/10/27/ml/a/" class="post-title-link" itemprop="url">class1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-10-27 14:02:34 / 修改时间：14:25:59" itemprop="dateCreated datePublished" datetime="2025-10-27T14:02:34+08:00">2025-10-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-supervised-learning"><a href="#1-supervised-learning" class="headerlink" title="1 supervised learning"></a>1 supervised learning</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/27/ml/a/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/" class="post-title-link" itemprop="url">begin: my favorite color</a>
+            <a href="/ljn-Blog/2026/06/20/code/lc2100/" class="post-title-link" itemprop="url">2100 适合野炊的日子</a>
         </h2>
 
         <div class="post-meta">
@@ -670,86 +453,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-06-20 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-20T00:00:00+08:00">2026-06-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:25:11" itemprop="dateModified" datetime="2025-10-27T13:25:11+08:00">2025-10-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="like-color"><a href="#like-color" class="headerlink" title="like color"></a>like color</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/%E7%AC%AC%E4%B8%80%E7%AF%87/first%20try/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/%E9%83%A8%E7%BD%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2025/10/26/Qt_study/%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">部署</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:23:49" itemprop="dateModified" datetime="2025-10-27T13:23:49+08:00">2025-10-27</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -757,7 +468,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">数组</span></a>
                 </span>
             </span>
 
@@ -772,98 +483,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-<p>windployqt部署</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E7%AE%97%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E7%AE%97%E5%99%A8/" class="post-title-link" itemprop="url">计算器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:07" itemprop="dateModified" datetime="2025-10-27T13:24:07+08:00">2025-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="learned"><a href="#learned" class="headerlink" title="learned"></a>learned</h1><ul>
-<li>QChar包含了所有的字符()&gt;char, 而switch语句期望获得一个数字，可以用QChar::unicode()进行转换</li>
-<li>函数多使用驼峰式命名，与cpp内置函数有所不同</li>
-<li>整数处理方式</li>
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-good-days-to-rob-the-bank/description/">2100. 适合野炊的日子</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>使用pre记录到当前位置时左边连续大于自身右边的数目,suf记录当前位置时右边连续大于自身左边的数目,当两者都&gt;&#x3D;time时,将其加入答案</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>time&#x3D;&#x3D;0时答案为整个数组的下标,pre数组可以用一个变量替代</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n)$,两次遍历就可以解决问题</li>
+<li>空间复杂度: $O(n)$,suf的空间</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">abs</span>(result - std::<span class="built_in">round</span>(result)) &lt; <span class="number">1e-10</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>槽的使用</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E7%AE%97%E5%99%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">goodDaysToRobBank</span>(<span class="params">self, security: <span class="type">List</span>[<span class="built_in">int</span>], time: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        n=<span class="built_in">len</span>(security)</span><br><span class="line">        <span class="keyword">if</span> time==<span class="number">0</span>:<span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">range</span>(n))</span><br><span class="line">        suf=[<span class="number">0</span>]*n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">2</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            suf[i]=suf[i+<span class="number">1</span>]+<span class="number">1</span> <span class="keyword">if</span> security[i]&lt;=security[i+<span class="number">1</span>] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">        pre=<span class="number">0</span></span><br><span class="line">        ans=[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            pre=pre+<span class="number">1</span> <span class="keyword">if</span> security[i]&lt;=security[i-<span class="number">1</span>] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> pre&gt;=time <span class="keyword">and</span> suf[i]&gt;=time:ans.append(i)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -882,7 +516,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E4%BC%98%E5%8A%BF/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/18/code/%E9%9D%A2%E8%AF%95%E9%A2%9816.03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -896,7 +530,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/10/26/Qt_study/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E4%BC%98%E5%8A%BF/" class="post-title-link" itemprop="url">信号与槽AI</a>
+            <a href="/ljn-Blog/2026/06/18/code/%E9%9D%A2%E8%AF%95%E9%A2%9816.03/" class="post-title-link" itemprop="url">面试题 16.03 交点</a>
         </h2>
 
         <div class="post-meta">
@@ -906,14 +540,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-06-18 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-18T00:00:00+08:00">2026-06-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:25:58" itemprop="dateModified" datetime="2025-10-27T13:25:58+08:00">2025-10-27</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -921,7 +555,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E5%87%A0%E4%BD%95/" itemprop="url" rel="index"><span itemprop="name">几何</span></a>
                 </span>
             </span>
 
@@ -936,15 +570,456 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-观察者模式-Observer-Pattern"><a href="#1-观察者模式-Observer-Pattern" class="headerlink" title="1. 观察者模式 (Observer Pattern)"></a>1. 观察者模式 (Observer Pattern)</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD%E7%9A%84%E4%BC%98%E5%8A%BF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-lcci/description/">面试题 16.03. 交点</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>通过求出每一条直线的方程y&#x3D;kx+b,进而求出交点$(x&#x3D;\frac{b_1-b_2}{k_2-k_1},y&#x3D;x*k_1+b_1)$.最后再判断点是不是在两条直线上</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>需要特判直线垂直于x轴的情况</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(1)$</li>
+<li>空间复杂度: $O(1)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">intersection</span>(<span class="params">self, start1: <span class="type">List</span>[<span class="built_in">int</span>], end1: <span class="type">List</span>[<span class="built_in">int</span>], start2: <span class="type">List</span>[<span class="built_in">int</span>], end2: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">float</span>]:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">getkb</span>(<span class="params">start,end</span>):</span><br><span class="line">            x1,y1=start</span><br><span class="line">            x2,y2=end </span><br><span class="line">            <span class="keyword">if</span> x1==x2:<span class="keyword">return</span> <span class="literal">False</span>,<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">            k=(y2-y1)/(x2-x1)</span><br><span class="line">            b=y1-x1*k</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span>,k,b</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">rangy</span>(<span class="params">start,end</span>):</span><br><span class="line">            <span class="keyword">if</span> start[<span class="number">1</span>]&gt;end[<span class="number">1</span>]:<span class="keyword">return</span> end[<span class="number">1</span>],start[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">return</span> start[<span class="number">1</span>],end[<span class="number">1</span>]</span><br><span class="line">        f1,k1,b1=getkb(start1,end1)</span><br><span class="line">        f2,k2,b2=getkb(start2,end2)</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">samekb</span>():</span><br><span class="line">            y1min,y1max=rangy(start1,end1)</span><br><span class="line">            y2min,y2max=rangy(start2,end2)</span><br><span class="line">            <span class="keyword">if</span> y1min&lt;=y2min&lt;=y1max:<span class="keyword">return</span> [start2[<span class="number">0</span>],y2min]</span><br><span class="line">            <span class="keyword">elif</span> y2min&lt;=y1min&lt;=y2max:<span class="keyword">return</span> [start1[<span class="number">0</span>],y1min]</span><br><span class="line">            <span class="keyword">else</span>:<span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> f1 <span class="keyword">and</span> <span class="keyword">not</span> f2:</span><br><span class="line">            <span class="keyword">if</span> start1[<span class="number">0</span>]==start2[<span class="number">0</span>]:</span><br><span class="line">                <span class="keyword">return</span> samekb()</span><br><span class="line">            <span class="keyword">else</span>:<span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">x,y,ylim</span>):</span><br><span class="line">            ymin,ymax=ylim</span><br><span class="line">            <span class="keyword">if</span> ymin&lt;=y&lt;=ymax:<span class="keyword">return</span> [x,y]</span><br><span class="line">            <span class="keyword">return</span> [] </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> f1:</span><br><span class="line">            x=start1[<span class="number">0</span>]</span><br><span class="line">            y=k2*x+b2</span><br><span class="line">            <span class="keyword">return</span> check(x,y,rangy(start1,end1))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> f2:</span><br><span class="line">            x=start2[<span class="number">0</span>]</span><br><span class="line">            y=k1*x+b1</span><br><span class="line">            <span class="keyword">return</span> check(x,y,rangy(start2,end2))</span><br><span class="line">        <span class="keyword">if</span> k1==k2 <span class="keyword">and</span> b1!=b2:<span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">elif</span> k1==k2 <span class="keyword">and</span> b1==b2:<span class="keyword">return</span> samekb()</span><br><span class="line">        x=(b1-b2)/(k2-k1)</span><br><span class="line">        y=k1*x+b1</span><br><span class="line">        <span class="keyword">if</span> check(x,y,rangy(start1,end1)) <span class="keyword">and</span> check(x,y,rangy(start2,end2)):</span><br><span class="line">            <span class="keyword">return</span> [x,y]</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/16/code/lc3093/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/06/16/code/lc3093/" class="post-title-link" itemprop="url">3093 最长公共后缀查询</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-16T00:00:00+08:00">2026-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E5%AD%97%E5%85%B8%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">字典树</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-suffix-queries/description/">3093. 最长公共后缀查询</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>排序加字典树可以简化题目中的要求</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>按照(长度,出现时间)进行排序,并把排序后的每一个词语加入字典树,同时在第一次创建该树节点的时候填写val(字典树走到此处时哪一个点是结果).因为填写的顺序,使得每一个节点的数字正好是访问的答案,后续进行访问即可.</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(nlog(n))$排序建树查询均是nlog(n)</li>
+<li>空间复杂度: $O(n*m)$最多每一个字母分配一个trie,但是实际上son只有26,结果会小很多</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">trie</span>&#123;</span><br><span class="line">        <span class="type">int</span> val;</span><br><span class="line">        trie* son[<span class="number">26</span>]&#123;&#125;;</span><br><span class="line">        <span class="built_in">trie</span>(<span class="type">int</span> val=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>-&gt;val=val;</span><br><span class="line">        &#125;</span><br><span class="line">        ~<span class="built_in">trie</span>() &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">delete</span> son[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> all(x) x.begin(),x.end()</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">stringIndices</span><span class="params">(vector&lt;string&gt;&amp; wordsContainer, vector&lt;string&gt;&amp; wordsQuery)</span> </span>&#123;</span><br><span class="line">      vector&lt;pair&lt;string,<span class="type">int</span>&gt;&gt;dc;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;wordsContainer.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">        <span class="built_in">reverse</span>(<span class="built_in">all</span>(wordsContainer[i]));</span><br><span class="line">        dc.<span class="built_in">emplace_back</span>(wordsContainer[i],i);</span><br><span class="line">      &#125;  </span><br><span class="line">      ranges::<span class="built_in">sort</span>(dc,&#123;&#125;,[](<span class="keyword">auto</span> x)&#123;<span class="keyword">return</span> <span class="built_in">make_pair</span>(x.first.<span class="built_in">size</span>(),x.second); &#125;);</span><br><span class="line">      trie* root=<span class="keyword">new</span> <span class="built_in">trie</span>(dc[<span class="number">0</span>].second);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">auto</span>[w,i]:dc)&#123;</span><br><span class="line">        <span class="keyword">auto</span> cur=root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c:w)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>])&#123;</span><br><span class="line">                cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>]=<span class="keyword">new</span> <span class="built_in">trie</span>(i);</span><br><span class="line">            &#125;cur=cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      vector&lt;<span class="type">int</span>&gt;<span class="built_in">ans</span>(wordsQuery.<span class="built_in">size</span>());</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;wordsQuery.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">        <span class="keyword">auto</span> w=wordsQuery[i];</span><br><span class="line">        <span class="built_in">reverse</span>(<span class="built_in">all</span>(w));</span><br><span class="line">        <span class="keyword">auto</span> cur=root;</span><br><span class="line">        <span class="type">int</span> f=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c:w)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            cur=cur-&gt;son[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;ans[i]=cur-&gt;val;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">delete</span> root;</span><br><span class="line">      <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/13/code/lc29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/06/13/code/lc29/" class="post-title-link" itemprop="url">29 两数相除</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-13 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-13T00:00:00+08:00">2026-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">位运算</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/divide-two-integers/description/">29. 两数相除</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>除法本质上就是减法,现在问题就是怎么让它减的更快,10进制时我们执行120&#x2F;12时,会将12对齐,实际效果就是除数乘10,但是现在不允许我们使用乘法,我们改用位运算进行模拟乘法来试商.</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>简化问题,我们直接处理正数除正数后续再处理符号和溢出问题.我们用res记录当前乘积的倍数(1,2,4,8)同十进制的(1,10,100,1000),然后从高位开始减,能减时就减去并给ans+&#x3D;res(类似试商后减少剩余被除数),直到res&#x3D;&#x3D;0,即除到最后一位</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(1)$最多32位,循环就最多32次,为常数</li>
+<li>空间复杂度: $O(1)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params">self, dividend: <span class="built_in">int</span>, divisor: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">div</span>(<span class="params">dividend,divisor</span>):</span><br><span class="line">            res=<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> (divisor&lt;&lt;<span class="number">1</span>)&lt;=dividend:</span><br><span class="line">                res&lt;&lt;=<span class="number">1</span></span><br><span class="line">                divisor&lt;&lt;=<span class="number">1</span></span><br><span class="line">            ans=<span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> res:</span><br><span class="line">                <span class="keyword">if</span> dividend&gt;=divisor:</span><br><span class="line">                    dividend-=divisor</span><br><span class="line">                    ans+=res </span><br><span class="line">                res&gt;&gt;=<span class="number">1</span></span><br><span class="line">                divisor&gt;&gt;=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> ans</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> dividend^divisor&lt;<span class="number">0</span>:ans=-div(<span class="built_in">abs</span>(dividend),<span class="built_in">abs</span>(divisor))</span><br><span class="line">        <span class="keyword">else</span>:ans=div(<span class="built_in">abs</span>(dividend),<span class="built_in">abs</span>(divisor))</span><br><span class="line">        mx,mn=(<span class="number">1</span>&lt;&lt;<span class="number">31</span>)-<span class="number">1</span>,-(<span class="number">1</span>&lt;&lt;<span class="number">31</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(mn,<span class="built_in">min</span>(mx,ans))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/04/code/lc127/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/06/04/code/lc127/" class="post-title-link" itemprop="url">127 单词接龙</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-04 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-04T00:00:00+08:00">2026-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">广度优先搜索</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-ladder/description/">127. 单词接龙</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>bfs每次从wordList中枚举的话最多2500次出队*2500次遍历，每次遍历还要比较单词的差异数，太慢了，注意到访问过的点我们不会再访问（bfs已经找到更近的点），那我们就跳过这些点的访问，但是仅仅跳过，仍要比较差异数。既然我们已经知道哪些点是还未访问的，如果他们在哈希表中，我们就不用遍历单词数次数了2500，因为单词很短的缘故，我们枚举单个字符的修改是否在hash表中，则最多需要26*len(word)&#x3D;260次运算。</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>先把wordList放入hash表中，访问过的逐个移除，单个字符修改上，我们循环26次+1并取模，前25次相当于完成修改，最后一次相当于还原。然后是我常用的bfs写法</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(N<em>M</em>26)$N为len(wordList),M为len(beginWord)</li>
+<li>空间复杂度: $O(N*M)$hash表+队列大小之和</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">ladderLength</span><span class="params">(string beginWord, string endWord, vector&lt;string&gt;&amp; wordList)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m=wordList.<span class="built_in">size</span>(),n=beginWord.<span class="built_in">size</span>(),res=<span class="number">1</span>;</span><br><span class="line">        unordered_set&lt;string&gt;<span class="built_in">path</span>(wordList.<span class="built_in">begin</span>(),wordList.<span class="built_in">end</span>());</span><br><span class="line">        queue&lt;string&gt;q;</span><br><span class="line">        q.<span class="built_in">push</span>(beginWord);</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="type">int</span> size=q.<span class="built_in">size</span>();</span><br><span class="line">            res+=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(size--)&#123;</span><br><span class="line">                <span class="keyword">auto</span> start=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;<span class="number">26</span>;++j)&#123;</span><br><span class="line">                        start[i]=(start[i]<span class="number">+1</span>-<span class="string">&#x27;a&#x27;</span>)%<span class="number">26</span>+<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">                        <span class="keyword">if</span>(path.<span class="built_in">count</span>(start))&#123;</span><br><span class="line">                            <span class="keyword">if</span>(start==endWord)<span class="keyword">return</span> res;</span><br><span class="line">                            path.<span class="built_in">erase</span>(start);</span><br><span class="line">                            q.<span class="built_in">push</span>(start);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/04/code/lc221/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/06/04/code/lc221/" class="post-title-link" itemprop="url">221 最大正方形</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-04 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-04T00:00:00+08:00">2026-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">数组</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximal-square/description/">221. 最大正方形</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>注意到数据量不大，考虑直接暴力枚举矩阵，使用二维前缀和降低查询矩阵的复杂度，枚举矩阵边长时，可以使用二分搜索</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>注意k&#x3D;&#x3D;0时，实际矩阵大小为1，所以答案为$(l+1)^2$</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n^2log(n))$</li>
+<li>空间复杂度: $O(n^2)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximalSquare</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        m,n=<span class="built_in">len</span>(matrix),<span class="built_in">len</span>(matrix[<span class="number">0</span>])</span><br><span class="line">        cnt0=[[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                cnt0[i+<span class="number">1</span>][j+<span class="number">1</span>]=cnt0[i][j+<span class="number">1</span>]+cnt0[i+<span class="number">1</span>][j]-cnt0[i][j]+(<span class="number">1</span> <span class="keyword">if</span> matrix[i][j]==<span class="string">&#x27;0&#x27;</span> <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">query</span>(<span class="params">r1,c1,r2,c2</span>):</span><br><span class="line">            <span class="keyword">return</span> cnt0[r2+<span class="number">1</span>][c2+<span class="number">1</span>]-cnt0[r2+<span class="number">1</span>][c1]-cnt0[r1][c2+<span class="number">1</span>]+cnt0[r1][c1]</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">k:<span class="built_in">int</span></span>)-&gt;<span class="built_in">bool</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                    <span class="keyword">if</span> i&gt;=k <span class="keyword">and</span> j&gt;=k <span class="keyword">and</span> query(i-k,j-k,i,j)==<span class="number">0</span>:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        l,r=-<span class="number">1</span>,<span class="built_in">min</span>(m,n)+<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> l+<span class="number">1</span>&lt;r:</span><br><span class="line">            mid=l+r&gt;&gt;<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> check(mid):l=mid </span><br><span class="line">            <span class="keyword">else</span>:r=mid</span><br><span class="line">        <span class="keyword">return</span> (l+<span class="number">1</span>)*(l+<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/03/code/lc173/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/06/03/code/lc173/" class="post-title-link" itemprop="url">173 二叉搜索树迭代器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-03 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-03T00:00:00+08:00">2026-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E6%A0%88/" itemprop="url" rel="index"><span itemprop="name">栈</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search-tree-iterator/description/">173. 二叉搜索树迭代器</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>要求O(h)内存，说明不能存储遍历过的节点，我们使用栈来进行中序遍历。</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>注意到每个节点的遍历顺序是左根右，因此我们在访问一个节点时，先递归把它的左节点以及子树的左节点压栈。出栈代表已经访问，此时单独把它的右子树入栈。<br>由于第一次遍历是第一个节点，我们格外用一个dummy节点表示起点</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: 均摊$O(1)$每个节点入栈出栈一次</li>
+<li>空间复杂度: $O(h)$栈最高为树高</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BSTIterator</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>):</span><br><span class="line">        dummy=TreeNode(<span class="number">0</span>,<span class="literal">None</span>,root)</span><br><span class="line">        <span class="variable language_">self</span>.st=[dummy]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">next</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        top=<span class="variable language_">self</span>.st.pop()</span><br><span class="line">        <span class="keyword">if</span> top.right:</span><br><span class="line">            <span class="variable language_">self</span>.st.append(top.right)</span><br><span class="line">            top=top.right</span><br><span class="line">            <span class="keyword">while</span> top.left:</span><br><span class="line">                <span class="variable language_">self</span>.st.append(top.left)</span><br><span class="line">                top=top.left</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.st[-<span class="number">1</span>].val</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hasNext</span>(<span class="params">self</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># print([i.val for i in self.st])</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span>(<span class="built_in">len</span>(<span class="variable language_">self</span>.st)==<span class="number">1</span> <span class="keyword">and</span> <span class="keyword">not</span> <span class="variable language_">self</span>.st[<span class="number">0</span>].right)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your BSTIterator object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = BSTIterator(root)</span></span><br><span class="line"><span class="comment"># param_1 = obj.next()</span></span><br><span class="line"><span class="comment"># param_2 = obj.hasNext()</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -962,7 +1037,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/ljn-Blog/page/2/">2</a><a class="extend next" rel="next" href="/ljn-Blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/ljn-Blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/ljn-Blog/page/6/">6</a><a class="extend next" rel="next" href="/ljn-Blog/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1030,14 +1105,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/ljn-Blog/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/ljn-Blog/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

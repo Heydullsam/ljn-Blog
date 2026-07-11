@@ -184,7 +184,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E6%97%B6%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/02/code/lc36/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -198,7 +198,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E6%97%B6%E5%99%A8/" class="post-title-link" itemprop="url">计时器</a>
+            <a href="/ljn-Blog/2026/06/02/code/lc36/" class="post-title-link" itemprop="url">36 有效的数独</a>
         </h2>
 
         <div class="post-meta">
@@ -208,14 +208,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-02T00:00:00+08:00">2026-06-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:23:57" itemprop="dateModified" datetime="2025-10-27T13:23:57+08:00">2025-10-27</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,7 +223,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">数组</span></a>
                 </span>
             </span>
 
@@ -238,22 +238,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li>QTimer 通过start(int num)函数运行，(以num为间隔)不断发出timeout信号，stop停止</li>
-<li>QTimer::singleShot(1000,this,SLOT(timeoutSlot()));直接计时后运行</li>
-<li>connect(对象，信号，发送到对象，调用函数)，调用函数一般是自定义槽函数</li>
-<li>Qimage::load(path)加载图片R(“”)忽略转义，相对路径（加.qrc文件，:加相对路径）</li>
-<li>QPixmap pix(“D:\CACHE\Qt\objectTimer\pic\1.jpg”);另一种加载图片的方法*</li>
-<li>Widget::startTimer()返回一个ID,killTimer()停止，不建议使用</li>
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-sudoku/description/">36. 有效的数独</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>每一个行、列、小矩形都需要判定是否重复，可以使用set进行维护</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>行列的不需要计算，小矩形需要简单的计算，发现重复返回False即可</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n^2)$</li>
+<li>空间复杂度: $O(n^2)$</li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/%E8%AE%A1%E6%97%B6%E5%99%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidSudoku</span>(<span class="params">self, board: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        row,col,blank=[<span class="built_in">set</span>() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>)],[<span class="built_in">set</span>() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>)],[<span class="built_in">set</span>() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">                x=board[i][j]</span><br><span class="line">                <span class="keyword">if</span> x==<span class="string">&#x27;.&#x27;</span>:<span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> x <span class="keyword">in</span> row[i] <span class="keyword">or</span> x <span class="keyword">in</span> col[j] <span class="keyword">or</span> x <span class="keyword">in</span> blank[i//<span class="number">3</span>*<span class="number">3</span>+j//<span class="number">3</span>]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                row[i].add(x)</span><br><span class="line">                col[j].add(x)</span><br><span class="line">                blank[i//<span class="number">3</span>*<span class="number">3</span>+j//<span class="number">3</span>].add(x)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -272,7 +271,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/TCP/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/02/code/lc68/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -286,7 +285,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/10/26/Qt_study/TCP/" class="post-title-link" itemprop="url">TCP</a>
+            <a href="/ljn-Blog/2026/06/02/code/lc68/" class="post-title-link" itemprop="url">68 文本左右对齐</a>
         </h2>
 
         <div class="post-meta">
@@ -296,14 +295,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-02T00:00:00+08:00">2026-06-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:55" itemprop="dateModified" datetime="2025-10-27T13:24:55+08:00">2025-10-27</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -311,7 +310,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">数组</span></a>
                 </span>
             </span>
 
@@ -326,21 +325,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="client"><a href="#client" class="headerlink" title="client"></a>client</h1><h2 id="learned"><a href="#learned" class="headerlink" title="learned"></a>learned</h2><ul>
-<li>.pro中+network</li>
-<li>QTcpsocket类::connetToHost</li>
-<li>跳转方式，创建新的指针（指针在堆上，实例在栈上）</li>
-<li>ba.append(ui-&gt;lineEdit-&gt;text().toUtf8()); QByteArray加QString字符串的方法</li>
-<li></li>
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/text-justification/description/">68. 文本左右对齐</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>我们遍历并累计单词长度并每次加1（预留空格），发现长度加上目前单词&gt;maxWidth时，此时一定pre到目前的前一个单词可以连成一个句子(trans逻辑中转化)。注意这种处理方式最后一定有一个句子需要我们单独处理，刚好可以按照题目要求进行处理</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>trans中先统计空格数量，再计算每个间隔（因此循环为l-1）的空格，为了方便，直接加在对应位置后了。最后一行直接用’ ‘.join拼接成字符串再补充空格即可</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n)$</li>
+<li>空间复杂度: $O(n)$</li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/TCP/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fullJustify</span>(<span class="params">self, words: <span class="type">List</span>[<span class="built_in">str</span>], maxWidth: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        ans=[]</span><br><span class="line">        pre=tmp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">trans</span>(<span class="params">cand:<span class="built_in">list</span></span>):</span><br><span class="line">            blanks=maxWidth-<span class="built_in">sum</span>([<span class="built_in">len</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> cand])</span><br><span class="line">            l=<span class="built_in">len</span>(cand)</span><br><span class="line">            <span class="keyword">if</span> l==<span class="number">1</span>:<span class="keyword">return</span> cand[<span class="number">0</span>]+<span class="string">&#x27; &#x27;</span>*blanks</span><br><span class="line">            eve=blanks//(l-<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l-<span class="number">1</span>):</span><br><span class="line">                cand[i]+=<span class="string">&#x27; &#x27;</span>*(eve + (<span class="number">1</span> <span class="keyword">if</span> i&lt;blanks%(l-<span class="number">1</span>) <span class="keyword">else</span> <span class="number">0</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(cand)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(words)):</span><br><span class="line">            <span class="keyword">if</span> tmp+<span class="built_in">len</span>(words[i])&gt;maxWidth:<span class="comment"># 判断时不用加1，因为末尾没有空格</span></span><br><span class="line">                cand=words[pre:i]</span><br><span class="line">                tmp=<span class="number">0</span></span><br><span class="line">                pre=i </span><br><span class="line">                ans.append(trans(cand))</span><br><span class="line">            <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(words):tmp+=<span class="built_in">len</span>(words[i])+<span class="number">1</span></span><br><span class="line">        last=<span class="string">&#x27; &#x27;</span>.join(words[pre:])</span><br><span class="line">        ans.append(last+<span class="string">&#x27; &#x27;</span>*(maxWidth-<span class="built_in">len</span>(last)))</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -359,7 +358,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/player/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/01/code/lc134/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -373,7 +372,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/10/26/Qt_study/player/" class="post-title-link" itemprop="url">player</a>
+            <a href="/ljn-Blog/2026/06/01/code/lc134/" class="post-title-link" itemprop="url">134 加油站</a>
         </h2>
 
         <div class="post-meta">
@@ -383,14 +382,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-01T00:00:00+08:00">2026-06-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:50" itemprop="dateModified" datetime="2025-10-27T13:24:50+08:00">2025-10-27</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -398,7 +397,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E8%B4%AA%E5%BF%83/" itemprop="url" rel="index"><span itemprop="name">贪心</span></a>
                 </span>
             </span>
 
@@ -413,183 +412,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>MediaPlayer+AudioOutput(m_mediaPlayer-&gt;setAudioOutput(m_audioOutput);)<br>获取文件目录<br>QDirIterator，.hasNext()进行遍历<br>播放逻辑</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/player/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/paste_pic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2025/10/26/Qt_study/paste_pic/" class="post-title-link" itemprop="url">paste_pic</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:42" itemprop="dateModified" datetime="2025-10-27T13:24:42+08:00">2025-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>updating: “ <a target="_blank" rel="noopener" href="https://github.com/Heydullsam/paste_pic.git">https://github.com/Heydullsam/paste_pic.git</a>“</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/paste_pic/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2025/10/26/Qt_study/mysql/" class="post-title-link" itemprop="url">mysql</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:33" itemprop="dateModified" datetime="2025-10-27T13:24:33+08:00">2025-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h1><h2 id="learned"><a href="#learned" class="headerlink" title="learned"></a>learned</h2><ul>
-<li>.pro +sql</li>
-<li>QSqlDatabase::addDatabase(“NAME”)加载数据库</li>
-<li>QSqlquery::exec执行sql命令，返回true或false</li>
-<li>QString的拼接 .arg()</li>
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/gas-station/description/">134. 加油站</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>问题转换，数组正向移动满一圈，每次油量res加gas[i]-cost[i],存在res&lt;0则说明这个起点不行，遍历每一个起点，时间复杂度$O(n^2)$,会超时。<br>优化方式：每次起点从上一次res&lt;0的点开始，并保证起点res&gt;&#x3D;0(否则没法启动)，设起点x（x&gt;0）,容易得到x+中间&#x3D;res&lt;0,中间部分加到res位置时一定会小于0，可以排除</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>方便计算，使用diff直接记录gas-cost,另外开始点的停止条件为遍历完一圈。每次遍历时发现可以满足就直接返回True</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n)$start和循环单圈遍历次数和不会超过2*n，n为数组长度</li>
+<li>空间复杂度: $O(n)$ diff长度，省略可以$O(1)$</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString sql=<span class="built_in">QString</span>(<span class="string">&quot;insert into student values (%1,&#x27;%2&#x27;,&#x27;%3&#x27;);)&quot;</span>).<span class="built_in">arg</span>(id).<span class="built_in">arg</span>(name).<span class="built_in">arg</span>(birthday);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/mysql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n=<span class="built_in">len</span>(gas)</span><br><span class="line">        diff=[gas[i]-cost[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        start=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            res=<span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> start&gt;=n:<span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> diff[start]&lt;<span class="number">0</span>:</span><br><span class="line">                start+=<span class="number">1</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                res+=diff[(start+i)%n]</span><br><span class="line">                <span class="keyword">if</span> res&lt;<span class="number">0</span>:</span><br><span class="line">                    start+=i</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> start</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -608,7 +445,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/notepad/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/06/01/code/lc151/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -622,7 +459,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/10/26/Qt_study/notepad/" class="post-title-link" itemprop="url">notepad</a>
+            <a href="/ljn-Blog/2026/06/01/code/lc151/" class="post-title-link" itemprop="url">151 反转字符串中的单词</a>
         </h2>
 
         <div class="post-meta">
@@ -632,14 +469,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-01T00:00:00+08:00">2026-06-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:37" itemprop="dateModified" datetime="2025-10-27T13:24:37+08:00">2025-10-27</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -647,7 +484,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E5%8F%8C%E6%8C%87%E9%92%88/" itemprop="url" rel="index"><span itemprop="name">双指针</span></a>
                 </span>
             </span>
 
@@ -662,20 +499,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="learned"><a href="#learned" class="headerlink" title="learned"></a>learned</h1><ul>
-<li>QFileDialog用于获取需要打开的文件（点击）</li>
-<li>QFile::open打开文件，readAll()获取QByteArray类型的数据</li>
-<li>键与槽函数Qt::ControlModifier,mousePressEvent，QPoint</li>
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/description/">151. 反转字符串中的单词</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>已知cpp std::reverse是原地交换，这里我们可以用时间换空间，先把整体反转，如hello world反转成dlrow olleh,然后我们很容易发现，把每个空格分割段再局部每一处调用一遍reverse，就可以得到world hello了，然后关键是多余空格的处理。这里我直接过滤前导空格，然后用pos记录当前写入字符串的位置，后续直接使用resize对字符串进行截断即可</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>细节上，正向过滤后在，反转复用来过滤后面的空格（直接判断末尾是不是空格再截取更方便，因为末尾最多有一个空格），遍历s时，注意到末尾还要进行一次处理，故循环条件设置为i&lt;&#x3D;s.size().注意函数使用值引用传参（无拷贝）</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n)$</li>
+<li>空间复杂度: $O(1)$</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(QKetEvent* k-&gt;<span class="built_in">modifiers</span>()==Qt::ControlModifier &amp;&amp; k-&gt;<span class="built_in">key</span>()==Qt::Key_S)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">saveActionSlot</span>();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/notepad/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">process</span><span class="params">(string&amp;s)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> pos=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(s[pos]==<span class="string">&#x27; &#x27;</span>)pos++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=pos;i&lt;s.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i&amp;&amp;s[i]==<span class="string">&#x27; &#x27;</span>&amp;&amp;s[i]==s[i<span class="number">-1</span>])&#123;</span><br><span class="line">                pos++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            s[i-pos]=s[i];</span><br><span class="line">        &#125;</span><br><span class="line">        s.<span class="built_in">resize</span>(s.<span class="built_in">size</span>()-pos);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseWords</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">process</span>(s);</span><br><span class="line">        ranges::<span class="built_in">reverse</span>(s);</span><br><span class="line">        <span class="built_in">process</span>(s);</span><br><span class="line">        <span class="type">int</span> pre=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=s.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i==s.<span class="built_in">size</span>()||s[i]==<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>()+pre,s.<span class="built_in">begin</span>()+i);</span><br><span class="line">                pre=i<span class="number">+1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -694,7 +532,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/desktop_cat/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/04/21/code/lc114/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -708,7 +546,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/10/26/Qt_study/desktop_cat/" class="post-title-link" itemprop="url">desktop_pet_cat</a>
+            <a href="/ljn-Blog/2026/04/21/code/lc114/" class="post-title-link" itemprop="url">114 二叉树展开为链表</a>
         </h2>
 
         <div class="post-meta">
@@ -718,14 +556,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-04-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-21T00:00:00+08:00">2026-04-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:24" itemprop="dateModified" datetime="2025-10-27T13:24:24+08:00">2025-10-27</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -733,7 +571,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                  <a href="/ljn-Blog/categories/%E6%A0%88/" itemprop="url" rel="index"><span itemprop="name">栈</span></a>
                 </span>
             </span>
 
@@ -748,22 +586,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="learned"><a href="#learned" class="headerlink" title="learned"></a>learned</h1><ul>
-<li>重载QPaintEvent::paintEvent, 使之能够加载图片</li>
-<li>snprintf基于printf处理字符串，QString中.arg()可以模拟，注意参数是%num;</li>
-<li>connect调用的函数必须加&amp;</li>
-<li>Qpixmap::scale()用于调整大小</li>
-<li>Widget::update直接更新窗口</li>
-<li>透明窗口、透明背景、与移动</li>
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/description/">114. 二叉树展开为链表</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>注意到使用前序遍历时，如果我们直接把答案放在右子树，那么会影响后续的遍历，因此我们把结果先放在左子树，后续反转即可</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n)$</li>
+<li>空间复杂度: $O(1)$不计入栈空间，也可手动前序真正$O(1)$</li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/desktop_cat/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">flatten</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        TreeNode dummy;</span><br><span class="line">        TreeNode*cur=&amp;dummy;</span><br><span class="line">        <span class="keyword">auto</span> dfs=[&amp;](<span class="keyword">this</span> <span class="keyword">auto</span>&amp;&amp;dfs,TreeNode*root)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!root)<span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">auto</span> left=root-&gt;left;</span><br><span class="line">            <span class="keyword">auto</span> right=root-&gt;right;</span><br><span class="line">            cur-&gt;right=root;</span><br><span class="line">            root-&gt;left=<span class="literal">nullptr</span>;</span><br><span class="line">            cur=cur-&gt;right;</span><br><span class="line">            <span class="built_in">dfs</span>(left);</span><br><span class="line">            <span class="built_in">dfs</span>(right);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        root=dummy.right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -782,7 +616,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/content/">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/03/24/code/lc752/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
@@ -796,7 +630,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ljn-Blog/2025/10/26/Qt_study/content/" class="post-title-link" itemprop="url">Qt</a>
+            <a href="/ljn-Blog/2026/03/24/code/lc752/" class="post-title-link" itemprop="url">752 打开转盘锁</a>
         </h2>
 
         <div class="post-meta">
@@ -806,15 +640,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
+              <time title="创建时间：2026-03-24 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-24T00:00:00+08:00">2026-03-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-09-12 09:08:10" itemprop="dateModified" datetime="2025-09-12T09:08:10+08:00">2025-09-12</time>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">广度优先搜索</span></a>
+                </span>
+            </span>
 
           
 
@@ -827,7 +670,368 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">filters:</span><br><span class="line">  and:</span><br><span class="line">    - file.folder == this.file.folder</span><br><span class="line">    - file.path != this.file.path</span><br><span class="line">    - file.path != &quot;/assets/&quot;</span><br><span class="line">views:</span><br><span class="line">  - type: table</span><br><span class="line">    name: 表格</span><br><span class="line">    order:</span><br><span class="line">      - title</span><br><span class="line">      - file.name</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/open-the-lock/description/">752. 打开转盘锁</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>不是特别复杂的写法，正常的bfs，在处理修改时，可以使用for循环4位+原址修改该字符串（auto&amp;c:t），注意修改后需要还原，并重复减的操作</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>这些方法具体怎么运用？</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(*)$</li>
+<li>空间复杂度: $O(*)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">openLock</span><span class="params">(vector&lt;string&gt;&amp; deadends, string target)</span> </span>&#123;</span><br><span class="line">        unordered_set&lt;string&gt;vis;</span><br><span class="line">        unordered_set&lt;string&gt;<span class="built_in">stop</span>(deadends.<span class="built_in">begin</span>(),deadends.<span class="built_in">end</span>());</span><br><span class="line">        queue&lt;string&gt;q;</span><br><span class="line">        vis.<span class="built_in">insert</span>(<span class="string">&quot;0000&quot;</span>);</span><br><span class="line">        q.<span class="built_in">push</span>(<span class="string">&quot;0000&quot;</span>);</span><br><span class="line">        <span class="keyword">auto</span> add=[](<span class="type">char</span> c)&#123;<span class="keyword">return</span> c<span class="number">+1</span>&gt;<span class="string">&#x27;9&#x27;</span>?<span class="string">&#x27;0&#x27;</span>:c<span class="number">+1</span>; &#125;;</span><br><span class="line">        <span class="keyword">auto</span> sub=[](<span class="type">char</span> c)&#123;<span class="keyword">return</span> c<span class="number">-1</span>&lt;<span class="string">&#x27;0&#x27;</span>?<span class="string">&#x27;9&#x27;</span>:c<span class="number">-1</span>; &#125;;</span><br><span class="line">        <span class="type">int</span> level=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="type">int</span> Size=q.<span class="built_in">size</span>();</span><br><span class="line">            level+=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(Size--)&#123;</span><br><span class="line">                <span class="keyword">auto</span> t=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">if</span>(t==target)<span class="keyword">return</span> level;</span><br><span class="line">                <span class="keyword">if</span>(stop.<span class="built_in">count</span>(t))<span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span>&amp;c:t)&#123;</span><br><span class="line">                    c=<span class="built_in">add</span>(c);</span><br><span class="line">                    <span class="keyword">if</span>(!vis.<span class="built_in">count</span>(t))&#123;</span><br><span class="line">                        vis.<span class="built_in">insert</span>(t);</span><br><span class="line">                        q.<span class="built_in">push</span>(t);</span><br><span class="line">                    &#125;</span><br><span class="line">                    c=<span class="built_in">sub</span>(c);</span><br><span class="line">                    c=<span class="built_in">sub</span>(c);</span><br><span class="line">                    <span class="keyword">if</span>(!vis.<span class="built_in">count</span>(t))&#123;</span><br><span class="line">                        vis.<span class="built_in">insert</span>(t);</span><br><span class="line">                        q.<span class="built_in">push</span>(t);</span><br><span class="line">                    &#125;</span><br><span class="line">                    c=<span class="built_in">add</span>(c);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/03/16/code/lc220/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/03/16/code/lc220/" class="post-title-link" itemprop="url">220 存在重复元素 III</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-16 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-16T00:00:00+08:00">2026-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">数组</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/contains-duplicate-iii/description/">220. 存在重复元素 III</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>根据题意可知：我们需要寻找区间内的两个数，使之差小于指定值，如果区间是有序的，我们选定一个值，我们等同于区寻找第一个大于等于和第一个小于它的数，可以使用二分解决</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>我们使用滑动窗口来保证是区间内的两个数在比较，每次加入新的数后，如果区间大于要求区间，我们删除区间最左边的元素，每次遍历时，二分寻找需要的两个值来分别与之做差，如果满足两者之差小于等于valueDiff,则返回true,否则返回false</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n*logn)$</li>
+<li>空间复杂度: $O(n)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsNearbyAlmostDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> indexDiff, <span class="type">int</span> valueDiff)</span> </span>&#123;</span><br><span class="line">        multiset&lt;<span class="type">int</span>&gt;s;</span><br><span class="line">        <span class="type">int</span> n=nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">            <span class="keyword">auto</span> it=s.<span class="built_in">lower_bound</span>(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(it!=s.<span class="built_in">end</span>()&amp;&amp;*it-nums[i]&lt;=valueDiff)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(it!=s.<span class="built_in">begin</span>()&amp;&amp;nums[i]-*(--it)&lt;=valueDiff)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            s.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(i&gt;=indexDiff)s.<span class="built_in">erase</span>(s.<span class="built_in">find</span>(nums[i-indexDiff]));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/03/15/code/lc12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/03/15/code/lc12/" class="post-title-link" itemprop="url">12 整数转罗马数字</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-15T00:00:00+08:00">2026-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E5%93%88%E5%B8%8C%E8%A1%A8/" itemprop="url" rel="index"><span itemprop="name">哈希表</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-to-roman/description/">12. 整数转罗马数字</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>注意到每位树转化的罗马数字总是三个字母组成的，我们把需要的字母排在一起可以发现:每位使用的恰好是闭区间[pos,pos+2]的字母，每下一位则会pos+2；</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>倒序处理每一位，结果反转相加即可</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(*)$</li>
+<li>空间复杂度: $O(*)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">intToRoman</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">        string tab=<span class="string">&quot;IVXLCDM&quot;</span>,ans;</span><br><span class="line">        <span class="type">int</span> pos=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(num)&#123;</span><br><span class="line">            <span class="keyword">auto</span> t=num%<span class="number">10</span>;</span><br><span class="line">            string temp;</span><br><span class="line">            <span class="keyword">if</span>(t&gt;=<span class="number">5</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(t==<span class="number">9</span>)temp=<span class="built_in">string</span>(<span class="number">1</span>,tab[pos])+tab[pos<span class="number">+2</span>];</span><br><span class="line">                <span class="keyword">else</span> temp=<span class="built_in">string</span>(<span class="number">1</span>,tab[pos<span class="number">+1</span>])+<span class="built_in">string</span>(t<span class="number">-5</span>,tab[pos]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(t==<span class="number">4</span>)temp=<span class="built_in">string</span>(<span class="number">1</span>,tab[pos])+tab[pos<span class="number">+1</span>];</span><br><span class="line">                <span class="keyword">else</span> temp=<span class="built_in">string</span>(t,tab[pos]);</span><br><span class="line">            &#125;</span><br><span class="line">            num/=<span class="number">10</span>;</span><br><span class="line">            pos+=<span class="number">2</span>;</span><br><span class="line">            ans=temp+ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/03/12/code/lc371/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/03/12/code/lc371/" class="post-title-link" itemprop="url">371 两整数之和</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-12 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-12T00:00:00+08:00">2026-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">位运算</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-two-integers/description/">371. 两整数之和</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>模拟加法器逐位相加</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>每次循环，只判断当前位结果和进位结果，当前位结果可以计数1（异或）完成，进位直接判断是否有两个1</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(1)$</li>
+<li>空间复杂度: $O(1)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getSum</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> res=<span class="number">0</span>,carry=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">32</span>;++i)&#123;</span><br><span class="line">            <span class="keyword">auto</span> x=a&gt;&gt;i&amp;<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">auto</span> y=b&gt;&gt;i&amp;<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(x^y^carry)res|=<span class="number">1</span>&lt;&lt;i;</span><br><span class="line">            carry=(x&amp;y|x&amp;carry|y&amp;carry);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2026/03/09/code/lc1442/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2026/03/09/code/lc1442/" class="post-title-link" itemprop="url">1442 形成两个异或相等数组的三元组数目</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-03-09 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-09T00:00:00+08:00">2026-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">位运算</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/description/">1442. 形成两个异或相等数组的三元组数目</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>a&#x3D;&#x3D;b，考虑到任何一个数的异或等于他本身，容易得到区间[i,k]&#x3D;&#x3D;0时，正是a,b数组拼接的结果，中间内每一个数都是符合要求的j；</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>实际操作时，我们存储前缀异或和的所有下标到哈希表用于枚举，发现当前前缀和xor_sum存储过时，由于存储的值也是xor_sum,xor_sum^xor_sum&#x3D;&#x3D;0,所以整个区间的异或和都等于0，逐个计数每个区间中间的元素即可</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(n)$</li>
+<li>空间复杂度: $O(n)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">countTriplets</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;&gt;mp;</span><br><span class="line">        mp[<span class="number">0</span>].<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">        <span class="type">int</span> xor_sum=<span class="number">0</span>,ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;arr.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">            xor_sum^=arr[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> x:mp[xor_sum])ans+=i-x<span class="number">-1</span>;</span><br><span class="line">            mp[xor_sum].<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -846,7 +1050,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/ljn-Blog/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/ljn-Blog/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/ljn-Blog/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/ljn-Blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/ljn-Blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/ljn-Blog/page/6/">6</a><a class="extend next" rel="next" href="/ljn-Blog/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -914,14 +1118,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/ljn-Blog/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/ljn-Blog/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

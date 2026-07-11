@@ -419,26 +419,36 @@ from math import exp,log,inffrom functools import cachexin=input().split()n,v,b=
       </tags>
   </entry>
   <entry>
-    <title>Problem: 2100. 适合野炊的日子</title>
-    <url>/ljn-Blog/2026/07/08/code/lc2100/</url>
-    <content><![CDATA[思路使用pre记录到当前位置时左边连续大于自身右边的数目,suf记录当前位置时右边连续大于自身左边的数目,当两者都&gt;&#x3D;time时,将其加入答案
-解题过程time&#x3D;&#x3D;0时答案为整个数组的下标,pre数组可以用一个变量替代
-复杂度时间复杂度: O(n),两次遍历就可以解决问题空间复杂度: O(n),suf的空间
-class Solution:    def goodDaysToRobBank(self, security: List[int], time: int) -&gt; List[int]:        n=len(security)        if time==0:return list(range(n))        suf=[0]*n        for i in range(n-2,-1,-1):            suf[i]=suf[i+1]+1 if security[i]&lt;=security[i+1] else 0        pre=0        ans=[]        for i in range(1,n):            pre=pre+1 if security[i]&lt;=security[i-1] else 0            if pre&gt;=time and suf[i]&gt;=time:ans.append(i)        return ans]]></content>
+    <title>2100 适合野炊的日子</title>
+    <url>/ljn-Blog/2026/06/20/code/lc2100/</url>
+    <content><![CDATA[
+Problem: 2100. 适合野炊的日子
+
+思路
+使用pre记录到当前位置时左边连续大于自身右边的数目,suf记录当前位置时右边连续大于自身左边的数目,当两者都&gt;&#x3D;time时,将其加入答案
+
+解题过程
+time&#x3D;&#x3D;0时答案为整个数组的下标,pre数组可以用一个变量替代
+
+复杂度
+时间复杂度: $O(n)$,两次遍历就可以解决问题
+空间复杂度: $O(n)$,suf的空间
+
+Codeclass Solution:    def goodDaysToRobBank(self, security: List[int], time: int) -&gt; List[int]:        n=len(security)        if time==0:return list(range(n))        suf=[0]*n        for i in range(n-2,-1,-1):            suf[i]=suf[i+1]+1 if security[i]&lt;=security[i+1] else 0        pre=0        ans=[]        for i in range(1,n):            pre=pre+1 if security[i]&lt;=security[i-1] else 0            if pre&gt;=time and suf[i]&gt;=time:ans.append(i)        return ans
+]]></content>
       <categories>
-        <category>前后缀分离</category>
+        <category>数组</category>
       </categories>
       <tags>
         <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
-    <title>LCR177 撞色搭配</title>
+    <title>LCR 177 撞色搭配</title>
     <url>/ljn-Blog/2026/07/10/code/lcr177/</url>
     <content><![CDATA[
 Problem: LCR 177. 撞色搭配
 
-[TOC]
 思路
 由于其他数字都成对，我们进行异或和最终两两相消，得到的是结果的两数的异或值，现在问题是怎么把它分开得到两个数。注意到异或结果不可能为0（两数不相等），则二进制位中1的地方，正好结果对应的两个数的对应位置是1和0。以此为基准，我们又可以把sockets分为两组（该位为1或该位为0），进而再次异或，依旧两两相消，最后的结果一定是要找的两个数
 
@@ -449,21 +459,21 @@ Problem: LCR 177. 撞色搭配
 时间复杂度: $O(n)$
 空间复杂度: $O(1)$
 
-Codeclass Solution:    def sockCollocation(self, sockets: List[int]) -&gt; List[int]:        xor_sum=reduce(xor,sockets)        mask=xor_sum&amp;-xor_sum        a=b=0        for i in sockets:            if i&amp;mask:a^=i             else:b^=i         return [a,b]]]></content>
+Codeclass Solution:    def sockCollocation(self, sockets: List[int]) -&gt; List[int]:        xor_sum=reduce(xor,sockets)        mask=xor_sum&amp;-xor_sum        a=b=0        for i in sockets:            if i&amp;mask:a^=i             else:b^=i         return [a,b]
+]]></content>
       <categories>
-        <category>分组异或和</category>
+        <category>位运算</category>
       </categories>
       <tags>
         <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
-    <title>lc3093. 最长公共后缀查询</title>
-    <url>/ljn-Blog/2026/07/10/code/lc3093/</url>
+    <title>3093 最长公共后缀查询</title>
+    <url>/ljn-Blog/2026/06/16/code/lc3093/</url>
     <content><![CDATA[
 Problem: 3093. 最长公共后缀查询
 
-[TOC]
 思路
 排序加字典树可以简化题目中的要求
 
@@ -474,9 +484,954 @@ Problem: 3093. 最长公共后缀查询
 时间复杂度: $O(nlog(n))$排序建树查询均是nlog(n)
 空间复杂度: $O(n*m)$最多每一个字母分配一个trie,但是实际上son只有26,结果会小很多
 
-Codestruct trie&#123;        int val;        trie* son[26]&#123;&#125;;        trie(int val=0)&#123;            this-&gt;val=val;        &#125;        ~trie() &#123;        for (int i = 0; i &lt; 26; ++i) &#123;            delete son[i];        &#125;    &#125;    &#125;;#define all(x) x.begin(),x.end()class Solution &#123;public:    vector&lt;int&gt; stringIndices(vector&lt;string&gt;&amp; wordsContainer, vector&lt;string&gt;&amp; wordsQuery) &#123;      vector&lt;pair&lt;string,int&gt;&gt;dc;      for(int i=0;i&lt;wordsContainer.size();++i)&#123;        reverse(all(wordsContainer[i]));        dc.emplace_back(wordsContainer[i],i);      &#125;        ranges::sort(dc,&#123;&#125;,[](auto x)&#123;return make_pair(x.first.size(),x.second); &#125;);      trie* root=new trie(dc[0].second);      for(auto[w,i]:dc)&#123;        auto cur=root;        for(auto c:w)&#123;            if(!cur-&gt;son[c-&#x27;a&#x27;])&#123;                cur-&gt;son[c-&#x27;a&#x27;]=new trie(i);            &#125;cur=cur-&gt;son[c-&#x27;a&#x27;];        &#125;      &#125;      vector&lt;int&gt;ans(wordsQuery.size());      for(int i=0;i&lt;wordsQuery.size();++i)&#123;        auto w=wordsQuery[i];        reverse(all(w));        auto cur=root;        int f=1;        for(auto c:w)&#123;            if(!cur-&gt;son[c-&#x27;a&#x27;])&#123;                break;            &#125;            cur=cur-&gt;son[c-&#x27;a&#x27;];        &#125;ans[i]=cur-&gt;val;      &#125;      delete root;      return ans;    &#125;&#125;;]]></content>
+Codestruct trie&#123;        int val;        trie* son[26]&#123;&#125;;        trie(int val=0)&#123;            this-&gt;val=val;        &#125;        ~trie() &#123;        for (int i = 0; i &lt; 26; ++i) &#123;            delete son[i];        &#125;    &#125;    &#125;;#define all(x) x.begin(),x.end()class Solution &#123;public:    vector&lt;int&gt; stringIndices(vector&lt;string&gt;&amp; wordsContainer, vector&lt;string&gt;&amp; wordsQuery) &#123;      vector&lt;pair&lt;string,int&gt;&gt;dc;      for(int i=0;i&lt;wordsContainer.size();++i)&#123;        reverse(all(wordsContainer[i]));        dc.emplace_back(wordsContainer[i],i);      &#125;        ranges::sort(dc,&#123;&#125;,[](auto x)&#123;return make_pair(x.first.size(),x.second); &#125;);      trie* root=new trie(dc[0].second);      for(auto[w,i]:dc)&#123;        auto cur=root;        for(auto c:w)&#123;            if(!cur-&gt;son[c-&#x27;a&#x27;])&#123;                cur-&gt;son[c-&#x27;a&#x27;]=new trie(i);            &#125;cur=cur-&gt;son[c-&#x27;a&#x27;];        &#125;      &#125;      vector&lt;int&gt;ans(wordsQuery.size());      for(int i=0;i&lt;wordsQuery.size();++i)&#123;        auto w=wordsQuery[i];        reverse(all(w));        auto cur=root;        int f=1;        for(auto c:w)&#123;            if(!cur-&gt;son[c-&#x27;a&#x27;])&#123;                break;            &#125;            cur=cur-&gt;son[c-&#x27;a&#x27;];        &#125;ans[i]=cur-&gt;val;      &#125;      delete root;      return ans;    &#125;&#125;;
+]]></content>
       <categories>
-        <category>排序+字典树</category>
+        <category>字典树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1008 前序遍历构造二叉搜索树</title>
+    <url>/ljn-Blog/2025/11/25/code/lc1008/</url>
+    <content><![CDATA[
+Problem: 1008. 前序遍历构造二叉搜索树
+
+思路
+寻找分割点，递归划分为更小的子问题
+
+解题过程
+注意到左边为子问题根节点，小于其都在左子问题，大于其都在右子问题，以此递归解决就好，注意left&gt;right时说明已经没有子节点了，返回nullptr.
+
+复杂度
+时间复杂度: $O(n^2)$
+空间复杂度: $O(n)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;    TreeNode*build(vector&lt;int&gt;&amp;preorder,int left,int right)&#123;        if(left&gt;right)return nullptr;        TreeNode*root=new TreeNode(preorder[left]);        int i=left+1;//根节点就不用比较了        while(i&lt;=right&amp;&amp;preorder[i]&lt;preorder[left])i++;        root-&gt;left=build(preorder,left+1,i-1);        root-&gt;right=build(preorder,i,right);        return root;    &#125;public:    TreeNode* bstFromPreorder(vector&lt;int&gt;&amp; preorder) &#123;        return build(preorder,0,preorder.size()-1);    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>栈</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1026 节点与其祖先之间的最大差值</title>
+    <url>/ljn-Blog/2025/11/19/code/lc1026/</url>
+    <content><![CDATA[
+Problem: 1026. 节点与其祖先之间的最大差值
+
+思路
+递归
+
+解题过程
+思考每一个节点，它可以为下一层更新最大值和最小值，同时它可以更新结果值，而它的子节点同理。对于每个节点的结果，应该是$max（自己更新值，左节点更新值，右节点更新值）$,上一层节点在“归”时可以根据其子节点更新，最终root的结果即是答案
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(n)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;public:    int maxAncestorDiff(TreeNode* root,int Max=INT_MIN,int Min=INT_MAX) &#123;        if(!root)return 0;        int val=root-&gt;val;        Max=max(val,Max),Min=min(val,Min);        int ans=max(val-Min,Max-val);        return max(&#123;ans,maxAncestorDiff(root-&gt;left,Max,Min),maxAncestorDiff(root-&gt;right,Max,Min)&#125;);    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>102 二叉树的层序遍历</title>
+    <url>/ljn-Blog/2025/11/25/code/lc102/</url>
+    <content><![CDATA[
+Problem: 102. 二叉树的层序遍历
+
+思路
+你选用何种方法解题？
+
+解题过程
+这些方法具体怎么运用？
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(n)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;public:    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) &#123;        vector&lt;vector&lt;int&gt;&gt;ans;        auto dfs=[&amp;](this auto&amp;&amp;dfs,TreeNode*root,int level)&#123;            if(!root)return;            if(level&gt;=ans.size())ans.push_back(&#123;root-&gt;val&#125;);            else ans[level].push_back(root-&gt;val);            dfs(root-&gt;left,level+1);            dfs(root-&gt;right,level+1);        &#125;;        dfs(root,0);        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>106 从中序与后序遍历序列构造二叉树</title>
+    <url>/ljn-Blog/2025/11/25/code/lc106/</url>
+    <content><![CDATA[
+Problem: 106. 从中序与后序遍历序列构造二叉树
+
+思路
+递归
+
+解题过程
+同上一题，遍历变成先右后左
+
+复杂度
+时间复杂度: $O(n^2)$,可以用哈希表优化到$O(n)$
+空间复杂度: $O(n)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;public:    TreeNode* buildTree(vector&lt;int&gt;&amp; inorder, vector&lt;int&gt;&amp; postorder) &#123;        int pos=postorder.size()-1;        auto dfs=[&amp;](this auto&amp;&amp; dfs,int l,int r)-&gt;TreeNode*&#123;            if(l&gt;r)return nullptr;            int i=l;            while(i&lt;=r&amp;&amp;inorder[i]!=postorder[pos])i++;            TreeNode*root=new TreeNode(postorder[pos--]);            root-&gt;right=dfs(i+1,r);            root-&gt;left=dfs(l,i-1);            return root;        &#125;;        return dfs(0,postorder.size()-1);    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>105 从前序与中序遍历序列构造二叉树</title>
+    <url>/ljn-Blog/2025/11/25/code/lc105/</url>
+    <content><![CDATA[
+Problem: 105. 从前序与中序遍历序列构造二叉树
+
+思路
+递归
+
+解题过程
+这些方法具体怎么运用？
+
+复杂度
+时间复杂度: $O(n^2)$
+空间复杂度: $O(n)$
+
+Codeclass Solution &#123;public:    TreeNode* buildTree(vector&lt;int&gt;&amp; preorder, vector&lt;int&gt;&amp; inorder) &#123;        int pos=0;        auto dfs=[&amp;](this auto&amp;&amp;dfs,int l,int r)-&gt;TreeNode*&#123;            if(l&gt;r)return nullptr;            int i=l;            while(i&lt;=r&amp;&amp;inorder[i]!=preorder[pos])i++;            return new TreeNode(preorder[pos++],            dfs(l,i-1),dfs(i+1,r));        &#125;;        return dfs(0,preorder.size()-1);    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>114 二叉树展开为链表</title>
+    <url>/ljn-Blog/2026/04/21/code/lc114/</url>
+    <content><![CDATA[
+Problem: 114. 二叉树展开为链表
+
+思路
+注意到使用前序遍历时，如果我们直接把答案放在右子树，那么会影响后续的遍历，因此我们把结果先放在左子树，后续反转即可
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(1)$不计入栈空间，也可手动前序真正$O(1)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;public:    void flatten(TreeNode* root) &#123;        TreeNode dummy;        TreeNode*cur=&amp;dummy;        auto dfs=[&amp;](this auto&amp;&amp;dfs,TreeNode*root)&#123;            if(!root)return;            auto left=root-&gt;left;            auto right=root-&gt;right;            cur-&gt;right=root;            root-&gt;left=nullptr;            cur=cur-&gt;right;            dfs(left);            dfs(right);        &#125;;        dfs(root);        root=dummy.right;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>栈</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>12 整数转罗马数字</title>
+    <url>/ljn-Blog/2026/03/15/code/lc12/</url>
+    <content><![CDATA[
+Problem: 12. 整数转罗马数字
+
+思路
+注意到每位树转化的罗马数字总是三个字母组成的，我们把需要的字母排在一起可以发现:每位使用的恰好是闭区间[pos,pos+2]的字母，每下一位则会pos+2；
+
+解题过程
+倒序处理每一位，结果反转相加即可
+
+复杂度
+时间复杂度: $O(*)$
+空间复杂度: $O(*)$
+
+Codeclass Solution &#123;public:    string intToRoman(int num) &#123;        string tab=&quot;IVXLCDM&quot;,ans;        int pos=0;        while(num)&#123;            auto t=num%10;            string temp;            if(t&gt;=5)&#123;                if(t==9)temp=string(1,tab[pos])+tab[pos+2];                else temp=string(1,tab[pos+1])+string(t-5,tab[pos]);            &#125;else&#123;                if(t==4)temp=string(1,tab[pos])+tab[pos+1];                else temp=string(t,tab[pos]);            &#125;            num/=10;            pos+=2;            ans=temp+ans;        &#125;        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>哈希表</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1110 删点成林</title>
+    <url>/ljn-Blog/2025/11/22/code/lc1110/</url>
+    <content><![CDATA[
+Problem: 1110. 删点成林
+
+思路
+删除+队列，因为刚刚做了删除节点的题，思路有点菜
+
+解题过程
+这些方法具体怎么运用？
+
+复杂度
+时间复杂度: $O(*)$
+空间复杂度: $O(*)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;public://1. 只要没有被删除，就需要进入ans//2. 被删除，把子节点入队，返回nullptr    vector&lt;TreeNode*&gt; delNodes(TreeNode* root, vector&lt;int&gt;&amp; to_delete) &#123;        queue&lt;TreeNode*&gt;q;        q.push(root);        vector&lt;TreeNode*&gt;ans;        auto dfs=[&amp;](this auto&amp;&amp;dfs,TreeNode*root)-&gt;TreeNode*&#123;            if(!root)return nullptr;            root-&gt;left=dfs(root-&gt;left);            root-&gt;right=dfs(root-&gt;right);            for(auto i:to_delete)&#123;                if(i==root-&gt;val)&#123;                    if(root-&gt;left)q.push(root-&gt;left);                    if(root-&gt;right)q.push(root-&gt;right);                    return nullptr;                &#125;            &#125;            return root;        &#125;;        while(!q.empty())&#123;            auto node=dfs(q.front());q.pop();            if(node)ans.push_back(node);        &#125;        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>134 加油站</title>
+    <url>/ljn-Blog/2026/06/01/code/lc134/</url>
+    <content><![CDATA[
+Problem: 134. 加油站
+
+思路
+问题转换，数组正向移动满一圈，每次油量res加gas[i]-cost[i],存在res&lt;0则说明这个起点不行，遍历每一个起点，时间复杂度$O(n^2)$,会超时。优化方式：每次起点从上一次res&lt;0的点开始，并保证起点res&gt;&#x3D;0(否则没法启动)，设起点x（x&gt;0）,容易得到x+中间&#x3D;res&lt;0,中间部分加到res位置时一定会小于0，可以排除
+
+解题过程
+方便计算，使用diff直接记录gas-cost,另外开始点的停止条件为遍历完一圈。每次遍历时发现可以满足就直接返回True
+
+复杂度
+时间复杂度: $O(n)$start和循环单圈遍历次数和不会超过2*n，n为数组长度
+空间复杂度: $O(n)$ diff长度，省略可以$O(1)$
+
+Codeclass Solution:    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -&gt; int:        n=len(gas)        diff=[gas[i]-cost[i] for i in range(n)]        start=0        while True:            res=0            if start&gt;=n:return -1            if diff[start]&lt;0:                start+=1                continue            for i in range(n):                res+=diff[(start+i)%n]                if res&lt;0:                    start+=i                    break            else:                return start
+]]></content>
+      <categories>
+        <category>贪心</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>127 单词接龙</title>
+    <url>/ljn-Blog/2026/06/04/code/lc127/</url>
+    <content><![CDATA[
+Problem: 127. 单词接龙
+
+思路
+bfs每次从wordList中枚举的话最多2500次出队*2500次遍历，每次遍历还要比较单词的差异数，太慢了，注意到访问过的点我们不会再访问（bfs已经找到更近的点），那我们就跳过这些点的访问，但是仅仅跳过，仍要比较差异数。既然我们已经知道哪些点是还未访问的，如果他们在哈希表中，我们就不用遍历单词数次数了2500，因为单词很短的缘故，我们枚举单个字符的修改是否在hash表中，则最多需要26*len(word)&#x3D;260次运算。
+
+解题过程
+先把wordList放入hash表中，访问过的逐个移除，单个字符修改上，我们循环26次+1并取模，前25次相当于完成修改，最后一次相当于还原。然后是我常用的bfs写法
+
+复杂度
+时间复杂度: $O(NM26)$N为len(wordList),M为len(beginWord)
+空间复杂度: $O(N*M)$hash表+队列大小之和
+
+Codeclass Solution &#123;public:    int ladderLength(string beginWord, string endWord, vector&lt;string&gt;&amp; wordList) &#123;        int m=wordList.size(),n=beginWord.size(),res=1;        unordered_set&lt;string&gt;path(wordList.begin(),wordList.end());        queue&lt;string&gt;q;        q.push(beginWord);        while(!q.empty())&#123;            int size=q.size();            res+=1;            while(size--)&#123;                auto start=q.front();q.pop();                for(int i=0;i&lt;n;++i)&#123;                    for(int j=0;j&lt;26;++j)&#123;                        start[i]=(start[i]+1-&#x27;a&#x27;)%26+&#x27;a&#x27;;                        if(path.count(start))&#123;                            if(start==endWord)return res;                            path.erase(start);                            q.push(start);                        &#125;                    &#125;                &#125;            &#125;        &#125;        return 0;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>广度优先搜索</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>139 单词拆分</title>
+    <url>/ljn-Blog/2025/11/12/code/lc139/</url>
+    <content><![CDATA[
+Problem: 139. 单词拆分
+
+思路
+考虑到达到（dp[i]&#x3D;1）当前状态时，能到达的状态设为dp[i+1]&#x3D;1,而怎么查看能达到的目的地呢，我们通过字典树从根节点进行遍历，根据s为前缀能达到的所有end&#x3D;1的情况就是能达到的状态
+
+解题过程
+字典树，dp创建，定义搜索函数（用于寻找当前状态能达到的所有状态），然后正向遍历即可，dp[n]即是结果。
+
+复杂度
+时间复杂度: $O(N^2)$
+空间复杂度: $O(N+K)$
+
+Codeclass Solution &#123;    struct Node&#123;        Node*son[26]&#123;&#125;;        int end;    &#125;;public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) &#123;        int n=s.size();        vector&lt;int&gt;dp(n+1);        dp[0]=1;        Node*root=new Node();        for(auto s:wordDict)&#123;            Node*cur=root;            for(auto c:s)&#123;                c-=&#x27;a&#x27;;                if(!cur-&gt;son[c])cur-&gt;son[c]=new Node();                cur=cur-&gt;son[c];            &#125;cur-&gt;end=1;        &#125;        auto search=[&amp;](int pos,Node*cur)&#123;            while(pos&lt;n)&#123;                int ch=s[pos]-&#x27;a&#x27;;                if(!cur-&gt;son[ch])return;                cur=cur-&gt;son[ch];                if(cur-&gt;end)dp[pos+1]=1;                pos++;            &#125;        &#125;;        for(int i=0;i&lt;n;++i)&#123;            if(dp[i])&#123;                search(i,root);            &#125;        &#125;        return dp[n];    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>字典树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1254 统计封闭岛屿的数目</title>
+    <url>/ljn-Blog/2025/11/29/code/lc1254/</url>
+    <content><![CDATA[
+Problem: 1254. 统计封闭岛屿的数目
+
+思路
+到达边界时放回0，说明此岛无法被水环绕，并将结果向上归，标记已经访问的区域，避免重复访问。到达水时返回1，表示该边际是可以被水环绕的
+
+解题过程
+最后重每个格子遍历一遍，即可得出格子数
+
+复杂度
+时间复杂度: $O(m*n)$每个格子最多访问一次
+空间复杂度: $O(n+m)$不考虑已经有的空间
+
+Codeclass Solution &#123;    int dx[4]&#123;1,0,-1,0&#125;;    int dy[4]&#123;0,1,0,-1&#125;;public:    int closedIsland(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;        int m=grid.size(),n=grid[0].size();        auto dfs=[&amp;](this auto&amp;&amp;dfs,int x,int y)-&gt;int&#123;            if(x&lt;0||y&lt;0||x&gt;=m||y&gt;=n)return 0;            if(grid[x][y]==1)return 1;            grid[x][y]=1;            int res=1;            for(int i=0;i&lt;4;++i)&#123;                if(dfs(x+dx[i],y+dy[i])==0)res=0;            &#125;            return res;        &#125;;        int ans=0;        for(int i=0;i&lt;m;++i)        for(int j=0;j&lt;n;++j)&#123;            if(grid[i][j]==0)&#123;                if(dfs(i,j))ans++;            &#125;        &#125;        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>深度优先搜索</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1461 检查一个字符串是否包含所有长度为 K 的二进制子串</title>
+    <url>/ljn-Blog/2026/02/23/code/lc1461/</url>
+    <content><![CDATA[
+Problem: 1461. 检查一个字符串是否包含所有长度为 K 的二进制子串
+
+思路
+滑动窗口
+
+解题过程
+通过哈希表记录遇到的数字，最后验证哈希表的长度即可。滑动窗口用于维护区间的值，并在记录后移去最高位（%最高一位）。
+
+复杂度
+时间复杂度: $O(K)$
+空间复杂度: $O(K)$
+
+Codeclass Solution &#123;public:    bool hasAllCodes(string s, int k) &#123;        unordered_set&lt;int&gt;ss;        int sum=0,mod=pow(2,k-1);        for(int i=0;i&lt;s.size();++i)&#123;            sum=sum*2+s[i]-&#x27;0&#x27;;            if(i&lt;k-1)continue;            ss.insert(sum);            sum%=mod;        &#125;        // cout&lt;&lt;ss.size()&lt;&lt;&#x27; &#x27;&lt;&lt;mod&lt;&lt;endl;        return ss.size()==pow(2,k);    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>位运算</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>140 单词拆分 II</title>
+    <url>/ljn-Blog/2025/11/12/code/lc140/</url>
+    <content><![CDATA[
+Problem: 140. 单词拆分 II
+
+思路
+字典树+dp
+
+解题过程
+dp存放能到目前位置的所有前缀，再与后面end&#x3D;&#x3D;1时取出的单词进行拼接，简而言之，就是前一个题dp数组改成dp个string数组，用于记录结果，最后dp[n]中所有结果就是答案
+
+复杂度
+时间复杂度: $O(N^2)$
+空间复杂度: $O(N^2)$
+
+Codeclass Solution &#123;    struct Node&#123;        Node*son[26]&#123;&#125;;        int end;    &#125;;    Node*root=new Node();public:    vector&lt;string&gt; wordBreak(string s, vector&lt;string&gt;&amp; wordDict) &#123;        for(auto s:wordDict)&#123;            Node*cur=root;            for(auto c:s)&#123;                c-=&#x27;a&#x27;;                if(!cur-&gt;son[c])cur-&gt;son[c]=new Node();                cur=cur-&gt;son[c];            &#125;cur-&gt;end=1;        &#125;        int n=s.size();        vector&lt;vector&lt;string&gt;&gt;dp(n+1,vector&lt;string&gt;());        auto dfs=[&amp;](int pos,Node*cur,int i)&#123;//i起点，pos能到的终点            while(pos&lt;n)&#123;                int ch=s[pos]-&#x27;a&#x27;;                if(!cur-&gt;son[ch])return;                cur=cur-&gt;son[ch];                if(cur-&gt;end==1)&#123;                    for(auto t:dp[i])&#123;                        if(i!=0)t+=&#x27; &#x27;;//不是开头就加空格                        dp[pos+1].push_back(t+s.substr(i,pos+1-i));//注意substr第二个参数为长度，开始以为是end卡了好久                    &#125;                &#125;                pos++;            &#125;        &#125;;        dp[0].push_back(&quot;&quot;);//保证起点可搜寻        for(int i=0;i&lt;n;++i)&#123;            if(!dp[i].empty())&#123;                dfs(i,root,i);            &#125;        &#125;        return dp[n];    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>字典树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1442 形成两个异或相等数组的三元组数目</title>
+    <url>/ljn-Blog/2026/03/09/code/lc1442/</url>
+    <content><![CDATA[
+Problem: 1442. 形成两个异或相等数组的三元组数目
+
+思路
+a&#x3D;&#x3D;b，考虑到任何一个数的异或等于他本身，容易得到区间[i,k]&#x3D;&#x3D;0时，正是a,b数组拼接的结果，中间内每一个数都是符合要求的j；
+
+解题过程
+实际操作时，我们存储前缀异或和的所有下标到哈希表用于枚举，发现当前前缀和xor_sum存储过时，由于存储的值也是xor_sum,xor_sum^xor_sum&#x3D;&#x3D;0,所以整个区间的异或和都等于0，逐个计数每个区间中间的元素即可
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(n)$
+
+Codeclass Solution &#123;public:    int countTriplets(vector&lt;int&gt;&amp; arr) &#123;        unordered_map&lt;int,vector&lt;int&gt;&gt;mp;        mp[0].push_back(-1);        int xor_sum=0,ans=0;        for(int i=0;i&lt;arr.size();++i)&#123;            xor_sum^=arr[i];            for(auto x:mp[xor_sum])ans+=i-x-1;            mp[xor_sum].push_back(i);        &#125;        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>位运算</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>173 二叉搜索树迭代器</title>
+    <url>/ljn-Blog/2026/06/03/code/lc173/</url>
+    <content><![CDATA[
+Problem: 173. 二叉搜索树迭代器
+
+思路
+要求O(h)内存，说明不能存储遍历过的节点，我们使用栈来进行中序遍历。
+
+解题过程
+注意到每个节点的遍历顺序是左根右，因此我们在访问一个节点时，先递归把它的左节点以及子树的左节点压栈。出栈代表已经访问，此时单独把它的右子树入栈。由于第一次遍历是第一个节点，我们格外用一个dummy节点表示起点
+
+复杂度
+时间复杂度: 均摊$O(1)$每个节点入栈出栈一次
+空间复杂度: $O(h)$栈最高为树高
+
+Code# Definition for a binary tree node.# class TreeNode:#     def __init__(self, val=0, left=None, right=None):#         self.val = val#         self.left = left#         self.right = rightclass BSTIterator:    def __init__(self, root: Optional[TreeNode]):        dummy=TreeNode(0,None,root)        self.st=[dummy]    def next(self) -&gt; int:        top=self.st.pop()        if top.right:            self.st.append(top.right)            top=top.right            while top.left:                self.st.append(top.left)                top=top.left        return self.st[-1].val            def hasNext(self) -&gt; bool:        # print([i.val for i in self.st])        return not(len(self.st)==1 and not self.st[0].right)# Your BSTIterator object will be instantiated and called as such:# obj = BSTIterator(root)# param_1 = obj.next()# param_2 = obj.hasNext()
+]]></content>
+      <categories>
+        <category>栈</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>151 反转字符串中的单词</title>
+    <url>/ljn-Blog/2026/06/01/code/lc151/</url>
+    <content><![CDATA[
+Problem: 151. 反转字符串中的单词
+
+思路
+已知cpp std::reverse是原地交换，这里我们可以用时间换空间，先把整体反转，如hello world反转成dlrow olleh,然后我们很容易发现，把每个空格分割段再局部每一处调用一遍reverse，就可以得到world hello了，然后关键是多余空格的处理。这里我直接过滤前导空格，然后用pos记录当前写入字符串的位置，后续直接使用resize对字符串进行截断即可
+
+解题过程
+细节上，正向过滤后在，反转复用来过滤后面的空格（直接判断末尾是不是空格再截取更方便，因为末尾最多有一个空格），遍历s时，注意到末尾还要进行一次处理，故循环条件设置为i&lt;&#x3D;s.size().注意函数使用值引用传参（无拷贝）
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(1)$
+
+Codeclass Solution &#123;    void process(string&amp;s)&#123;        int pos=0;        while(s[pos]==&#x27; &#x27;)pos++;        for(int i=pos;i&lt;s.size();++i)&#123;            if(i&amp;&amp;s[i]==&#x27; &#x27;&amp;&amp;s[i]==s[i-1])&#123;                pos++;                continue;            &#125;            s[i-pos]=s[i];        &#125;        s.resize(s.size()-pos);    &#125;public:    string reverseWords(string s) &#123;        process(s);        ranges::reverse(s);        process(s);        int pre=0;        for(int i=0;i&lt;=s.size();++i)&#123;            if(i==s.size()||s[i]==&#x27; &#x27;)&#123;                reverse(s.begin()+pre,s.begin()+i);                pre=i+1;            &#125;        &#125;        return s;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>双指针</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>211 添加与搜索单词 - 数据结构设计</title>
+    <url>/ljn-Blog/2025/11/11/code/lc211/</url>
+    <content><![CDATA[
+Problem: 211. 添加与搜索单词 - 数据结构设计
+
+思路
+字典树
+
+解题过程
+先插入字典树再查询，查询时，只有’.’需要注意，考虑到点号处我们可以枚举26个字母，只要该字母继续查询下去能够得到结果，那么这个单词就可以查询到。因为要从某一个点继续查询，重载search函数使其能够在目的端点开始查询
+
+复杂度
+时间复杂度: $O(26^{word.length})$?最坏
+空间复杂度: $O(26*\sum maxlength)$
+
+Codeclass WordDictionary &#123;    struct Node&#123;        Node*son[26];        int end;    &#125;;    Node*root;public:    WordDictionary() &#123;        root=new Node();    &#125;        void addWord(string word) &#123;        Node*cur=root;        for(auto c:word)&#123;            c-=&#x27;a&#x27;;            if(!cur-&gt;son[c])cur-&gt;son[c]=new Node();            cur=cur-&gt;son[c];        &#125;        cur-&gt;end=1;    &#125;    bool search(string word,Node*temp)&#123;        Node*cur=temp;        for(int i=0;i&lt;word.size();++i)&#123;            int c=word[i]-&#x27;a&#x27;;            if(word[i]==&#x27;.&#x27;)&#123;                string s=word.substr(i);//剩余未查长度                bool x=0;                for(int i=0;i&lt;26;++i)&#123;                    s[0]=&#x27;a&#x27;+i;//逐个尝试                    x|=search(s,cur);//有一个能查询到结果就是true                &#125;                return x;            &#125;            if(!cur-&gt;son[c])&#123;                return false;            &#125;            cur=cur-&gt;son[c];        &#125;        return cur-&gt;end;    &#125;        bool search(string word) &#123;        return search(word,root);//有点时从有点的地方继续查询，故重载了一下这个函数    &#125;&#125;;/** * Your WordDictionary object will be instantiated and called as such: * WordDictionary* obj = new WordDictionary(); * obj-&gt;addWord(word); * bool param_2 = obj-&gt;search(word); */
+]]></content>
+      <categories>
+        <category>深度优先搜索</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>199 二叉树的右视图</title>
+    <url>/ljn-Blog/2025/11/19/code/lc199/</url>
+    <content><![CDATA[
+Problem: 199. 二叉树的右视图
+
+思路
+不用层序遍历我觉得写着方便一点，直接进行前序遍历，最后取的值是对应位置的ans
+
+解题过程
+以层数确定结果的下标，当层数&gt;&#x3D;ans.size()时，说明下标已经超出数组大小了，需要扩容（直接push_back）,否则更新ans[level]的值，使其是最新的（最后遍历到的）
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(n)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;public:    vector&lt;int&gt; rightSideView(TreeNode* root) &#123;        vector&lt;int&gt;ans;        auto dfs=[&amp;](this auto&amp;&amp;dfs,TreeNode*root,int level)&#123;            if(!root)return;            if(ans.size()&lt;=level)ans.push_back(root-&gt;val);            else ans[level]=root-&gt;val;            dfs(root-&gt;left,level+1);            dfs(root-&gt;right,level+1);        &#125;;        dfs(root,0);        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>221 最大正方形</title>
+    <url>/ljn-Blog/2026/06/04/code/lc221/</url>
+    <content><![CDATA[
+Problem: 221. 最大正方形
+
+思路
+注意到数据量不大，考虑直接暴力枚举矩阵，使用二维前缀和降低查询矩阵的复杂度，枚举矩阵边长时，可以使用二分搜索
+
+解题过程
+注意k&#x3D;&#x3D;0时，实际矩阵大小为1，所以答案为$(l+1)^2$
+
+复杂度
+时间复杂度: $O(n^2log(n))$
+空间复杂度: $O(n^2)$
+
+Codeclass Solution:    def maximalSquare(self, matrix: List[List[str]]) -&gt; int:        m,n=len(matrix),len(matrix[0])        cnt0=[[0]*(n+1) for _ in range(m+1)]        for i in range(m):            for j in range(n):                cnt0[i+1][j+1]=cnt0[i][j+1]+cnt0[i+1][j]-cnt0[i][j]+(1 if matrix[i][j]==&#x27;0&#x27; else 0)        def query(r1,c1,r2,c2):            return cnt0[r2+1][c2+1]-cnt0[r2+1][c1]-cnt0[r1][c2+1]+cnt0[r1][c1]        ans=0        def check(k:int)-&gt;bool:            for i in range(m):                for j in range(n):                    if i&gt;=k and j&gt;=k and query(i-k,j-k,i,j)==0:                        return True            return False        l,r=-1,min(m,n)+1        while l+1&lt;r:            mid=l+r&gt;&gt;1            if check(mid):l=mid             else:r=mid        return (l+1)*(l+1)
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>212 单词搜索 II</title>
+    <url>/ljn-Blog/2025/11/12/code/lc212/</url>
+    <content><![CDATA[
+Problem: 212. 单词搜索 II
+
+思路
+谈谈遇到的问题吧，因为把访问过的直接标记未true，最后结束时再清除会影响本次搜索的结果（有点还能深入，但是已经被其他路径点”把路堵死了“），最后只能使用回溯，优点是本次行进不会重复，也不影响其他路的行进。删除的话是偶然想到的，为了统计方便，我直接把word存入Node中了，访问时把Node-&gt;end清空恰好可以避免重复搜索的问题
+
+解题过程
+字典树模板+end修改成记录当前位置的单词，然后递归回溯搜索上下左右达到时字典树是否还有路径，找到单词时就把它“摘”下来,每次递归完后还原对vis的修改
+
+复杂度
+时间复杂度: $O(mnword_{max_length})$
+空间复杂度: $O(m*n+word_{max_length}*26)$
+
+Codeclass Solution &#123;    struct Node&#123;        Node*son[26]&#123;&#125;;        string end;    &#125;;public:    vector&lt;string&gt; findWords(vector&lt;vector&lt;char&gt;&gt;&amp; board, vector&lt;string&gt;&amp; words) &#123;        Node*root=new Node();        for(auto s:words)&#123;            Node*cur=root;            for(auto c:s)&#123;                c-=&#x27;a&#x27;;                if(!cur-&gt;son[c])cur-&gt;son[c]=new Node();                cur=cur-&gt;son[c];            &#125;cur-&gt;end=s;        &#125;        int m=board.size(),n=board[0].size();        vector&lt;vector&lt;int8_t&gt;&gt;vis(m,vector&lt;int8_t&gt;(n,0));        vector&lt;string&gt;result;        auto dfs=[&amp;](this auto&amp;&amp;dfs,int i,int j,Node*cur)&#123;            if(i&lt;0||j&lt;0||i&gt;=m||j&gt;=n||vis[i][j])return;            int ch=board[i][j]-&#x27;a&#x27;;            if(cur-&gt;son[ch]==nullptr)return;            vis[i][j]=1;            cur=cur-&gt;son[ch];            if(cur-&gt;end!=&quot;&quot;)&#123;result.push_back(cur-&gt;end);cur-&gt;end=&quot;&quot;;&#125;            dfs(i+1,j,cur);            dfs(i-1,j,cur);            dfs(i,j+1,cur);            dfs(i,j-1,cur);            vis[i][j]=0;        &#125;;        for(int i=0;i&lt;m;++i)&#123;            for(int j=0;j&lt;n;++j)&#123;                dfs(i,j,root);            &#125;        &#125;        return result;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>字典树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2402 会议室 III</title>
+    <url>/ljn-Blog/2025/12/27/code/lc2402/</url>
+    <content><![CDATA[
+Problem: 2402. 会议室 III
+
+思路
+起初我只使用了一个堆，每次遍历时插入&lt;max(finish,start)+end-start,id&gt;,就是说每次把会议放在结束时间最早的房间，但是引发了一个问题，在一个时间点（start&#x3D;4），room[2]结束时间可能是1，room[1]为2，此时它们都已经结束了，因而需要选择编号小的1而不是2。也就是说，已经结束的需要单独拿出最小的编号进行处理，考虑使用第二个堆维护【已经结束的编号最小的堆】
+
+解题过程
+先排序,保证start递增，然后遍历。遍历时，先将【所有已经结束】的从pq取出，放入out中。然后检查out，存在编号就直接取最小编号出来，注意到开始时间正是start，我们把&lt;finish,id&gt;放入pq; 不存在时，我们认为start应为pq中最早结束的，取pq.top(),放回&lt;finish_origin+时间间隔（finish-start）,id&gt;,此外注意加法可能溢出，使用long long。最终结果就是room记录次数中次数最大编号最小的
+
+复杂度
+时间复杂度: $O(Nlogn)$
+空间复杂度: $O(n)$
+
+Codeclass Solution &#123;public:    int mostBooked(int n, vector&lt;vector&lt;int&gt;&gt;&amp; meetings) &#123;        ranges::sort(meetings,&#123;&#125;,[](auto &amp;v)&#123;            return v[0];        &#125;);        vector&lt;int&gt;arr(n);        priority_queue&lt;pair&lt;long,int&gt;,vector&lt;pair&lt;long,int&gt;&gt;,greater&lt;&gt;&gt;pq;        priority_queue&lt;int,vector&lt;int&gt;,greater&lt;&gt;&gt;out;        for(int i=0;i&lt;n;++i)out.emplace(i);        for(auto &amp;m:meetings)&#123;            while(!pq.empty()&amp;&amp;m[0]&gt;=pq.top().first)&#123;                out.emplace(pq.top().second);                pq.pop();            &#125;            if(!out.empty())&#123;                auto room=out.top();out.pop();                arr[room]++;                pq.emplace(m[1],room);            &#125;            else&#123;                auto [finish,room]=pq.top();pq.pop();                arr[room]++;                pq.emplace(finish+m[1]-m[0],room);            &#125;        &#125;        int ans=INT_MIN,pos=0;        for(int i=0;i&lt;n;++i)&#123;            if(arr[i]&gt;ans)&#123;ans=arr[i];pos=i;&#125;        &#125;        return pos;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>220 存在重复元素 III</title>
+    <url>/ljn-Blog/2026/03/16/code/lc220/</url>
+    <content><![CDATA[
+Problem: 220. 存在重复元素 III
+
+思路
+根据题意可知：我们需要寻找区间内的两个数，使之差小于指定值，如果区间是有序的，我们选定一个值，我们等同于区寻找第一个大于等于和第一个小于它的数，可以使用二分解决
+
+解题过程
+我们使用滑动窗口来保证是区间内的两个数在比较，每次加入新的数后，如果区间大于要求区间，我们删除区间最左边的元素，每次遍历时，二分寻找需要的两个值来分别与之做差，如果满足两者之差小于等于valueDiff,则返回true,否则返回false
+
+复杂度
+时间复杂度: $O(n*logn)$
+空间复杂度: $O(n)$
+
+Codeclass Solution &#123;public:    bool containsNearbyAlmostDuplicate(vector&lt;int&gt;&amp; nums, int indexDiff, int valueDiff) &#123;        multiset&lt;int&gt;s;        int n=nums.size();        for(int i=0;i&lt;n;++i)&#123;            auto it=s.lower_bound(nums[i]);            if(it!=s.end()&amp;&amp;*it-nums[i]&lt;=valueDiff)return 1;            if(it!=s.begin()&amp;&amp;nums[i]-*(--it)&lt;=valueDiff)return 1;            s.insert(nums[i]);            if(i&gt;=indexDiff)s.erase(s.find(nums[i-indexDiff]));        &#125;        return 0;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2385 感染二叉树需要的总时间</title>
+    <url>/ljn-Blog/2025/11/24/code/lc2385/</url>
+    <content><![CDATA[
+Problem: 2385. 感染二叉树需要的总时间
+
+思路
+使用树的直径+负数利用
+
+解题过程
+写法有些丑陋，只有能够达到的点才标记为-1，到达不了的点用一个大负数来方便记录长度
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(n)$
+
+Code/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125; * &#125;; */class Solution &#123;public:    int amountOfTime(TreeNode* root, int start) &#123;        int ans=INT_MIN;        auto dfs=[&amp;](this auto&amp;&amp;dfs,TreeNode*root,bool is_infect)&#123;            if(!root)return -100&#x27;001;            if(root-&gt;val==start)&#123;                int l=dfs(root-&gt;left,true)+1;                int r=dfs(root-&gt;right,true)+1;                ans=max(ans,max(l,r));                return 0;            &#125;            int l=dfs(root-&gt;left,is_infect)+1;            int r=dfs(root-&gt;right,is_infect)+1;            if(!is_infect)ans=max(ans,l+r);            return max(l,r);        &#125;;        dfs(root,false);        return ans+100&#x27;000;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2429 最小异或</title>
+    <url>/ljn-Blog/2026/03/09/code/lc2429/</url>
+    <content><![CDATA[
+Problem: 2429. 最小异或
+
+思路
+暴力枚举最小值，即x XOR num1的最小值是我们需要求的，然后要求x置位数为指定值即可，怎么得到x，(x^num1)^num1&#x3D;x,即我们再吧枚举的最小值^num1就可以找到对应的x；
+
+解题过程
+可以使用现代cpp的find_if进行惰性加载枚举的值
+
+复杂度
+时间复杂度: $O(*)$
+空间复杂度: $O(*)$
+
+Codeclass Solution &#123;public:    int minimizeXor(int num1, int num2) &#123;        auto tar=popcount(uint32_t(num2));        auto it=ranges::find_if(views::iota(0),[&amp;](int x)&#123;            return tar==popcount(uint32_t(x^num1));        &#125;);        return *it^num1;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>贪心</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>36 有效的数独</title>
+    <url>/ljn-Blog/2026/06/02/code/lc36/</url>
+    <content><![CDATA[
+Problem: 36. 有效的数独
+
+思路
+每一个行、列、小矩形都需要判定是否重复，可以使用set进行维护
+
+解题过程
+行列的不需要计算，小矩形需要简单的计算，发现重复返回False即可
+
+复杂度
+时间复杂度: $O(n^2)$
+空间复杂度: $O(n^2)$
+
+Codeclass Solution:    def isValidSudoku(self, board: List[List[str]]) -&gt; bool:        row,col,blank=[set() for _ in range(9)],[set() for _ in range(9)],[set() for _ in range(9)]        for i in range(9):            for j in range(9):                x=board[i][j]                if x==&#x27;.&#x27;:continue                if x in row[i] or x in col[j] or x in blank[i//3*3+j//3]:                    return False                row[i].add(x)                col[j].add(x)                blank[i//3*3+j//3].add(x)        return True
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>29 两数相除</title>
+    <url>/ljn-Blog/2026/06/13/code/lc29/</url>
+    <content><![CDATA[
+Problem: 29. 两数相除
+
+思路
+除法本质上就是减法,现在问题就是怎么让它减的更快,10进制时我们执行120&#x2F;12时,会将12对齐,实际效果就是除数乘10,但是现在不允许我们使用乘法,我们改用位运算进行模拟乘法来试商.
+
+解题过程
+简化问题,我们直接处理正数除正数后续再处理符号和溢出问题.我们用res记录当前乘积的倍数(1,2,4,8)同十进制的(1,10,100,1000),然后从高位开始减,能减时就减去并给ans+&#x3D;res(类似试商后减少剩余被除数),直到res&#x3D;&#x3D;0,即除到最后一位
+
+复杂度
+时间复杂度: $O(1)$最多32位,循环就最多32次,为常数
+空间复杂度: $O(1)$
+
+Codeclass Solution:    def divide(self, dividend: int, divisor: int) -&gt; int:        def div(dividend,divisor):            res=1            while (divisor&lt;&lt;1)&lt;=dividend:                res&lt;&lt;=1                divisor&lt;&lt;=1            ans=0            while res:                if dividend&gt;=divisor:                    dividend-=divisor                    ans+=res                 res&gt;&gt;=1                divisor&gt;&gt;=1            return ans        ans=0        if dividend^divisor&lt;0:ans=-div(abs(dividend),abs(divisor))        else:ans=div(abs(dividend),abs(divisor))        mx,mn=(1&lt;&lt;31)-1,-(1&lt;&lt;31)        return max(mn,min(mx,ans))
+]]></content>
+      <categories>
+        <category>位运算</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>68 文本左右对齐</title>
+    <url>/ljn-Blog/2026/06/02/code/lc68/</url>
+    <content><![CDATA[
+Problem: 68. 文本左右对齐
+
+思路
+我们遍历并累计单词长度并每次加1（预留空格），发现长度加上目前单词&gt;maxWidth时，此时一定pre到目前的前一个单词可以连成一个句子(trans逻辑中转化)。注意这种处理方式最后一定有一个句子需要我们单独处理，刚好可以按照题目要求进行处理
+
+解题过程
+trans中先统计空格数量，再计算每个间隔（因此循环为l-1）的空格，为了方便，直接加在对应位置后了。最后一行直接用’ ‘.join拼接成字符串再补充空格即可
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(n)$
+
+Codeclass Solution:    def fullJustify(self, words: List[str], maxWidth: int) -&gt; List[str]:        ans=[]        pre=tmp=0        def trans(cand:list):            blanks=maxWidth-sum([len(i) for i in cand])            l=len(cand)            if l==1:return cand[0]+&#x27; &#x27;*blanks            eve=blanks//(l-1)            for i in range(l-1):                cand[i]+=&#x27; &#x27;*(eve + (1 if i&lt;blanks%(l-1) else 0))            return &#x27;&#x27;.join(cand)        for i in range(len(words)):            if tmp+len(words[i])&gt;maxWidth:# 判断时不用加1，因为末尾没有空格                cand=words[pre:i]                tmp=0                pre=i                 ans.append(trans(cand))            if i &lt; len(words):tmp+=len(words[i])+1        last=&#x27; &#x27;.join(words[pre:])        ans.append(last+&#x27; &#x27;*(maxWidth-len(last)))        return ans
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>371 两整数之和</title>
+    <url>/ljn-Blog/2026/03/12/code/lc371/</url>
+    <content><![CDATA[
+Problem: 371. 两整数之和
+
+思路
+模拟加法器逐位相加
+
+解题过程
+每次循环，只判断当前位结果和进位结果，当前位结果可以计数1（异或）完成，进位直接判断是否有两个1
+
+复杂度
+时间复杂度: $O(1)$
+空间复杂度: $O(1)$
+
+Codeclass Solution &#123;public:    int getSum(int a, int b) &#123;        int res=0,carry=0;        for(int i=0;i&lt;32;++i)&#123;            auto x=a&gt;&gt;i&amp;1;            auto y=b&gt;&gt;i&amp;1;            if(x^y^carry)res|=1&lt;&lt;i;            carry=(x&amp;y|x&amp;carry|y&amp;carry);        &#125;        return res;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>位运算</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>329 矩阵中的最长递增路径</title>
+    <url>/ljn-Blog/2025/12/23/code/lc329/</url>
+    <content><![CDATA[
+Problem: 329. 矩阵中的最长递增路径
+
+思路
+先考虑到暴力解法，从每一个格子开始遍历，只向比自己大的方向dfs，可以直接维护一个变量level来记录最大深度循环200*200，dfs 200*200运算$1.6\times 10^9$次，显然会超时但是考虑到每个点在计算出其最大深度时，下一次从别的点开始到达这个点时，就不用再次计算了，我们用一个cache来记录i，j位置上已经计算出的最大深度
+
+解题过程
+直接考虑“归”的过程，我们只关心每一次返回计算次数向上传递，不用再记录level，返回值直接返回最大深度。具体的，对于i，j,我们先看cache中有没有存储，如果没有，自己本身深度res设置为1，考虑其他方向的深度时，为dfs(xx,yy)+1,res只记录之中的最大值就行
+
+复杂度
+时间复杂度: $O(n*m)$,每个位置最多计算一次
+空间复杂度: $O(n*m)$,cache空间
+
+Codeclass Solution &#123;    int dx[4]&#123;1,0,-1,0&#125;;    int dy[4]&#123;0,1,0,-1&#125;;public:    int longestIncreasingPath(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) &#123;        int ans=0,m=matrix.size(),n=matrix[0].size();        vector cache(m,vector&lt;int&gt;(n));        auto dfs=[&amp;](this auto&amp;&amp;dfs,int x,int y)-&gt;int&#123;            auto &amp;res=cache[x][y];//res是&amp;            if(res!=0)return cache[x][y];            res=1;            for(int i=0;i&lt;4;++i)&#123;                int xx=x+dx[i],yy=y+dy[i];                if(xx&gt;=0&amp;&amp;yy&gt;=0&amp;&amp;xx&lt;m&amp;&amp;yy&lt;n&amp;&amp;matrix[x][y]&lt;matrix[xx][yy])&#123;                    res=max(res,dfs(xx,yy)+1);                &#125;            &#125;            return res;        &#125;;        for(int i=0;i&lt;m;++i)        for(int j=0;j&lt;n;++j)&#123;            ans=max(ans,dfs(i,j));        &#125;        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>深度优先搜索</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3777 使子字符串变交替的最少删除次数</title>
+    <url>/ljn-Blog/2025/12/14/code/lc3777/</url>
+    <content><![CDATA[
+Problem: 100841. 使子字符串变交替的最少删除次数
+
+思路
+统计发生不同（和上一个不同）的值，区间-不同&#x3D;修改数，注意第一个一定不用修改，故从l+1开始
+
+解题过程
++&#x3D;i&amp;(-i),-&#x3D;i&amp;(-i)好记，我就这么写了，其他就是线段树的模板，修改时我们发现它和前一个相同，那么修改后它及以后的值都会+1，否则-1；同理，如果它后后一个相同，那么修改后它后一个以以后都会+1,否则-1；
+
+复杂度
+时间复杂度: $O(Nlogn)$
+空间复杂度: $O(n)$
+
+Codeclass Solution &#123;public:    vector&lt;int&gt; minDeletions(string s, vector&lt;vector&lt;int&gt;&gt;&amp; queries) &#123;        vector&lt;int&gt;ans;        int n=s.size();        vector&lt;int&gt;tree(n+1);        auto update=[&amp;](int pos,int val)&#123;            while(pos&lt;tree.size())&#123;                tree[pos]+=val;                pos+=pos&amp;(-pos);            &#125;        &#125;;        auto pre=[&amp;](int pos)-&gt;int&#123;            int res=0;            while(pos&gt;0)&#123;                res+=tree[pos];                pos-=pos&amp;(-pos);            &#125;            return res;        &#125;;        auto query=[&amp;](int l,int r)-&gt;int&#123;            if(r&lt;l)return 0;            return pre(r)-pre(l-1);        &#125;;        for(int i=1;i&lt;s.size();++i)&#123;            if(s[i]!=s[i-1])update(i,1);        &#125;        for(auto q:queries)&#123;            if(q[0]==2)&#123;                int l=q[1],r=q[2];                ans.push_back(r-l-query(l+1,r));            &#125;            else&#123;                int j=q[1];                if(j&lt;n-1)&#123;                    if(s[j]==s[j+1])&#123;                        update(j+1,1);                    &#125;                    else update(j+1,-1);                &#125;                if(j&gt;0)&#123;                    if(s[j]==s[j-1])&#123;                        update(j,1);                    &#125;else update(j,-1);                &#125;                s[j]^=&#x27;A&#x27;^&#x27;B&#x27;;            &#125;        &#125;        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>752 打开转盘锁</title>
+    <url>/ljn-Blog/2026/03/24/code/lc752/</url>
+    <content><![CDATA[
+Problem: 752. 打开转盘锁
+
+思路
+不是特别复杂的写法，正常的bfs，在处理修改时，可以使用for循环4位+原址修改该字符串（auto&amp;c:t），注意修改后需要还原，并重复减的操作
+
+解题过程
+这些方法具体怎么运用？
+
+复杂度
+时间复杂度: $O(*)$
+空间复杂度: $O(*)$
+
+Codeclass Solution &#123;public:    int openLock(vector&lt;string&gt;&amp; deadends, string target) &#123;        unordered_set&lt;string&gt;vis;        unordered_set&lt;string&gt;stop(deadends.begin(),deadends.end());        queue&lt;string&gt;q;        vis.insert(&quot;0000&quot;);        q.push(&quot;0000&quot;);        auto add=[](char c)&#123;return c+1&gt;&#x27;9&#x27;?&#x27;0&#x27;:c+1; &#125;;        auto sub=[](char c)&#123;return c-1&lt;&#x27;0&#x27;?&#x27;9&#x27;:c-1; &#125;;        int level=-1;        while(!q.empty())&#123;            int Size=q.size();            level+=1;            while(Size--)&#123;                auto t=q.front();q.pop();                if(t==target)return level;                if(stop.count(t))continue;                for(auto&amp;c:t)&#123;                    c=add(c);                    if(!vis.count(t))&#123;                        vis.insert(t);                        q.push(t);                    &#125;                    c=sub(c);                    c=sub(c);                    if(!vis.count(t))&#123;                        vis.insert(t);                        q.push(t);                    &#125;                    c=add(c);                &#125;            &#125;        &#125;        return -1;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>广度优先搜索</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3781. 二进制交换后的最大分数</title>
+    <url>/ljn-Blog/2026/07/11/code/lc3781/</url>
+    <content><![CDATA[
+Problem: 3781. 二进制交换后的最大分数
+
+[TOC]
+思路
+问题简化：s[i]为‘1’时，取前面已有且未选数中的最大值，因为1只能前移
+
+解题过程
+大堆维护，s[i]为1时弹出并加入结果
+
+复杂度
+时间复杂度: $O(nlog(n))$
+空间复杂度: $O(n)$
+
+Code[]class Solution:    def maximumScore(self, nums: List[int], s: str) -&gt; int:        pq=[]        ans=0        for i,x in enumerate(nums):            heappush(pq,-x)            if s[i]==&#x27;1&#x27;:                ans-=heappop(pq)        return ans
+]]></content>
+      <categories>
+        <category>堆，贪心</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>912 排序数组</title>
+    <url>/ljn-Blog/2025/11/28/code/lc912/</url>
+    <content><![CDATA[
+Problem: 912. 排序数组
+
+思路
+cpp库函数也有建堆和pop操作，这里手写一边
+
+解题过程复杂度
+时间复杂度: $O(nlogn)$
+空间复杂度: $O(1)$
+
+Codeclass Solution &#123;public:    vector&lt;int&gt; sortArray(vector&lt;int&gt;&amp; nums) &#123;       int pos=nums.size();       auto lift=[&amp;](int t)-&gt;void&#123;        while(1)&#123;                t=2*t+1;                if(t&gt;=pos)break;                if(t+1&lt;pos&amp;&amp;nums[t]&lt;nums[t+1])t++;                if(nums[(t-1)/2]&lt;nums[t])swap(nums[(t-1)/2],nums[t]);                else break;            &#125;       &#125;;       auto make_heap=[&amp;]()&#123;        for(int i=nums.size()/2;i&gt;=0;--i)&#123;            int t=i;            lift(t);        &#125;       &#125;;    //    make_heap(nums.begin(),nums.end());        make_heap();        auto pop_heap=[&amp;](int pos)&#123;            swap(nums[0],nums[pos]);            int t=0;            lift(t);        &#125;;       while(pos--)&#123;        // pop_heap(nums.begin(),nums.begin()+pos+1);        pop_heap(pos);       &#125;       return nums;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>918 环形子数组的最大和</title>
+    <url>/ljn-Blog/2025/12/05/code/lc918/</url>
+    <content><![CDATA[
+Problem: 918. 环形子数组的最大和
+
+思路
+正向求解最大值，最小值，由sum-最小值得出反向区间（除了这个区间外的值）的最大值
+
+解题过程
+注意先更新t-sum_min,意为全选
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(1)$
+
+Codeclass Solution &#123;        public:    int maxSubarraySumCircular(vector&lt;int&gt;&amp; nums) &#123;        int t=reduce(nums.begin(),nums.end());        int sum_max=0,sum_min=0,ans=INT_MIN;        for(int i:nums)&#123;            ans=max(ans,t-sum_min);            sum_max=max(sum_max,0)+i;            sum_min=min(sum_min,0)+i;            ans=max(ans,sum_max);        &#125;        return ans;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>队列</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>912 排序数组</title>
+    <url>/ljn-Blog/2025/11/28/code/lc912_2/</url>
+    <content><![CDATA[
+Problem: 912. 排序数组
+
+思路
+快排+随机
+
+解题过程
+
+复杂度
+时间复杂度: $O(nlog(n))$随机数最差时n^2
+空间复杂度: $O(1)$
+
+Codeclass Solution &#123;public:    vector&lt;int&gt; sortArray(vector&lt;int&gt;&amp; nums) &#123;        auto dfs=[&amp;](this auto&amp;&amp;dfs,int l,int r)-&gt;void&#123;            if(l&gt;=r)return;            swap(nums[rand()%(r-l+1)+l],nums[l]);//把随机一个数当作基准            int p=nums[l],i=l,j=r;//左基准算法            while(i&lt;j)&#123;                while(i&lt;j&amp;&amp;nums[j]&gt;=p)j--;                while(i&lt;j&amp;&amp;nums[i]&lt;=p)i++;                swap(nums[i],nums[j]);            &#125;            swap(nums[l],nums[i]);            dfs(l,i-1);            dfs(i+1,r);        &#125;;        dfs(0,nums.size()-1);        return nums;    &#125;&#125;;
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试题 16.03 交点</title>
+    <url>/ljn-Blog/2026/06/18/code/%E9%9D%A2%E8%AF%95%E9%A2%9816.03/</url>
+    <content><![CDATA[
+Problem: 面试题 16.03. 交点
+
+思路
+通过求出每一条直线的方程y&#x3D;kx+b,进而求出交点$(x&#x3D;\frac{b_1-b_2}{k_2-k_1},y&#x3D;x*k_1+b_1)$.最后再判断点是不是在两条直线上
+
+解题过程
+需要特判直线垂直于x轴的情况
+
+复杂度
+时间复杂度: $O(1)$
+空间复杂度: $O(1)$
+
+Codeclass Solution:    def intersection(self, start1: List[int], end1: List[int], start2: List[int], end2: List[int]) -&gt; List[float]:        def getkb(start,end):            x1,y1=start            x2,y2=end             if x1==x2:return False,0,0            k=(y2-y1)/(x2-x1)            b=y1-x1*k            return True,k,b        def rangy(start,end):            if start[1]&gt;end[1]:return end[1],start[1]            return start[1],end[1]        f1,k1,b1=getkb(start1,end1)        f2,k2,b2=getkb(start2,end2)        def samekb():            y1min,y1max=rangy(start1,end1)            y2min,y2max=rangy(start2,end2)            if y1min&lt;=y2min&lt;=y1max:return [start2[0],y2min]            elif y2min&lt;=y1min&lt;=y2max:return [start1[0],y1min]            else:return []        if not f1 and not f2:            if start1[0]==start2[0]:                return samekb()            else:return []        def check(x,y,ylim):            ymin,ymax=ylim            if ymin&lt;=y&lt;=ymax:return [x,y]            return []         if not f1:            x=start1[0]            y=k2*x+b2            return check(x,y,rangy(start1,end1))        if not f2:            x=start2[0]            y=k1*x+b1            return check(x,y,rangy(start2,end2))        if k1==k2 and b1!=b2:return []        elif k1==k2 and b1==b2:return samekb()        x=(b1-b2)/(k2-k1)        y=k1*x+b1        if check(x,y,rangy(start1,end1)) and check(x,y,rangy(start2,end2)):            return [x,y]        return []
+]]></content>
+      <categories>
+        <category>几何</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>919 完全二叉树插入器</title>
+    <url>/ljn-Blog/2025/11/26/code/lc919/</url>
+    <content><![CDATA[
+Problem: 919. 完全二叉树插入器
+
+思路
+其实方法有点多余了，这个方式中数组索引本身还相当于存了子节点的位置，pos*2+1是左子节点，pos*2+1是右子节点，这个是刚学树时老师讲的一种存放二叉树的方法，写在这纪念一下
+
+解题过程
+这些方法具体怎么运用？
+
+复杂度
+时间复杂度: $O(n)$
+空间复杂度: $O(n)$
+
+Codeclass CBTInserter &#123;    vector&lt;TreeNode*&gt;pos;public:    CBTInserter(TreeNode* root) &#123;        queue&lt;TreeNode*&gt;q;        q.push(root);        while(!q.empty())&#123;            auto t=q.front();q.pop();            pos.push_back(t);            if(t-&gt;left)q.push(t-&gt;left);            if(t-&gt;right)q.push(t-&gt;right);        &#125;    &#125;        int insert(int val) &#123;        TreeNode*node=new TreeNode(val);        pos.push_back(node);        int t=pos.size()-1;        if((t-1)%2)pos[(t-1)/2]-&gt;right=node;        else pos[(t-1)/2]-&gt;left=node;        return pos[(t-1)/2]-&gt;val;    &#125;        TreeNode* get_root() &#123;        return pos[0];    &#125;&#125;;/** * Your CBTInserter object will be instantiated and called as such: * CBTInserter* obj = new CBTInserter(root); * int param_1 = obj-&gt;insert(val); * TreeNode* param_2 = obj-&gt;get_root(); */
+]]></content>
+      <categories>
+        <category>树</category>
       </categories>
       <tags>
         <tag>leetcode</tag>
