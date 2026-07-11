@@ -43,6 +43,31 @@
   </entry>
   
   <entry>
+    <title>第3题-魔法能量分配</title>
+    <link href="https://heydullsam.github.io/ljn-Blog/2026/07/11/practice/5160/"/>
+    <id>https://heydullsam.github.io/ljn-Blog/2026/07/11/practice/5160/</id>
+    <published>2026-07-10T16:00:00.000Z</published>
+    <updated>2026-07-11T14:29:22.273Z</updated>
+    
+    <content type="html"><![CDATA[<hr><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>贪心似乎可以解决问题，我的想法是ans+&#x3D;max(0,b_i-min_cur_a_i),a是会一直增加的，那么使这个值最后的结果最大，b_i的和又固定的情况后，后面“越负越好”？（因为无论多负都会置零）。所以把按照从大到小排序</p><h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>min_cur_a_i需要用堆维护，二元数据可以表示当前值和增量值，使用heapreplace实现出堆+入堆</p><h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>时间复杂度：O(nlogn)<br>空间复杂度：O(n)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> heapify, heapreplace</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n,m=<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split())</span><br><span class="line">a=[[<span class="built_in">int</span>(i),<span class="built_in">int</span>(i)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">b=[<span class="built_in">int</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">input</span>().split()]</span><br><span class="line">b.sort(reverse=<span class="literal">True</span>)</span><br><span class="line">heapify(a)</span><br><span class="line">ans=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> b:</span><br><span class="line">    val,add=a[<span class="number">0</span>]</span><br><span class="line">    ans+=<span class="built_in">max</span>(<span class="number">0</span>,i-a[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">    heapreplace(a,[val+add,add])</span><br><span class="line"><span class="built_in">print</span>(ans)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;hr&gt;
+&lt;h1 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h1&gt;&lt;p&gt;贪心似乎可以解决问题，我的想法是ans+&amp;#x3D;max(0,b_i-min_cur_a_i),a是会一直增加的，那么使这个值最</summary>
+      
+    
+    
+    
+    <category term="hw" scheme="https://heydullsam.github.io/ljn-Blog/categories/hw/"/>
+    
+    
+    <category term="practice" scheme="https://heydullsam.github.io/ljn-Blog/tags/practice/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LCR 177 撞色搭配</title>
     <link href="https://heydullsam.github.io/ljn-Blog/2026/07/10/code/lcr177/"/>
     <id>https://heydullsam.github.io/ljn-Blog/2026/07/10/code/lcr177/</id>
@@ -69,10 +94,10 @@
   
   <entry>
     <title>2026/7/1 第三题Certainty Forcing 训练损失计算</title>
-    <link href="https://heydullsam.github.io/ljn-Blog/2026/07/06/code/5131_perfect/"/>
-    <id>https://heydullsam.github.io/ljn-Blog/2026/07/06/code/5131_perfect/</id>
+    <link href="https://heydullsam.github.io/ljn-Blog/2026/07/06/practice/5131/"/>
+    <id>https://heydullsam.github.io/ljn-Blog/2026/07/06/practice/5131/</id>
     <published>2026-07-06T15:27:40.961Z</published>
-    <updated>2026-07-08T05:40:22.315Z</updated>
+    <updated>2026-07-11T14:29:31.599Z</updated>
     
     <content type="html"><![CDATA[<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>由于题目描述十分清晰且给出了每一步计算的流程与结果，可以十分方便的调试<br>这里公式部分按照自己习惯，核心部分应该最后token的选择和loss计算</p><h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>token的选择：在b的最大影响限制下，取出价值最大的token，计算token的$\sum Hi$,<br>可以简化为01背包问题，这里用@cache+记忆化搜索实现。需要计算$\sum Hi$,因此背包<br>不仅仅需要<br>计算最小值，还需要返回选择的目标，这里使用一个长数字的二进制来返回选择的结果</p><h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><p>记忆化的时间复杂度是背包的大小:$O(n*b)$,因为每个位置最多计算一次<br>记忆化的空间复杂度同理</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> exp,log,inf</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> cache</span><br><span class="line">xin=<span class="built_in">input</span>().split()</span><br><span class="line">n,v,b=<span class="built_in">map</span>(<span class="built_in">int</span>,xin[:<span class="number">3</span>])</span><br><span class="line">la=<span class="built_in">float</span>(xin[<span class="number">3</span>])</span><br><span class="line">tokens=[[<span class="built_in">float</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">input</span>().split()] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Softmax</span>(<span class="params">z</span>):</span><br><span class="line">    m=[<span class="built_in">max</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> z]</span><br><span class="line">    U=[<span class="built_in">sum</span>(exp(j-m[i]) <span class="keyword">for</span> j <span class="keyword">in</span> row) <span class="keyword">for</span> i,row <span class="keyword">in</span> <span class="built_in">enumerate</span>(z)]</span><br><span class="line">    <span class="keyword">return</span> [[exp(z[i][j]-m[i])/U[i] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(z[<span class="number">0</span>]))] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(z))]</span><br><span class="line">l1=[]</span><br><span class="line">H1=[]</span><br><span class="line">ci=[]</span><br><span class="line"><span class="keyword">for</span> idx,token <span class="keyword">in</span> <span class="built_in">enumerate</span>(tokens):</span><br><span class="line">    y,c=<span class="built_in">map</span>(<span class="built_in">int</span>,token[-<span class="number">2</span>:])</span><br><span class="line">    token=token[:-<span class="number">2</span>]</span><br><span class="line">    pi=softmax=Softmax([token])[<span class="number">0</span>]</span><br><span class="line">    l1.append(-log(pi[y]))  <span class="comment">#cross_entropy</span></span><br><span class="line">    H1.append(-<span class="built_in">sum</span>(pi[j]*log(pi[j]) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(v)))</span><br><span class="line">    ci.append(c)</span><br><span class="line">base_loss=<span class="built_in">sum</span>(l1)</span><br><span class="line"><span class="meta">@cache</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">i,left_b</span>):</span><br><span class="line">    <span class="keyword">if</span> left_b&lt;<span class="number">0</span>:<span class="keyword">return</span> -inf ,<span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> i&lt;<span class="number">0</span>:<span class="keyword">return</span> <span class="number">0</span> ,<span class="number">0</span></span><br><span class="line">    no_choose=dfs(i-<span class="number">1</span>,left_b)</span><br><span class="line">    choose=dfs(i-<span class="number">1</span>,left_b-ci[i])</span><br><span class="line">    <span class="keyword">if</span> choose[<span class="number">0</span>]+l1[i]&gt;no_choose[<span class="number">0</span>]:<span class="keyword">return</span> choose[<span class="number">0</span>]+l1[i],choose[<span class="number">1</span>]|<span class="number">1</span>&lt;&lt;i </span><br><span class="line">    <span class="keyword">return</span> no_choose</span><br><span class="line"><span class="comment"># dp=[-inf]*(b+1)</span></span><br><span class="line"><span class="comment"># dp[0]=0</span></span><br><span class="line"><span class="comment"># for i,x in enumerate(ci):</span></span><br><span class="line"><span class="comment">#     for j in range(b,x-1,-1):</span></span><br><span class="line"><span class="comment">#         dp[j]=max(dp[j],dp[j-x]+l1[i])</span></span><br><span class="line"></span><br><span class="line">_,choose=dfs(n-<span class="number">1</span>,b)</span><br><span class="line">H_sum=<span class="number">0.0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="keyword">if</span> choose&amp;<span class="number">1</span>&lt;&lt;i:</span><br><span class="line">        H_sum+=H1[i]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;base_loss+la*H_sum:<span class="number">.2</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -84,7 +109,7 @@
     
     
     
-    <category term="code" scheme="https://heydullsam.github.io/ljn-Blog/categories/code/"/>
+    <category term="hw" scheme="https://heydullsam.github.io/ljn-Blog/categories/hw/"/>
     
     
     <category term="practice" scheme="https://heydullsam.github.io/ljn-Blog/tags/practice/"/>
@@ -508,31 +533,6 @@
 &lt;p&gt;Problem: &lt;a href=&quot;https://leetcode.cn/problems/sum-of-two-integers/description/&quot;&gt;371. 两整数之和&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&quot;思路</summary>
-      
-    
-    
-    
-    <category term="位运算" scheme="https://heydullsam.github.io/ljn-Blog/categories/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-    
-    <category term="leetcode" scheme="https://heydullsam.github.io/ljn-Blog/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>1442 形成两个异或相等数组的三元组数目</title>
-    <link href="https://heydullsam.github.io/ljn-Blog/2026/03/09/code/lc1442/"/>
-    <id>https://heydullsam.github.io/ljn-Blog/2026/03/09/code/lc1442/</id>
-    <published>2026-03-08T16:00:00.000Z</published>
-    <updated>2026-07-11T02:10:26.539Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Problem: <a href="https://leetcode.cn/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/description/">1442. 形成两个异或相等数组的三元组数目</a></p></blockquote><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote><p>a&#x3D;&#x3D;b，考虑到任何一个数的异或等于他本身，容易得到区间[i,k]&#x3D;&#x3D;0时，正是a,b数组拼接的结果，中间内每一个数都是符合要求的j；</p></blockquote><h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote><p>实际操作时，我们存储前缀异或和的所有下标到哈希表用于枚举，发现当前前缀和xor_sum存储过时，由于存储的值也是xor_sum,xor_sum^xor_sum&#x3D;&#x3D;0,所以整个区间的异或和都等于0，逐个计数每个区间中间的元素即可</p></blockquote><h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul><li>时间复杂度: $O(n)$</li><li>空间复杂度: $O(n)$</li></ul><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">countTriplets</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;&gt;mp;</span><br><span class="line">        mp[<span class="number">0</span>].<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">        <span class="type">int</span> xor_sum=<span class="number">0</span>,ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;arr.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">            xor_sum^=arr[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> x:mp[xor_sum])ans+=i-x<span class="number">-1</span>;</span><br><span class="line">            mp[xor_sum].<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;Problem: &lt;a href=&quot;https://leetcode.cn/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/description/&quot;&gt;1442. 形成两个</summary>
       
     
     

@@ -184,6 +184,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/11/12/code/lc139/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
+      <meta itemprop="name" content="blue_cat">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="studyLog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ljn-Blog/2025/11/12/code/lc139/" class="post-title-link" itemprop="url">139 单词拆分</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-11-12 00:00:00" itemprop="dateCreated datePublished" datetime="2025-11-12T00:00:00+08:00">2025-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-07-11 10:10:26" itemprop="dateModified" datetime="2026-07-11T10:10:26+08:00">2026-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ljn-Blog/categories/%E5%AD%97%E5%85%B8%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">字典树</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Problem: <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/description/">139. 单词拆分</a></p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<p>考虑到达到（dp[i]&#x3D;1）当前状态时，能到达的状态设为dp[i+1]&#x3D;1,而怎么查看能达到的目的地呢，我们通过字典树从根节点进行遍历，根据s为前缀能达到的所有end&#x3D;1的情况就是能达到的状态</p>
+</blockquote>
+<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><blockquote>
+<p>字典树，dp创建，定义搜索函数（用于寻找当前状态能达到的所有状态），然后正向遍历即可，dp[n]即是结果。</p>
+</blockquote>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><ul>
+<li>时间复杂度: $O(N^2)$</li>
+<li>空间复杂度: $O(N+K)$</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">        Node*son[<span class="number">26</span>]&#123;&#125;;</span><br><span class="line">        <span class="type">int</span> end;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">wordBreak</span><span class="params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(n<span class="number">+1</span>);</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        Node*root=<span class="keyword">new</span> <span class="built_in">Node</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> s:wordDict)&#123;</span><br><span class="line">            Node*cur=root;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> c:s)&#123;</span><br><span class="line">                c-=<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>(!cur-&gt;son[c])cur-&gt;son[c]=<span class="keyword">new</span> <span class="built_in">Node</span>();</span><br><span class="line">                cur=cur-&gt;son[c];</span><br><span class="line">            &#125;cur-&gt;end=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">auto</span> search=[&amp;](<span class="type">int</span> pos,Node*cur)&#123;</span><br><span class="line">            <span class="keyword">while</span>(pos&lt;n)&#123;</span><br><span class="line">                <span class="type">int</span> ch=s[pos]-<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>(!cur-&gt;son[ch])<span class="keyword">return</span>;</span><br><span class="line">                cur=cur-&gt;son[ch];</span><br><span class="line">                <span class="keyword">if</span>(cur-&gt;end)dp[pos<span class="number">+1</span>]=<span class="number">1</span>;</span><br><span class="line">                pos++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(dp[i])&#123;</span><br><span class="line">                <span class="built_in">search</span>(i,root);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/11/12/code/lc140/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -921,93 +1008,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heydullsam.github.io/ljn-Blog/2025/10/26/Qt_study/TCP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/ljn-Blog/images/avatar.png">
-      <meta itemprop="name" content="blue_cat">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="studyLog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ljn-Blog/2025/10/26/Qt_study/TCP/" class="post-title-link" itemprop="url">TCP</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-10-26 15:44:47" itemprop="dateCreated datePublished" datetime="2025-10-26T15:44:47+08:00">2025-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-10-27 13:24:55" itemprop="dateModified" datetime="2025-10-27T13:24:55+08:00">2025-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ljn-Blog/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="client"><a href="#client" class="headerlink" title="client"></a>client</h1><h2 id="learned"><a href="#learned" class="headerlink" title="learned"></a>learned</h2><ul>
-<li>.pro中+network</li>
-<li>QTcpsocket类::connetToHost</li>
-<li>跳转方式，创建新的指针（指针在堆上，实例在栈上）</li>
-<li>ba.append(ui-&gt;lineEdit-&gt;text().toUtf8()); QByteArray加QString字符串的方法</li>
-<li></li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ljn-Blog/2025/10/26/Qt_study/TCP/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1079,7 +1079,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/ljn-Blog/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
